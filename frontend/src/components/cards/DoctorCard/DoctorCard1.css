@@ -1,0 +1,130 @@
+.doctor-card {
+  max-width: 420px;
+  margin: 30px auto 0;
+  background: #f7fbff;
+  border-radius: 20px;
+  border: 1px solid #000;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+}
+
+/* Scope ONLY DoctorCard1 */
+.doctor-card-1 {
+  position: relative;
+}
+
+/* Right side vertical icons – DoctorCard1 ONLY */
+.doctor-card-1 .doctor1-social-icons {
+  position: absolute;
+  top: 10%;
+  right: 5px; /* half outside card */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+.doctor-card-1 .doctor1-social-icons svg {
+  background: #ffffff;
+  color: #1e88e5;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.doctor-card-1 .doctor1-social-icons svg:hover {
+  background: #1e88e5;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+
+/* Header */
+.doctor-header {
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+  height: 50px;
+}
+
+/* Body */
+.doctor-body {
+  padding-top: 24px;
+}
+
+.doctor-logo {
+  width: 120px;
+  height: 120px;
+  background: #ffca28;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+  border: 6px dashed #fff;
+}
+
+.doctor-desc {
+  font-size: 14px;
+  color: #555;
+}
+
+
+
+/* Contact Items */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  font-size: 15px;
+}
+
+.contact-item svg {
+  color: #1e88e5;
+  font-size: 18px;
+}
+/* Footer */
+.doctor-footer {
+  margin-top: auto;      
+  padding-top: 6px;      
+  padding-bottom: 0;
+}
+
+/* Button inside footer */
+.doctor-footer .btn {
+  padding: 10px 0;      
+  font-size: 15px;
+  font-weight: 500;
+  background: #28a75fa0;
+  border-radius: 0 0 20px 20px;
+}
+
+
+
+
+
+
+
+
+/* Footer */
+.doctor-footer {
+  margin-top: auto;
+
+}
+
+.doctor-footer .btn {
+  border-radius: 0;
+  font-weight: 500;
+   background: #28a75fa0;
+}
+
