@@ -5,9 +5,16 @@
 .idea
 .vscode
 
-# Backend (Spring Boot)
+# Frontend
+node_modules
+build
+dist
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Backend (future Spring Boot)
 target
 *.log
-
-# Env
-.env
