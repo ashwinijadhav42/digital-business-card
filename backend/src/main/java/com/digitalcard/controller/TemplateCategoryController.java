@@ -19,26 +19,26 @@ public class TemplateCategoryController {
     private TemplateCategoryService templateService;
 
     // SAVE (Admin)
-    @PostMapping
+    @PostMapping("/save")
     public TemplateCategory saveTemplate(
             @RequestBody TemplateCategory template) {
         return templateService.saveTemplate(template);
     }
 
     //  FETCH ALL
-    @GetMapping
+    @GetMapping("/getAllTemplates")
     public List<TemplateCategory> getAllTemplates() {
         return templateService.getAllTemplates();
     }
 
     // FETCH BY ID
-    @GetMapping("/{id}")
+    @GetMapping("/getTemplatesById/{id}")
     public TemplateCategory getTemplateById(@PathVariable Long id) {
         return templateService.getTemplateById(id);
     }
 
     //  UPDATE
-    @PutMapping("/{id}")
+    @PutMapping("updateTemplateById/{id}")
     public TemplateCategory updateTemplate(
             @PathVariable Long id,
             @RequestBody TemplateCategory template) {
