@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "templates")
-public class Template {
+@Table(name = "templates_category")
+public class TemplateCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

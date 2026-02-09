@@ -64,7 +64,7 @@ function Header() {
               {/* LOGIN */}
               <li className="nav-item mt-2 mt-lg-0">
                 <NavLink
-                  to="/loginPage"
+                  to="/LoginPage"
                   className="nav-link fw-semibold border rounded px-3 py-1"
                 >
                   <i className="fa-solid fa-user me-1"></i> Login

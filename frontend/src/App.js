@@ -7,6 +7,7 @@ import Features from "./pages/Features";
 import Blogs from "./pages/Blogs";
 import Pricing from "./pages/Pricing";
 import Templates from "./pages/Templates";
+import LoginPage from "./pages/LoginPage";
 import CreateCard from "./pages/CreateCard";
 import BusinessCard from "./components/cards/FreelancerCards/Freelancer";
 import DoctorTemplate from "./pages/DoctorTemplates";
@@ -26,6 +27,9 @@ function App() {
         <Route path="/features" element={<Features />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/pricing" element={<Pricing />} />
+<Route path="/LoginPage" element={<LoginPage />} />
+
+
          <Route path="/createCard" element={<CreateCard />} />
          <Route path="/templates" element={<Templates />} />       
         <Route path="/templates/doctorTemplates" element={<DoctorTemplate />} />

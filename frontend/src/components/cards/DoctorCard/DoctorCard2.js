@@ -8,6 +8,7 @@ import {
   FaInstagram,
   FaYoutube,
   FaWhatsapp,
+  FaClock,
 } from "react-icons/fa";
 import "./DoctorCard2.css";
 
@@ -55,6 +56,7 @@ function DoctorCard2() {
               Heart Care Clinic, 2nd Floor, MG Road, Pune
             </span>
           </div>
+          
 
           {/* Social Icons */}
           <div className="social-icons mt-4 py-1">

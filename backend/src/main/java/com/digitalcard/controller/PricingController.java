@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalcard.entity.PricingPlan;
+import com.digitalcard.repository.BlogRepository;
 import com.digitalcard.repository.PricingPlanRepository;
 
 @RestController
@@ -18,7 +19,10 @@ public class PricingController {
 
     @Autowired
     private PricingPlanRepository pricingPlanRepository;
-
+    
+    @Autowired
+    private BlogRepository blogRepository;
+    
     @GetMapping
     public List<PricingPlan> getPricingPlans() {
         return pricingPlanRepository.findByStatusTrue();
@@ -28,5 +32,4 @@ public class PricingController {
     public List<PricingPlan> getAllPricingPlans() {
         return pricingPlanRepository.findAllPlans();
     }
-
 }

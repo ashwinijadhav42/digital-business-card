@@ -12,7 +12,7 @@
         <div className="col-md-6 col-lg-4 d-flex">
           <div className="w-100">
            <Link
-    to="/templates/freelancer"
+    to="/LoginPage"
     className="card-link w-100 text-decoration-none"
   >
             <Freelancer /></Link>
@@ -21,7 +21,7 @@
 <div className="col-md-6 col-lg-4 d-flex">
           <div className="w-100">
             <Link
-    to="/"
+    to="/LoginPage"
     className="card-link w-100 text-decoration-none"
   >
             <FreelancerSoftwareEngineer />
