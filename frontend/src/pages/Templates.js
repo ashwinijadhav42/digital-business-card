@@ -7,7 +7,7 @@ function Templates() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/templates")
+      .get("http://localhost:8080/api/templates/getAllTemplates")
       .then((res) => setTemplates(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -24,10 +24,10 @@ function Templates() {
           <div className="col-12 col-sm-6 col-lg-4 mb-4" key={template.id}>
             <div className="card shadow-sm h-100">
               <img
-                src={template.imageUrl}
-                alt={`${template.title} Business Card`}
-                className="card-img-top template-img"
-              />
+  src={`http://localhost:8080/uploads/${template.imageUrl}`}
+  alt={`${template.title} Business Card`}
+  className="card-img-top template-img"
+/>
               <div className="card-body text-center">
                 <h5 className="card-title">{template.title}</h5>
                 <p className="text-muted small">{template.description}</p>
