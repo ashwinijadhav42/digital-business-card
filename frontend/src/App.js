@@ -16,6 +16,7 @@ import FreelancerTemplates from "./pages/FreelancerTemplates";
 import RealEstateTemplates from "./pages/RealEstateTemplates";
 import Freelancer from "./components/cards/FreelancerCards/Freelancer";
 import TemplateCategoryForm from "./pages/TemplateCategoryForm";
+import AddBlog from "./pages/AddBlog";
 
 
 
@@ -43,7 +44,9 @@ function App() {
      <Route path="/templates/freelancer" element={<Freelancer/>}/>
    
    <Route path="/template-category/add" element={<TemplateCategoryForm />} />
-    
+   <Route path="/add-blog" element={<AddBlog/>} />
+  
+
       </Routes>
 <Footer/>
     </BrowserRouter>

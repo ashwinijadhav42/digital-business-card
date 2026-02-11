@@ -7,7 +7,7 @@ function Blogs() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/blogs")
+      .get("http://localhost:8080/api/blogs/allBlog")
       .then((res) => setBlogs(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -31,8 +31,8 @@ function Blogs() {
             {blogs.map((blog) => (
               <BlogCard
                 key={blog.id}
-                image={blog.imageUrl}
-                date={blog.publishedDate}
+                image={`http://localhost:8080/uploads/blogs/${blog.imageUrl}`}   
+                date={blog.publishDate}                                      
                 title={blog.title}
                 description={blog.description}
               />

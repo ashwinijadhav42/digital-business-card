@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "blogs")
+@Table(name = "add_blogs")
 public class Blog {
 
     @Id
@@ -19,15 +19,14 @@ public class Blog {
 
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 5000)
     private String description;
 
-    @Column(name = "image_url")
+    private Boolean status; // Draft / Published
+
+    private LocalDate publishDate;
+    
     private String imageUrl;
-
-    private LocalDate publishedDate;
-
-    private Boolean status;
 
 	/**
 	 * @return the id
@@ -72,34 +71,6 @@ public class Blog {
 	}
 
 	/**
-	 * @return the imageUrl
-	 */
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	/**
-	 * @param imageUrl the imageUrl to set
-	 */
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
-	/**
-	 * @return the publishedDate
-	 */
-	public LocalDate getPublishedDate() {
-		return publishedDate;
-	}
-
-	/**
-	 * @param publishedDate the publishedDate to set
-	 */
-	public void setPublishedDate(LocalDate publishedDate) {
-		this.publishedDate = publishedDate;
-	}
-
-	/**
 	 * @return the status
 	 */
 	public Boolean getStatus() {
@@ -113,5 +84,33 @@ public class Blog {
 		this.status = status;
 	}
 
-   
+	/**
+	 * @return the publishDate
+	 */
+	public LocalDate getPublishDate() {
+		return publishDate;
+	}
+
+	/**
+	 * @param publishDate the publishDate to set
+	 */
+	public void setPublishDate(LocalDate publishDate) {
+		this.publishDate = publishDate;
+	}
+
+	/**
+	 * @return the imageUrl
+	 */
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	/**
+	 * @param imageUrl the imageUrl to set
+	 */
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+    
 }

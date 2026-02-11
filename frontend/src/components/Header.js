@@ -72,15 +72,38 @@ function Header() {
                 </NavLink>
               </li>
 
-              <li className="nav-item mt-2 mt-lg-0">
-                <NavLink
-                 
-                   to="/template-category/add"
-                  className="nav-link fw-semibold border rounded px-3 py-1"
-                >
-                  <i className="fa-solid fa-user me-1"></i>Template category
-                </NavLink>
-              </li>
+              <li className="nav-item dropdown mt-2 mt-lg-0">
+  <a
+    className="nav-link dropdown-toggle fw-semibold border rounded px-3 py-1"
+    href="#"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <i className="fa-solid fa-user me-1"></i> Admin
+  </a>
+
+  <ul className="dropdown-menu">
+    <li>
+      <NavLink
+        to="/template-category/add"
+        className="dropdown-item"
+      >
+        Template Category
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink
+        to="/add-blog"
+        className="dropdown-item"
+      >
+        Add Blog
+      </NavLink>
+    </li>
+  </ul>
+</li>
+
 
               {/* CTA */}
               <li className="nav-item mt-2 mt-lg-0">
