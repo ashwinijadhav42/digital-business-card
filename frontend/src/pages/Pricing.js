@@ -7,7 +7,7 @@ function Pricing() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/pricing")
+      .get("http://localhost:8080/api/pricing/activePlans")
       .then((res) => setPlans(res.data))
       .catch((err) => console.error(err));
   }, []);

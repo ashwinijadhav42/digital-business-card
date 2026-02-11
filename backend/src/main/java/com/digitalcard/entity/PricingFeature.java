@@ -2,6 +2,8 @@ package com.digitalcard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,9 +23,9 @@ public class PricingFeature {
     private String feature;
 
     @ManyToOne
-    @JoinColumn(name = "plan_id")
     @JsonIgnore
-    private PricingPlan plan;
+    @JoinColumn(name = "pricing_plan_id")
+    private PricingPlan pricingPlan;
 
 	/**
 	 * @return the id
@@ -54,18 +56,18 @@ public class PricingFeature {
 	}
 
 	/**
-	 * @return the plan
+	 * @return the pricingPlan
 	 */
-	public PricingPlan getPlan() {
-		return plan;
+	public PricingPlan getPricingPlan() {
+		return pricingPlan;
 	}
 
 	/**
-	 * @param plan the plan to set
+	 * @param pricingPlan the pricingPlan to set
 	 */
-	public void setPlan(PricingPlan plan) {
-		this.plan = plan;
+	public void setPricingPlan(PricingPlan pricingPlan) {
+		this.pricingPlan = pricingPlan;
 	}
-
+	
    
 }

@@ -51,7 +51,7 @@ function Header() {
               </li>
 
               <li className="nav-item">
-                <NavLink to="/pricing" className="nav-link">
+                <NavLink to="/pricingDesign" className="nav-link">
                   Pricing
                 </NavLink>
               </li>
@@ -99,6 +99,14 @@ function Header() {
         className="dropdown-item"
       >
         Add Blog
+      </NavLink>
+    </li>
+     <li>
+      <NavLink
+        to="/pricing"
+        className="dropdown-item"
+      >
+        Pricing
       </NavLink>
     </li>
   </ul>

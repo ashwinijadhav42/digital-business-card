@@ -17,6 +17,8 @@ import RealEstateTemplates from "./pages/RealEstateTemplates";
 import Freelancer from "./components/cards/FreelancerCards/Freelancer";
 import TemplateCategoryForm from "./pages/TemplateCategoryForm";
 import AddBlog from "./pages/AddBlog";
+import PricingList from "./pages/PricingList";
+import AddPricing from "./pages/AddPricing";
 
 
 
@@ -29,7 +31,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/features" element={<Features />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/pricing" element={<Pricing />} />
+        // <Route path="/pricingDesign" element={<Pricing />} />
 <Route path="/LoginPage" element={<LoginPage />} />
 
 
@@ -45,6 +47,10 @@ function App() {
    
    <Route path="/template-category/add" element={<TemplateCategoryForm />} />
    <Route path="/add-blog" element={<AddBlog/>} />
+
+   <Route path="/pricing" element={<PricingList />} />
+        <Route path="/add-pricing" element={<AddPricing />} />
+        <Route path="/edit-pricing/:id" element={<AddPricing />} />
   
 
       </Routes>

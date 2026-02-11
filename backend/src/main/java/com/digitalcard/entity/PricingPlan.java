@@ -1,10 +1,14 @@
 package com.digitalcard.entity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,97 +24,44 @@ public class PricingPlan {
     private Long id;
 
     private String title;
-    private Integer price;
+    private Double price;
     private String duration;
-    private Boolean status;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PricingFeature> features;
+    @Enumerated(EnumType.STRING)
+    private PlanStatus status;
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+    @OneToMany(mappedBy = "pricingPlan",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+ //@JsonManagedReference
+ private List<PricingFeature> features = new ArrayList<>();
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
+    // Getters & Setters
 
-	/**
-	 * @param title the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public Long getId() { return id; }
 
-	/**
-	 * @return the price
-	 */
-	public Integer getPrice() {
-		return price;
-	}
+    public void setId(Long id) { this.id = id; }
 
-	/**
-	 * @param price the price to set
-	 */
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
+    public String getTitle() { return title; }
 
-	/**
-	 * @return the duration
-	 */
-	public String getDuration() {
-		return duration;
-	}
+    public void setTitle(String title) { this.title = title; }
 
-	/**
-	 * @param duration the duration to set
-	 */
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
+    public Double getPrice() { return price; }
 
-	/**
-	 * @return the status
-	 */
-	public Boolean getStatus() {
-		return status;
-	}
+    public void setPrice(Double price) { this.price = price; }
 
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
+    public String getDuration() { return duration; }
 
-	/**
-	 * @return the features
-	 */
-	public List<PricingFeature> getFeatures() {
-		return features;
-	}
+    public void setDuration(String duration) { this.duration = duration; }
 
-	/**
-	 * @param features the features to set
-	 */
-	public void setFeatures(List<PricingFeature> features) {
-		this.features = features;
-	}
+    public PlanStatus getStatus() { return status; }
 
-    
+    public void setStatus(PlanStatus status) { this.status = status; }
+
+    public List<PricingFeature> getFeatures() { return features; }
+
+    public void setFeatures(List<PricingFeature> features) {
+        this.features = features;
+    }
 }
-
