@@ -19,6 +19,7 @@ import TemplateCategoryForm from "./pages/TemplateCategoryForm";
 import AddBlog from "./pages/AddBlog";
 import PricingList from "./pages/PricingList";
 import AddPricing from "./pages/AddPricing";
+import CreateDoctorCard from "./components/cards/DoctorCard/CreateDoctorCard";
 
 
 
@@ -32,7 +33,7 @@ function App() {
         <Route path="/features" element={<Features />} />
         <Route path="/blogs" element={<Blogs />} />
         // <Route path="/pricingDesign" element={<Pricing />} />
-<Route path="/LoginPage" element={<LoginPage />} />
+            <Route path="/loginPage" element={<LoginPage />} />
 
 
          <Route path="/createCard" element={<CreateCard />} />
@@ -51,7 +52,11 @@ function App() {
    <Route path="/pricing" element={<PricingList />} />
         <Route path="/add-pricing" element={<AddPricing />} />
         <Route path="/edit-pricing/:id" element={<AddPricing />} />
-  
+
+        <Route path="/createDoctorCard" element={<CreateDoctorCard />} />
+  <Route path="/loginPage/:templateType" element={<LoginPage />} />
+<Route path="/create-doctor-card/:templateType" element={<CreateDoctorCard />}/>
+
 
       </Routes>
 <Footer/>

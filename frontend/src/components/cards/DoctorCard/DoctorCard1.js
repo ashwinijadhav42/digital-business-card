@@ -16,55 +16,107 @@ import {
   FaDownload,
 } from "react-icons/fa";
 
-function DoctorCard1() {
+
+  function DoctorCard1({ data, showAllIcons = false }) {
   return (
-    <div className="doctor-card doctor-card-1 container-fluid p-0">
+    <div className="doctor-card doctor-card-1 ">
 
       {/* Top Header */}
-      <div className="doctor-header d-flex  justify-content-between align-items-center px-3 py-2">
-       
-      </div>
+      
+<div className="doctor-header text-center py-2">
+  <h5 className="text-white mb-0 fw-semibold">
+    Doctor Digital Business Card
+  </h5>
+</div>
+
+
       {/* Right Side Social Icons */}
       <div className="doctor1-social-icons">
 
-        <FaFacebookF />
-        <FaLinkedinIn />
-        <FaYoutube />
-        <FaInstagram />
-      </div>
+  {(showAllIcons || data?.facebook) && (
+    <a
+      href={data?.facebook || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaFacebookF />
+    </a>
+  )}
 
+  {(showAllIcons || data?.linkedin) && (
+    <a
+      href={data?.linkedin || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaLinkedinIn />
+    </a>
+  )}
 
+  {(showAllIcons || data?.youtube) && (
+    <a
+      href={data?.youtube || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaYoutube />
+    </a>
+  )}
+
+  {(showAllIcons || data?.instagram) && (
+    <a
+      href={data?.instagram || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaInstagram />
+    </a>
+  )}
+</div>
       {/* Doctor Info */}
       <div className="doctor-body text-center px-4">
-        <div className="doctor-logo mx-auto">
-          <span> Logo</span>
-        </div>  
+        <div
+  className="doctor-logo mx-auto"
+  style={
+    data?.logo
+      ? { backgroundImage: `url(${data.logo})` }
+      : {}
+  }
+>
+  {!data?.logo && <span>Dr. Logo</span>}
+</div>
 
-        <h4 className="mt-3">Dr.Chetan Thorat</h4>
-        <p className="text-muted mb-1">MBBS, MD (Cardiology)</p>
+
+        <h4 className="mt-3">{data?.name || " Name"}</h4>
+        <p className="text-muted mb-1">{data?.degree || "Specialization /Degree"}</p>
         <p className="doctor-desc">
-          Consultant Cardiologist with 10+ years of experience providing
-          patient-focused heart care.
+          {data?.description || "Doctor description and their speciality and experience here"}
         </p>
 
         <hr />
 
         {/* Contact Info */}
         <div className="contact-item">
-          <FaPhoneAlt /> <span>+91 9518311798</span>
+          <FaGlobe /> <span> {data?.hospitalName || "Hopital Name"}  </span>
+        </div>
+        
+        <div className="contact-item">
+
+          <FaPhoneAlt /> <span>
+          {data?.phone || "+91 XXXXXXXX"}</span>
         </div>
         <div className="contact-item">
-          <FaEnvelope /> <span>doctor@email.com</span>
+          <FaEnvelope /> <span>{data?.email || "doctor@email.com"}</span>
         </div>
         <div className="contact-item">
           <FaMapMarkerAlt />{" "}
-          <span>12/34, Medical Area, City - 456789</span>
+          <span>
+            {data?.address || "Hospital Address "}
+            </span>
         </div>
+        
         <div className="contact-item">
-          <FaGlobe /> <span>www.doctorclinic.com</span>
-        </div>
-        <div className="contact-item">
-  <FaClock /> <span>Mon - Sat | 10:00 AM - 7:00 PM</span>
+  <FaClock /> <span>{data?.time || "Dr's Availability at Hospital(Time) "}</span>
 </div>
 
       </div>
@@ -72,10 +124,10 @@ function DoctorCard1() {
 
 
       {/* Bottom Actions */}
-      <div className="doctor-footer d-flex">
+      <div className="doctor-footer">
 
         <button className="btn w-100">
-          <FaWhatsapp /> Chat With Us
+          <FaWhatsapp /> Chat With Us(Book Appointment)
         </button>
       </div>
     </div>
