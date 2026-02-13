@@ -33,7 +33,7 @@ function App() {
         <Route path="/features" element={<Features />} />
         <Route path="/blogs" element={<Blogs />} />
         // <Route path="/pricingDesign" element={<Pricing />} />
-            <Route path="/loginPage" element={<LoginPage />} />
+           <Route path="/loginPage" element={<LoginPage />} />
 
 
          <Route path="/createCard" element={<CreateCard />} />
@@ -58,8 +58,10 @@ function App() {
 <Route path="/create-doctor-card/:templateType" element={<CreateDoctorCard />}/>
 
 
+
       </Routes>
 <Footer/>
+ 
     </BrowserRouter>
   );
 }
