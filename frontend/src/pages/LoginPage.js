@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  // ✅ Validation Function
+  //  Validation Function
   const validateForm = () => {
     let newErrors = {};
 
@@ -50,8 +50,17 @@ const LoginPage = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+//Reset  Form
+  const resetForm = () => {
+  setFullName("");
+  setMobile("");
+  setPassword("");
+  setConfirmPassword("");
+  setErrors({});
+};
 
-  // ✅ Submit Handler
+
+  //  Submit Handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -104,6 +113,7 @@ const LoginPage = () => {
                 onClick={() => {
                   setIsLogin(false);
                   setErrors({});
+                   resetForm();
                 }}
               >
                 Sign Up
@@ -113,6 +123,7 @@ const LoginPage = () => {
                 onClick={() => {
                   setIsLogin(true);
                   setErrors({});
+                  resetForm();
                 }}
               >
                 Sign In
@@ -154,6 +165,7 @@ const LoginPage = () => {
                     type="text"
                     className={`form-control ${errors.mobile ? "is-invalid" : ""}`}
                     placeholder="Mobile Number"
+                    maxLength="10"
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value)}
                   />

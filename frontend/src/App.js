@@ -20,7 +20,7 @@ import AddBlog from "./pages/AddBlog";
 import PricingList from "./pages/PricingList";
 import AddPricing from "./pages/AddPricing";
 import CreateDoctorCard from "./components/cards/DoctorCard/CreateDoctorCard";
-
+import ViewDoctorCard from "./components/cards/DoctorCard/ViewDoctorCard";
 
 
 
@@ -56,6 +56,7 @@ function App() {
         <Route path="/createDoctorCard" element={<CreateDoctorCard />} />
   <Route path="/loginPage/:templateType" element={<LoginPage />} />
 <Route path="/create-doctor-card/:templateType" element={<CreateDoctorCard />}/>
+<Route path="/view-doctor-card/:slug" element={<ViewDoctorCard />} />
 
 
 

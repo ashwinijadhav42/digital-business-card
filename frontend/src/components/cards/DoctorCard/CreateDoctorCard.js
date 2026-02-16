@@ -170,7 +170,7 @@ function CreateDoctorCard() {
   };
 
   // Save Card
-  const handleSave = (e) => {
+  const handleSaveeee = (e) => {
     e.preventDefault();
 
     if (validateForm()) {
@@ -178,6 +178,34 @@ function CreateDoctorCard() {
       console.log("Form Data:", formData);
     }
   };
+
+  const handleSave = async (e) => {
+  e.preventDefault();
+
+  if (!validateForm()) return;
+
+  try {
+    const response = await fetch("http://localhost:8080/api/doctor-cards", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ...formData,
+        templateType: templateType
+      })
+    });
+
+    const data = await response.json();
+
+    // Open new tab using slug
+    window.open(`/view-doctor-card/${data.slug}`, "_blank");
+
+  } catch (error) {
+    console.error("Error saving card:", error);
+  }
+};
+
 
   // Render Template
   const renderSelectedTemplate = () => {
@@ -213,7 +241,7 @@ function CreateDoctorCard() {
 
             {/* Template Category */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">
                   Template Category
                 </label>
@@ -222,7 +250,8 @@ function CreateDoctorCard() {
                 <input
                   type="text"
                   className="form-control"
-                  value={formData.category}
+                  value="Doctor"
+                  //value={formData.category}
                   disabled
                 />
               </div>
@@ -230,9 +259,9 @@ function CreateDoctorCard() {
 
             {/* Template Design */}
 <div className="row mb-3 align-items-center">
-  <div className="col-md-2">
+  <div className="col-md-4">
     <label className="form-label">
-      Card Design
+      Select template design
     </label>
   </div>
   <div className="col-md-8">
@@ -252,7 +281,7 @@ function CreateDoctorCard() {
 
             {/* Logo */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">Logo</label>
               </div>
               <div className="col-md-8">
@@ -267,7 +296,7 @@ function CreateDoctorCard() {
 
             {/* Doctor Name */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">
                   Name <span className="text-danger">*</span>
                 </label>
@@ -287,7 +316,7 @@ function CreateDoctorCard() {
 
             {/* Degree */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">
                   Degree <span className="text-danger">*</span>
                 </label>
@@ -307,7 +336,7 @@ function CreateDoctorCard() {
 
             {/* Description */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">Description</label>
               </div>
               <div className="col-md-8">
@@ -323,7 +352,7 @@ function CreateDoctorCard() {
 
             {/* Hospital Name */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">
                   Hospital Name <span className="text-danger">*</span>
                 </label>
@@ -345,7 +374,7 @@ function CreateDoctorCard() {
 
             {/* Phone */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">
                   Phone <span className="text-danger">*</span>
                 </label>
@@ -367,6 +396,7 @@ function CreateDoctorCard() {
 
             {/* Same as Phone Checkbox */}
             <div className="row mb-3 ">
+               <div className="col-md-4"></div>
               <div className="col-md-8">
                 <div className="form-check">
                   <input
@@ -385,7 +415,7 @@ function CreateDoctorCard() {
 
             {/* WhatsApp Number */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label mb-0">
                   WhatsApp Number
                 </label>
@@ -411,7 +441,7 @@ function CreateDoctorCard() {
 
             {/* Email */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">
                   Email <span className="text-danger">*</span>
                 </label>
@@ -431,7 +461,7 @@ function CreateDoctorCard() {
 
             {/* Address */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">
                   Address <span className="text-danger">*</span>
                 </label>
@@ -451,7 +481,7 @@ function CreateDoctorCard() {
 
             {/* Available Time */}
             <div className="row mb-3 align-items-center">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label className="form-label">
                   Available Time <span className="text-danger">*</span>
                 </label>
@@ -484,7 +514,7 @@ function CreateDoctorCard() {
                 />
               </div>
 
-              <div className="col-md-4 mb-3">
+              <div className="col-md-6 mb-3">
                 <input
                   type="text"
                   name="linkedin"
@@ -508,7 +538,7 @@ function CreateDoctorCard() {
                 />
               </div>
 
-              <div className="col-md-4 mb-3">
+              <div className="col-md-6 mb-3">
                 <input
                   type="text"
                   name="youtube"
