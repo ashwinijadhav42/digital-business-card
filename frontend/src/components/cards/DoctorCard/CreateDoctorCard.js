@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import DoctorCard1 from "./DoctorCard1";
 import DoctorCard2 from "./DoctorCard2";
 
 function CreateDoctorCard() {
   const [templates, ,category,setTemplates] = useState([]);
 
-  const { templateType } = useParams();
+  const [selectedTemplate, setSelectedTemplate] = useState("template1");
 
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     logo: "",
     name: "",
     degree: "",
@@ -24,7 +23,21 @@ function CreateDoctorCard() {
     linkedin: "",
     instagram: "",
     youtube: ""
-  });
+  };
+
+  const [formData, setFormData] = useState({ 
+    logo: "", name: "", degree: "", description: "", hospitalName: "", phone: "", whatsapp: "", sameAsPhone: false, email: "", address: "", time: "", facebook: "", linkedin: "", instagram: "", youtube: "" });
+const handleReset = () => {
+  const confirmReset = window.confirm(
+    "Are you sure you want to reset the form?"
+  );
+
+  if (confirmReset) {
+    setFormData(initialFormData);
+    setErrors({});
+    setSelectedTemplate("template1");
+  }
+};
 
 
   const formatFacebookUrl = (value) => {
@@ -192,7 +205,8 @@ function CreateDoctorCard() {
       },
       body: JSON.stringify({
         ...formData,
-        templateType: templateType
+        templateType: selectedTemplate
+
       })
     });
 
@@ -206,19 +220,6 @@ function CreateDoctorCard() {
   }
 };
 
-
-  // Render Template
-  const renderSelectedTemplate = () => {
-    switch (templateType) {
-      case "DOCTOR_CARD_1":
-        return <DoctorCard1 data={formData} />;
-      case "DOCTOR_CARD_2":
-        return <DoctorCard2 data={formData} />;
-      default:
-        return <h5>No Template Selected</h5>;
-    }
-  };
-
   return (
     <div className="container-fluid py-4 ">
 
@@ -229,8 +230,15 @@ function CreateDoctorCard() {
 
         {/* LEFT PREVIEW */}
         <div className="col-md-6 py-2">
-          {renderSelectedTemplate()}
-        </div>
+  {selectedTemplate === "template1" && (
+    <DoctorCard1 data={formData} />
+  )}
+
+  {selectedTemplate === "template2" && (
+    <DoctorCard2 data={formData} />
+  )}
+</div>
+
 
         {/* RIGHT FORM */}
         <div className="col-md-6 p-4 border rounded ">
@@ -257,27 +265,23 @@ function CreateDoctorCard() {
               </div>
             </div>
 
-            {/* Template Design */}
-<div className="row mb-3 align-items-center">
-  <div className="col-md-4">
-    <label className="form-label">
-      Select template design
-    </label>
-  </div>
-  <div className="col-md-8">
-    <select
-      className="form-control"
-      value={templateType}
-      onChange={(e) =>
-        window.location.href = `/create-doctor-card/${e.target.value}`
-      }
-    >
-      <option value="DOCTOR_CARD_1">Doctor Card 1</option>
-      <option value="DOCTOR_CARD_2">Doctor Card 2</option>
-    </select>
-  </div>
+            {/* Select Template Design */}
+            <div className="row mb-3 align-items-center">
+              <div className="col-md-4">
+                <label className="form-label">Select Template Design</label>
+              </div>
+              <div className="col-md-8">
+             
+<select
+  className="form-select mb-3"
+  value={selectedTemplate}
+  onChange={(e) => setSelectedTemplate(e.target.value)}
+>
+  <option value="template1">Template 1</option>
+  <option value="template2">Template 2</option>
+</select>
 </div>
-
+</div>
 
             {/* Logo */}
             <div className="row mb-3 align-items-center">
@@ -552,11 +556,19 @@ function CreateDoctorCard() {
             </div>
 
             <button
-              className="btn btn-primary w-100"
+              className="btn btn-primary w-50"
               onClick={handleSave}
             >
               Create Card
             </button>
+
+            <button
+    type="button"
+    className="btn btn-danger w-50"
+    onClick={handleReset}
+  >
+    Reset
+  </button>
           </form>
         </div>
       </div>

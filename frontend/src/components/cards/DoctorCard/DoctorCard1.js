@@ -100,7 +100,7 @@ function DoctorCard1({ data, showAllIcons = false }) {
           {!data?.logo && <span>Dr. Logo</span>}
         </div>
 
-        <h4 className="mt-3">{data?.name || "Name"}</h4>
+        <h4 className="mt-3">{data?.name || "Dr Name"}</h4>
         <p className="text-muted mb-1">
           {data?.degree || "Specialization / Degree"}
         </p>
@@ -156,7 +156,7 @@ function DoctorCard1({ data, showAllIcons = false }) {
             className="btn d-flex justify-content-center align-items-center"
           >
             <FaWhatsapp className="me-2" />
-            Chat With Us (Book Appointment)
+            Chat With Us now(Book Appointment)
           </a>
         ) : (
           <div className="btn text-center small text-muted py-2">

@@ -1,30 +1,30 @@
-.doctor-card {
+.doctor-card-2 {
   
 max-width: 420px;
-  margin: 20px auto 0;
-  background: #f7fbff;
+  margin: 30px auto 0;
+ background: #f3fff6;
   border-radius: 20px;
   border: 1px solid #000;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
+   
 }
 
 /* Header */
-.doctor-card .card-header {
+.doctor-card-2 .card-header {
     margin: -1px; 
-  height: 140px;
-  background: linear-gradient(135deg, #0d6dfdb2, #17a3b8f4);
-  border-radius: 20px 20px 40px 40px;
+  height: 210px;
+  background: linear-gradient(135deg, #198754, #20c997);
+ border-radius: 20px 20px 40px 40px;
 }
 
-.logo-circle{
+.doctor-card-2 .logo-circle{
    border: 1px solid #000;
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   background: #ffffff;
   color: #0d6efd;
   border-radius: 50%;
@@ -35,11 +35,19 @@ max-width: 420px;
   justify-content: center;
   font-weight: bold;
   position: relative;
-  top: -25px;
+  top: -15px;
+ overflow: hidden; 
+ 
+}
+
+.doctor-card-2 .logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /*  Use contain for logo */
 }
 
 /* Contact Rows */
-.contact-item {
+.doctor-card-2 .contact-item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -50,7 +58,7 @@ max-width: 420px;
   font-size: 14px;
 }
 
-.contact-item .icon {
+.doctor-card-2 .contact-item .icon {
   color: #fff;
   padding: 10px;
   border-radius: 50%;
@@ -58,24 +66,20 @@ max-width: 420px;
 }
 
 /* Social Icons */
-.social-icons svg {
+.doctor-card-2 .social-icons svg {
   font-size: 20px;
   margin: 0 8px;
   cursor: pointer;
-  color: #0d6efd;
+  color: #ffca28;
 }
 
 /* Footer */
-.get-in-touch {
+.doctor-card-2 .get-in-touch {
   background: #28a75fa0;
   color: #0c0c0c;
   font-weight: 600;
+   font-size: 18px;
   padding: 12px;
 
-}
 
-@media (max-width: 375px) {
-  .doctor-card {
-    border-radius: 16px;
-  }
 }

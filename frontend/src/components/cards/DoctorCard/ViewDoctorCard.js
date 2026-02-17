@@ -53,9 +53,15 @@ const cardRef = useRef();
 
     {/*  Wrap only card design inside this div */}
     <div ref={cardRef} id="card-to-download">
-      {card.templateType === "DOCTOR_CARD_1" && <DoctorCard1 data={card} />}
-      {card.templateType === "DOCTOR_CARD_2" && <DoctorCard2 data={card} />}
+      {card.templateType === "template1" && <DoctorCard1 data={card} />}
+      {card.templateType === "template2" && <DoctorCard2 data={card} />}
     </div>
+
+   {/* <div ref={cardRef} id="card-to-download">
+  {card.templateType?.includes("1") && <DoctorCard1 data={card} />}
+  {card.templateType?.includes("2") && <DoctorCard2 data={card} />}
+</div> */}
+
 
     {/* QR Section */}
     <div className="mt-4">
