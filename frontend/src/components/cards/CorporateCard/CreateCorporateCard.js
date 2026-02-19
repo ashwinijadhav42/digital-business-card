@@ -33,10 +33,10 @@ function CreateCorporateCard() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -62,6 +62,7 @@ function CreateCorporateCard() {
                 type="text"
                 name="name"
                 className="form-control"
+                value={formData.name}
                 onChange={handleChange}
                 required
               />
@@ -73,6 +74,7 @@ function CreateCorporateCard() {
                 type="text"
                 name="designation"
                 className="form-control"
+                value={formData.designation}
                 onChange={handleChange}
               />
             </div>
@@ -83,6 +85,7 @@ function CreateCorporateCard() {
                 type="text"
                 name="companyName"
                 className="form-control"
+                value={formData.companyName}
                 onChange={handleChange}
               />
             </div>
@@ -93,6 +96,7 @@ function CreateCorporateCard() {
                 type="email"
                 name="email"
                 className="form-control"
+                value={formData.email}
                 onChange={handleChange}
               />
             </div>
@@ -104,6 +108,7 @@ function CreateCorporateCard() {
                 name="phone"
                 maxLength="10"
                 className="form-control"
+                value={formData.phone}
                 onChange={handleChange}
               />
             </div>
@@ -111,13 +116,16 @@ function CreateCorporateCard() {
             <button type="submit" className="btn btn-primary w-100">
               Save Corporate Card
             </button>
+
           </form>
         </div>
 
         {/* RIGHT SIDE PREVIEW */}
         <div className="col-md-6">
-          <SelectedTemplate formData={formData} />
+        
+          <SelectedTemplate data={formData} />
         </div>
+
       </div>
     </div>
   );
