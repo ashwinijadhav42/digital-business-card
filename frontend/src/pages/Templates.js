@@ -31,9 +31,15 @@ function Templates() {
               <div className="card-body text-center">
                 <h5 className="card-title">{template.title}</h5>
                 <p className="text-muted small">{template.description}</p>
-                <Link to={template.link} className="btn btn-primary btn-sm">
-                  View Template
-                </Link>
+                
+               <Link
+  to={`/templates/${template.category}`}
+  className="btn btn-primary btn-sm"
+>
+  View Template
+</Link>
+
+
               </div>
             </div>
           </div>

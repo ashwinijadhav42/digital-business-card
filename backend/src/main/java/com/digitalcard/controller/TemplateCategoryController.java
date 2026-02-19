@@ -49,7 +49,7 @@ public class TemplateCategoryController {
 // Save template category in db
 	@PostMapping("/saveTemplateCategory")
 	public ResponseEntity<?> saveTemplate(@RequestParam String title, @RequestParam String description,
-			@RequestParam String link, @RequestParam Boolean status, @RequestParam("image") MultipartFile image) {
+			@RequestParam String category, @RequestParam Boolean status, @RequestParam("image") MultipartFile image) {
 		try {
 			// 1️ Save image to folder
 			String uploadDir = "uploads/";
@@ -62,15 +62,15 @@ public class TemplateCategoryController {
 			Files.write(filePath, image.getBytes());
 
 			// 2️ Save data to entity
-			TemplateCategory category = new TemplateCategory();
-			category.setTitle(title);
-			category.setDescription(description);
-			category.setLink(link);
-			category.setStatus(status);
+			TemplateCategory templateCategory = new TemplateCategory();
+			templateCategory.setTitle(title);
+			templateCategory.setDescription(description);
+			templateCategory.setCategory(category);
+			templateCategory.setStatus(status);
 			// category.setImageUrl(filePath.toString());// save path
-			category.setImageUrl(fileName);
+			templateCategory.setImageUrl(fileName);
 
-			templateCategoryRepository.save(category);
+			templateCategoryRepository.save(templateCategory);
 
 			return ResponseEntity.ok("Template category saved successfully");
 
@@ -92,24 +92,28 @@ public class TemplateCategoryController {
 
 		return ResponseEntity.ok(optional.get());
 	}
+	
+	@GetMapping("/category/{category}")
+	public ResponseEntity<List<TemplateCategory>> getByCategory(
+	        @PathVariable String category) {
+	    return ResponseEntity.ok(templateService.getTemplatesByCategory(category));
+	}
+
 
 //Update template category by ID (all fields required)
 	@PutMapping(value = "/updateTemplateCategoryAllFieldsRequired/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> updateTemplate(@PathVariable Long id, @RequestParam String title,
-			@RequestParam String description, @RequestParam(required = false) String link, @RequestParam Boolean status,
+			@RequestParam String description, @RequestParam(required = false) String category, @RequestParam Boolean status,
 			@RequestParam(value = "image", required = false) MultipartFile image) {
 		try {
-			TemplateCategory category = templateCategoryRepository.findById(id)
+			TemplateCategory templateCategory = templateCategoryRepository.findById(id)
 					.orElseThrow(() -> new RuntimeException("Category not found"));
 
-			category.setTitle(title);
-			category.setDescription(description);
-			category.setStatus(status);
-
-			if (link != null) {
-				category.setLink(link);
-			}
-
+			templateCategory.setTitle(title);
+			templateCategory.setDescription(description);
+			templateCategory.setStatus(status);
+			templateCategory.setCategory(category);
+			
 			if (image != null && !image.isEmpty()) {
 				String uploadDir = "uploads/";
 				File dir = new File(uploadDir);
@@ -120,10 +124,10 @@ public class TemplateCategoryController {
 				Path filePath = Paths.get(uploadDir, fileName);
 				Files.write(filePath, image.getBytes());
 
-				category.setImageUrl(fileName);
+				templateCategory.setImageUrl(fileName);
 			}
 
-			templateCategoryRepository.save(category);
+			templateCategoryRepository.save(templateCategory);
 			return ResponseEntity.ok("Template category updated");
 
 		} catch (Exception e) {
@@ -136,21 +140,21 @@ public class TemplateCategoryController {
 	@PatchMapping(value = "/updateTemplateCategoryById/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> updateTemplateCategoryById(@PathVariable Long id,
 			@RequestParam(required = false) String title, @RequestParam(required = false) String description,
-			@RequestParam(required = false) String link, @RequestParam(required = false) Boolean status,
+			@RequestParam(required = false) String category, @RequestParam(required = false) Boolean status,
 			@RequestPart(value = "image", required = false) MultipartFile image) {
 		try {
-			TemplateCategory category = templateCategoryRepository.findById(id)
+			TemplateCategory templateCategory = templateCategoryRepository.findById(id)
 					.orElseThrow(() -> new RuntimeException("Category not found"));
 
 			// update only fields that are provided
 			if (title != null)
-				category.setTitle(title);
+				templateCategory.setTitle(title);
 			if (description != null)
-				category.setDescription(description);
-			if (link != null)
-				category.setLink(link);
+				templateCategory.setDescription(description);
+			if (category != null)
+				templateCategory.setCategory(category);
 			if (status != null)
-				category.setStatus(status);
+				templateCategory.setStatus(status);
 
 			// update image only if new one is uploaded
 			if (image != null && !image.isEmpty()) {
@@ -163,10 +167,10 @@ public class TemplateCategoryController {
 				Path filePath = Paths.get(uploadDir, fileName);
 				Files.write(filePath, image.getBytes());
 
-				category.setImageUrl(fileName);
+				templateCategory.setImageUrl(fileName);
 			}
 
-			templateCategoryRepository.save(category);
+			templateCategoryRepository.save(templateCategory);
 			return ResponseEntity.ok(category);
 
 		} catch (Exception e) {

@@ -34,6 +34,13 @@ public class TemplateCategoryServiceImpl implements TemplateCategoryService {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Template not found with id " + id));
     }
+    
+    //Fetch by category and status
+    public List<TemplateCategory> getTemplatesByCategory(String category) {
+        return repository.findByCategoryAndStatus(category, true);
+    }
+
+
 
     // UPDATE
     @Override
@@ -44,7 +51,7 @@ public class TemplateCategoryServiceImpl implements TemplateCategoryService {
         existing.setTitle(template.getTitle());
         existing.setDescription(template.getDescription());
         existing.setImageUrl(template.getImageUrl());
-        existing.setLink(template.getLink());
+        existing.setCategory(template.getCategory());
         existing.setStatus(template.getStatus());
 
         return repository.save(existing);

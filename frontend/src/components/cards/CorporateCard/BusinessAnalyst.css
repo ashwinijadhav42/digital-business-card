@@ -1,26 +1,27 @@
 .ba-card {
   margin-top: 0;
+  margin-bottom: 20px;
   max-width: 360px;
   border-radius: 16px;
   background: #f4f7fb;
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   overflow: hidden;
-  margin-bottom: 20px; 
   border: 1px solid #0e0d0d;
 }
 
+/* Header */
 .ba-header {
   background: linear-gradient(135deg, #0d6efd, #003c8f);
   color: #fff;
   padding: 30px 20px;
 }
-.ba-profile{
+
+/* Profile */
+.ba-profile {
   color: #0d0d0d;
 }
 
-
 .ba-profile-img {
-
   width: 100px;
   height: 100px;
   border-radius: 1%;
@@ -28,47 +29,51 @@
   padding: 2px;
 }
 
+/* Description */
 .ba-desc {
   font-size: 15px;
   padding: 0 20px;
 }
 
+/* Contact Section */
 .ba-contact div {
   padding: 8px 20px;
   font-size: 14px;
 }
 
-.ba-contact svg {
-  margin-right: 8px;
-  color: #0d6efd;
-}
 .ba-contact-item span {
-  color: #000; 
+  color: #000;
   font-size: 15px;
 }
-.ba-social svg {
-  font-size: 20px;
-  margin: 0 10px;
-  cursor: pointer;
-  color: #0d6efd;
-  margin-bottom: 20px; 
-}
 
-.ba-actions button {
-  font-size: 14px;
-}
-
+/* Shared SVG Styling (NO DUPLICATION) */
 .ba-contact svg,
 .ba-social svg {
-  stroke-width: 1.5;
-width: 35px;
-  height: 40px;
-  border-radius: 10px;                 
+  width: 50px;
+  height: 50px;
+   padding: 7px;
+  border-radius: 10px;
   background: rgba(224, 244, 246, 0.94);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-   color: #0d6efd;
-  font-size: 20px;
+  border: 1px solid black;
+  color: #0d6efd;
+  stroke-width: 1.5;
   transition: all 0.25s ease;
-  
+}
+
+/* Contact Specific */
+.ba-contact svg {
+  margin-right: 10px;
+}
+
+/* Social Specific */
+.ba-social svg {
+  margin: 0 10px 20px 10px;
+  cursor: pointer;
+}
+
+/* Buttons */
+.ba-actions button {
+  font-size: 14px;
 }

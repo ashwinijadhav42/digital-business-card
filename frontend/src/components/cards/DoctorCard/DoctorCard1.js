@@ -160,7 +160,7 @@ function DoctorCard1({ data, showAllIcons = false }) {
           </a>
         ) : (
           <div className="btn text-center small text-muted py-2">
-            Enter WhatsApp number to enable booking option
+            Enter WhatsApp number to enable booking 
           </div>
         )}
       </div>

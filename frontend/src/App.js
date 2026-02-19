@@ -21,48 +21,63 @@ import PricingList from "./pages/PricingList";
 import AddPricing from "./pages/AddPricing";
 import CreateDoctorCard from "./components/cards/DoctorCard/CreateDoctorCard";
 import ViewDoctorCard from "./components/cards/DoctorCard/ViewDoctorCard";
-
-
+import TemplatesByCategory from "./pages/TemplatesByCategory";
+import CreateFreelancerCard from "./components/cards/FreelancerCards/CreateFreelancerCard";
+import CreateCorporateCard from "./components/cards/CorporateCard/CreateCorporateCard";
+import CreateRealEstateCard from "./components/cards/RealEstateCard/CreateRealEstateCard";
 
 function App() {
   return (
     <BrowserRouter>
-<Header />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/features" element={<Features />} />
         <Route path="/blogs" element={<Blogs />} />
         // <Route path="/pricingDesign" element={<Pricing />} />
-           <Route path="/loginPage" element={<LoginPage />} />
+        <Route path="/loginPage" element={<LoginPage />} />
 
 
-         <Route path="/createCard" element={<CreateCard />} />
-         <Route path="/templates" element={<Templates />} />       
-        <Route path="/templates/doctorTemplates" element={<DoctorTemplate />} />
-        <Route path="/templates/corporateTemplates" element={<CorporateTemplates/>} />
-        <Route path="/templates/freelancerTemplates" element={<FreelancerTemplates/>} />
-        <Route path="/templates/realEstateTemplates" element={<RealEstateTemplates/>}/>
-     
-     <Route path="/templates/buiseness" element={<BusinessCard/>} />
-     <Route path="/templates/freelancer" element={<Freelancer/>}/>
-   
-   <Route path="/template-category/add" element={<TemplateCategoryForm />} />
-   <Route path="/add-blog" element={<AddBlog/>} />
+        <Route path="/createCard" element={<CreateCard />} />
+        <Route path="/templates" element={<Templates />} />
 
-   <Route path="/pricing" element={<PricingList />} />
+        {/* <Route path="/templates/doctorTemplates" element={<DoctorTemplate />} />
+        <Route path="/templates/corporateTemplates" element={<CorporateTemplates />} />
+        <Route path="/templates/freelancerTemplates" element={<FreelancerTemplates />} />
+        <Route path="/templates/realEstateTemplates" element={<RealEstateTemplates />} />
+        */}
+        <Route path="/templates/:category" element={<TemplatesByCategory />} />
+        <Route path="/templates/freelancerTemplates" element={<FreelancerTemplates />} />
+        <Route path="/templates/buiseness" element={<BusinessCard />} />
+
+
+        <Route path="/template-category/add" element={<TemplateCategoryForm />} />
+        <Route path="/add-blog" element={<AddBlog />} />
+
+        <Route path="/pricing" element={<PricingList />} />
         <Route path="/add-pricing" element={<AddPricing />} />
         <Route path="/edit-pricing/:id" element={<AddPricing />} />
 
         <Route path="/createDoctorCard" element={<CreateDoctorCard />} />
-  <Route path="/loginPage/:templateType" element={<LoginPage />} />
-<Route path="/create-doctor-card/:templateType" element={<CreateDoctorCard />}/>
-<Route path="/view-doctor-card/:slug" element={<ViewDoctorCard />} />
 
+        {/*
+        <Route path="/login/:category/:templateId" element={<LoginPage />} />
+        <Route path="/login/:templateType" element={<LoginPage />} /> */}
+
+        <Route path="/login/:category/:templateType" element={<LoginPage />} />
+       
+
+        <Route path="/create-doctor-card/:templateType" element={<CreateDoctorCard />} />
+        <Route path="/view-doctor-card/:slug" element={<ViewDoctorCard />} />
+
+        <Route path="/create-freelancer-card/:templateType" element={<CreateFreelancerCard />} />
+        <Route path="/create-corporate-card/:templateType" element={<CreateCorporateCard />} />
+        <Route path="/create-realestate-card/:templateType" element={<CreateRealEstateCard />} />
 
 
       </Routes>
-<Footer/>
- 
+      <Footer />
+
     </BrowserRouter>
   );
 }

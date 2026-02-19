@@ -4,7 +4,8 @@ import "./LoginPage.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { templateType } = useParams();
+  const { category, templateType } = useParams();
+
 
   const [isLogin, setIsLogin] = useState(false);
   const [fullName, setFullName] = useState("");
@@ -91,9 +92,14 @@ const LoginPage = () => {
 
       alert(isLogin ? "Login successful!" : "Account created successfully!");
 
-      if (isLogin) {
-        navigate(`/create-doctor-card/${templateType}`);
-      }
+     
+
+  
+if (isLogin) {
+  navigate(`/create-${category}-card/${templateType}`);
+}
+
+
 
     } catch (err) {
       console.error("Error:", err);

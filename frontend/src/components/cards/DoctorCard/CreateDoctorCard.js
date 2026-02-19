@@ -3,7 +3,7 @@ import DoctorCard1 from "./DoctorCard1";
 import DoctorCard2 from "./DoctorCard2";
 
 function CreateDoctorCard() {
-  const [templates, ,category,setTemplates] = useState([]);
+  const [templates, , category, setTemplates] = useState([]);
 
   const [selectedTemplate, setSelectedTemplate] = useState("template1");
 
@@ -25,19 +25,34 @@ function CreateDoctorCard() {
     youtube: ""
   };
 
-  const [formData, setFormData] = useState({ 
-    logo: "", name: "", degree: "", description: "", hospitalName: "", phone: "", whatsapp: "", sameAsPhone: false, email: "", address: "", time: "", facebook: "", linkedin: "", instagram: "", youtube: "" });
-const handleReset = () => {
-  const confirmReset = window.confirm(
-    "Are you sure you want to reset the form?"
-  );
+  const [formData, setFormData] = useState({
+    logo: "",
+    name: "",
+    degree: "",
+    description: "",
+    hospitalName: "",
+    phone: "",
+    whatsapp: "",
+    sameAsPhone: false,
+    email: "",
+    address: "",
+    time: "",
+    facebook: "",
+    linkedin: "",
+    instagram: "",
+    youtube: ""
+  });
+  const handleReset = () => {
+    const confirmReset = window.confirm(
+      "Are you sure you want to reset the form?"
+    );
 
-  if (confirmReset) {
-    setFormData(initialFormData);
-    setErrors({});
-    setSelectedTemplate("template1");
-  }
-};
+    if (confirmReset) {
+      setFormData(initialFormData);
+      setErrors({});
+      setSelectedTemplate("template1");
+    }
+  };
 
 
   const formatFacebookUrl = (value) => {
@@ -193,32 +208,32 @@ const handleReset = () => {
   };
 
   const handleSave = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  try {
-    const response = await fetch("http://localhost:8080/api/doctor-cards", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        ...formData,
-        templateType: selectedTemplate
+    try {
+      const response = await fetch("http://localhost:8080/api/doctor-cards", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ...formData,
+          templateType: selectedTemplate
 
-      })
-    });
+        })
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    // Open new tab using slug
-    window.open(`/view-doctor-card/${data.slug}`, "_blank");
+      // Open new tab using slug
+      window.open(`/view-doctor-card/${data.slug}`, "_blank");
 
-  } catch (error) {
-    console.error("Error saving card:", error);
-  }
-};
+    } catch (error) {
+      console.error("Error saving card:", error);
+    }
+  };
 
   return (
     <div className="container-fluid py-4 ">
@@ -230,14 +245,14 @@ const handleReset = () => {
 
         {/* LEFT PREVIEW */}
         <div className="col-md-6 py-2">
-  {selectedTemplate === "template1" && (
-    <DoctorCard1 data={formData} />
-  )}
+          {selectedTemplate === "template1" && (
+            <DoctorCard1 data={formData} />
+          )}
 
-  {selectedTemplate === "template2" && (
-    <DoctorCard2 data={formData} />
-  )}
-</div>
+          {selectedTemplate === "template2" && (
+            <DoctorCard2 data={formData} />
+          )}
+        </div>
 
 
         {/* RIGHT FORM */}
@@ -271,17 +286,17 @@ const handleReset = () => {
                 <label className="form-label">Select Template Design</label>
               </div>
               <div className="col-md-8">
-             
-<select
-  className="form-select mb-3"
-  value={selectedTemplate}
-  onChange={(e) => setSelectedTemplate(e.target.value)}
->
-  <option value="template1">Template 1</option>
-  <option value="template2">Template 2</option>
-</select>
-</div>
-</div>
+
+                <select
+                  className="form-select mb-3"
+                  value={selectedTemplate}
+                  onChange={(e) => setSelectedTemplate(e.target.value)}
+                >
+                  <option value="template1">Template 1</option>
+                  <option value="template2">Template 2</option>
+                </select>
+              </div>
+            </div>
 
             {/* Logo */}
             <div className="row mb-3 align-items-center">
@@ -400,7 +415,7 @@ const handleReset = () => {
 
             {/* Same as Phone Checkbox */}
             <div className="row mb-3 ">
-               <div className="col-md-4"></div>
+              <div className="col-md-4"></div>
               <div className="col-md-8">
                 <div className="form-check">
                   <input
@@ -563,12 +578,12 @@ const handleReset = () => {
             </button>
 
             <button
-    type="button"
-    className="btn btn-danger w-50"
-    onClick={handleReset}
-  >
-    Reset
-  </button>
+              type="button"
+              className="btn btn-danger w-50"
+              onClick={handleReset}
+            >
+              Reset
+            </button>
           </form>
         </div>
       </div>

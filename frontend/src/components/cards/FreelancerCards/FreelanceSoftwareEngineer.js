@@ -2,10 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./FreelanceSoftwareEngineer.css";
 import logo from "../../../assets/images/CorporateProfile.jpg";
 
-import { useState } from "react";
-import { Modal } from "react-bootstrap";
-import { QRCodeCanvas } from "qrcode.react";
-
 
 import {
   FaPhoneAlt,
@@ -23,13 +19,6 @@ import {
 } from "react-icons/fa";
 
 export default function FreelanceSoftwareEngineer() {
-
-  // 🔑 UNIQUE CARD ID (later from API / route)
-  const cardId = "sonali-mule";
-  const cardLink = `${window.location.origin}/card/${cardId}`;
-
-  const [showQR, setShowQR] = useState(false);
-
   return (
     <div className="fs-se-wrapper">
       <div className="fs-se-card">

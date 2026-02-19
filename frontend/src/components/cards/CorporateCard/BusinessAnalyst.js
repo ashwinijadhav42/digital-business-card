@@ -75,6 +75,9 @@ export default function BusinessAnalystCard() {
   </a>
 
 </div>
+<button className="btn btn-primary mt-2 text-center w-100">
+          View Github Portfolio
+        </button>
     </div>
   );
 }

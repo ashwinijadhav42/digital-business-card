@@ -11,7 +11,7 @@ function DoctorTemplates() {
       <div className="row g-4 align-items-stretch">
         <div className="col-md-6 col-lg-4 d-flex">
           <div className="w-100">
-            <Link to="/loginPage/DOCTOR_CARD_1"
+            <Link to="/loginPage/doctor/1"
               className="card-link text-decoration-none" >
               <DoctorCard1 data={{}} showAllIcons={true} />
             </Link>
@@ -20,7 +20,7 @@ function DoctorTemplates() {
 
         <div className="col-md-6 col-lg-4 d-flex">
           <div className="w-100">
-            <Link to="/loginPage/DOCTOR_CARD_2"
+            <Link to="/loginPage/doctor/2"
               className="card-link  text-decoration-none" >
               <DoctorCard2 data={{}} showAllIcons={true} />
             </Link>

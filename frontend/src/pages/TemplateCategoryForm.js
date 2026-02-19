@@ -5,7 +5,7 @@ const TemplateCategoryForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    link: "",
+    category: "",
     status: true,
     imageFile: null,
   });
@@ -35,7 +35,7 @@ const TemplateCategoryForm = () => {
       const data = new FormData();
       data.append("title", formData.title);
       data.append("description", formData.description);
-      data.append("link", formData.link);
+      data.append("category", formData.category);
       data.append("status", formData.status);
       data.append("image", formData.imageFile);
 
@@ -51,7 +51,8 @@ const TemplateCategoryForm = () => {
       setFormData({
         title: "",
         description: "",
-        link: "",
+        
+        category:"",
         status: true,
         imageFile: null,
       });
@@ -82,6 +83,13 @@ const TemplateCategoryForm = () => {
           name="description"
           placeholder="Description"
           value={formData.description}
+          onChange={handleChange}
+        />
+        <textarea
+          className="form-control mb-2"
+          name="category"
+          placeholder="Catgeory"
+          value={formData.category}
           onChange={handleChange}
         />
 

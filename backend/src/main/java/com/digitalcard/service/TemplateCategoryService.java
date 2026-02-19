@@ -14,6 +14,10 @@ public interface TemplateCategoryService {
 
     // FETCH BY ID
     TemplateCategory getTemplateById(Long id);
+    
+     List<TemplateCategory> getTemplatesByCategory(String category) ;
+    
+
 
     // UPDATE
     TemplateCategory updateTemplate(Long id, TemplateCategory template);

@@ -21,7 +21,7 @@ public class TemplateCategory {
     @Column(name = "image_url")
     private String imageUrl;
 
-    private String link;
+    private String category;
     private Boolean status;
 	/**
 	 * @return the id
@@ -71,17 +71,18 @@ public class TemplateCategory {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+	
 	/**
-	 * @return the link
+	 * @return the category
 	 */
-	public String getLink() {
-		return link;
+	public String getCategory() {
+		return category;
 	}
 	/**
-	 * @param link the link to set
+	 * @param category the category to set
 	 */
-	public void setLink(String link) {
-		this.link = link;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	/**
 	 * @return the status
