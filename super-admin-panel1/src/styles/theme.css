@@ -1,0 +1,27 @@
+body.light {
+  --bg-main: #e5e7e9;
+  --bg-card: #c0bcbc;
+  --bg-sidebar: #ffffff;
+  --bg-header: #ffffff;
+
+  --text-main: #0f172a;
+  --text-muted: #070707;
+  --text-sidebar: #000000;
+
+  --border-color: #cbd5e1;
+  --primary: #2563eb;
+}
+
+body.dark {
+  --bg-main: #2f2f30;
+  --bg-card: #1f1f1f;
+  --bg-sidebar: #454545;
+  --bg-header: #454545;
+
+  --text-main: #e5e7eb;
+  --text-muted: #fcfdfd;
+  --text-sidebar: #e5e7eb;
+
+  --border-color: #334155;
+  --primary: #3b82f6;
+}
