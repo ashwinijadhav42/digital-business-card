@@ -1,0 +1,85 @@
+.doctor-card-2 {
+  
+max-width: 420px;
+  margin: 30px auto 0;
+ background: #f3fff6;
+  border-radius: 20px;
+  border: 1px solid #000;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+   
+}
+
+/* Header */
+.doctor-card-2 .card-header {
+    margin: -1px; 
+  height: 210px;
+  background: linear-gradient(135deg, #198754, #20c997);
+ border-radius: 20px 20px 40px 40px;
+}
+
+.doctor-card-2 .logo-circle{
+   border: 1px solid #000;
+  width: 120px;
+  height: 120px;
+  background: #ffffff;
+  color: #0d6efd;
+  border-radius: 50%;
+  margin: auto;
+  margin-top:40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  position: relative;
+  top: -15px;
+ overflow: hidden; 
+ 
+}
+
+.doctor-card-2 .logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /*  Use contain for logo */
+}
+
+/* Contact Rows */
+.doctor-card-2 .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8f9fa;
+  border-radius: 50px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.doctor-card-2 .contact-item .icon {
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 35px;
+}
+
+/* Social Icons */
+.doctor-card-2 .social-icons svg {
+  font-size: 20px;
+  margin: 0 8px;
+  cursor: pointer;
+  color: #ffca28;
+}
+
+/* Footer */
+.doctor-card-2 .get-in-touch {
+  background: #28a75fa0;
+  color: #0c0c0c;
+  font-weight: 600;
+   font-size: 18px;
+  padding: 12px;
+
+
+}

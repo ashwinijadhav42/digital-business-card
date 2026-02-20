@@ -1,0 +1,30 @@
+/* ===== PAGE HEADER (TITLE + ACTION) ===== */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  color: var(--text-main);
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.page-action-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.page-action-btn:hover {
+  background: var(--primary);
+  color: #ffffff;
+}

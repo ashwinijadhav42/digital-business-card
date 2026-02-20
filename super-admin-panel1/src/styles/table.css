@@ -1,0 +1,114 @@
+/* ===============================
+   PAGE HEADER
+================================= */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.page-action-btn {
+  padding: 8px 16px;
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.page-action-btn:hover {
+  background: #0b5ed7;
+}
+
+/* ===============================
+   TABLE STYLE
+================================= */
+.table-container {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table thead {
+  background: var(--table-header-bg);
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.custom-table th {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.custom-table tbody tr {
+  border-top: 1px solid var(--border-color);
+  transition: 0.2s;
+}
+
+.custom-table tbody tr:hover {
+  background: var(--row-hover);
+}
+
+.custom-table img {
+  width: 70px;
+  border-radius: 6px;
+}
+
+/* ===============================
+   BUTTONS
+================================= */
+.edit-btn {
+  padding: 6px 12px;
+  background: #198754;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  padding: 6px 12px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+/* ===============================
+   DARK / LIGHT VARIABLES
+================================= */
+:root {
+  --card-bg: #c0bcbc;
+  --table-header-bg: #f8f9fa;
+  --border-color: #e5e5e5;
+  --row-hover: #f1f3f5;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body.dark {
+  --card-bg: #1f1f1f;
+  --table-header-bg: #2a2a40;
+  --border-color: #3b3b55;
+  --row-hover: #2f2f45;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
