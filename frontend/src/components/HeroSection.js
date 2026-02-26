@@ -21,7 +21,7 @@ function HeroSection() {
                 <a href="/register" className="btn btn-primary me-3">
                   Create Your Card
                 </a>
-                <a href="/sampleCard" className="btn btn-primary me-3">
+                <a href="/Templates" className="btn btn-primary me-3">
                   See Sample Card
                 </a>
               </div>

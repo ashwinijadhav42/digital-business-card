@@ -1,0 +1,21 @@
+import axios from "axios";
+
+const API_URL = "http://localhost:8080/api/admins";
+
+export const getAllAdmins = () => axios.get(API_URL);
+
+export const getAdminById = (id) => axios.get(`${API_URL}/${id}`);
+
+export const createAdmin = (admin) => axios.post(API_URL, admin);
+
+export const updateAdmin = (id, data) => {
+  return axios.put(`http://localhost:8080/api/admins/${id}`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const deleteAdmin = (id) =>
+  axios.delete(`${API_URL}/${id}`);
+
