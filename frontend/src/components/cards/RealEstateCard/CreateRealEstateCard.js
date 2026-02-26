@@ -15,6 +15,12 @@ function CreateRealEstateCard() {
     officeAddress: "",
     experience: "",
     about: "",
+    CompanyName: "",
+    agencyName:"",
+    description:"",
+    officeAddress:"",
+    website:"",
+    experience:"",
   });
 
   //  Template Selector
@@ -57,8 +63,9 @@ function CreateRealEstateCard() {
                 type="text"
                 name="name"
                 className="form-control"
+                value={formData.name}
                 onChange={handleChange}
-                required
+                
               />
             </div>
 
@@ -68,6 +75,18 @@ function CreateRealEstateCard() {
                 type="text"
                 name="agencyName"
                 className="form-control"
+                value={formData.agencyName}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Description</label>
+              <input
+                type="text"
+                name="description"
+                className="form-control"
+                value={formData.description}
                 onChange={handleChange}
               />
             </div>
@@ -79,6 +98,7 @@ function CreateRealEstateCard() {
                 name="designation"
                 className="form-control"
                 onChange={handleChange}
+                value={formData.designation}
                 placeholder="Property Consultant"
               />
             </div>
@@ -90,6 +110,7 @@ function CreateRealEstateCard() {
                 name="phone"
                 maxLength="10"
                 className="form-control"
+                value={formData.phone}
                 onChange={handleChange}
               />
             </div>
@@ -110,6 +131,18 @@ function CreateRealEstateCard() {
                 type="text"
                 name="officeAddress"
                 className="form-control"
+                value={formData.officeAddress}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Website</label>
+              <input
+                type="text"
+                name="website"
+                className="form-control"
+                value={formData.website}
                 onChange={handleChange}
               />
             </div>
@@ -120,6 +153,7 @@ function CreateRealEstateCard() {
                 type="text"
                 name="experience"
                 className="form-control"
+                value={formData.experience}
                 onChange={handleChange}
               />
             </div>
@@ -142,7 +176,7 @@ function CreateRealEstateCard() {
 
         {/* RIGHT SIDE PREVIEW */}
         <div className="col-md-6">
-          <SelectedTemplate formData={formData} />
+          <SelectedTemplate data={formData} />
         </div>
       </div>
     </div>

@@ -1,5 +1,7 @@
+
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { FiUser, FiMail, FiPhone, FiBriefcase, FiMapPin, FiLinkedin } from "react-icons/fi";
 import SoftwareEngineer from "./SoftwareEngineer";
 import BusinessAnalystCard from "./BusinessAnalyst";
 
@@ -7,17 +9,18 @@ function CreateCorporateCard() {
   const { templateType } = useParams();
 
   const [formData, setFormData] = useState({
-    logo: "",
+    image: "",
     name: "",
     designation: "",
     companyName: "",
     email: "",
     phone: "",
+    description: "",
+    FiMapPin: "",
     linkedin: "",
-    address: "",
   });
 
-  // 🔥 Select template dynamically
+  // Select Template
   const getTemplate = () => {
     switch (templateType) {
       case "1":
@@ -33,15 +36,27 @@ function CreateCorporateCard() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
+  // Image Upload Preview
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setFormData((prev) => ({
+        ...prev,
+        image: imageURL,
+      }));
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Corporate Card Data:", formData);
     alert("Corporate Card Created Successfully!");
   };
 
@@ -55,7 +70,6 @@ function CreateCorporateCard() {
         {/* LEFT SIDE FORM */}
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
-
             <div className="mb-3">
               <label className="form-label">Full Name</label>
               <input
@@ -64,7 +78,6 @@ function CreateCorporateCard() {
                 className="form-control"
                 value={formData.name}
                 onChange={handleChange}
-                required
               />
             </div>
 
@@ -106,26 +119,72 @@ function CreateCorporateCard() {
               <input
                 type="text"
                 name="phone"
-                maxLength="10"
                 className="form-control"
                 value={formData.phone}
                 onChange={handleChange}
               />
             </div>
 
+            <div className="mb-3">
+              <label className="form-label">Description</label>
+              <textarea
+                name="description"
+                className="form-control"
+                value={formData.description}
+                onChange={handleChange}
+                
+              />
+            </div>
+
+              <div className="mb-3">
+  <label className="form-label">Address</label>
+  <div className="input-icon">
+    <FiMapPin className="form-icon" />
+    <textarea
+      name="address"
+      className="form-control"
+      value={formData.address}
+      onChange={handleChange}
+      rows="2"
+    />
+  </div>
+</div>
+
+<div className="mb-3">
+  <label className="form-label">LinkedIn</label>
+  <div className="input-icon">
+    <FiLinkedin className="form-icon" />
+    <input
+      type="text"
+      name="linkedin"
+      placeholder="https://linkedin.com/in/username"
+      className="form-control"
+      value={formData.linkedin}
+      onChange={handleChange}
+    />
+  </div>
+</div>
+
+            <div className="mb-3">
+              <label className="form-label">Upload Profile Image</label>
+              <input
+                type="file"
+                className="form-control"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </div>
+
             <button type="submit" className="btn btn-primary w-100">
               Save Corporate Card
             </button>
-
           </form>
         </div>
 
-        {/* RIGHT SIDE PREVIEW */}
+        {/* RIGHT SIDE LIVE PREVIEW */}
         <div className="col-md-6">
-        
           <SelectedTemplate data={formData} />
         </div>
-
       </div>
     </div>
   );
