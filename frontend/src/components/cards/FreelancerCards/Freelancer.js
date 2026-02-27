@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 
 
-export default function Freelancer() { 
+export default function Freelancer({ data = {} }) { 
   return (
 
     <div className="container p-0 mb-3 
@@ -24,27 +24,33 @@ export default function Freelancer() {
 
           {/* Logo */}
           <div className="freelancer-logo-circle">
-           <img src={profileImg} alt="profile" className="freelancer-profile-img " />
-        
+           
+            <img
+            src={data.logo || "upload image"}
+            alt="logo"
+            className="freelancer-profile-img"
+            />
           </div>
-           <h4 className="mt-3">Rimpa Morgan</h4>
+           <h4 className="mt-3">
+            {data.name || "Rimpa Morgan"}
+            </h4>
+            
           <p className="fw-semibold mb-1">
-        Freelance Web Developer
+          {data.profession || "Freelance Web Developer"}
           </p>
 
           <hr />
 
           <p className="text-muted small px-4">
-             Helping businesses build modern, responsive, and scalable digital
-            solutions.
+           {data.bio || "Helping businesses build modern, responsive, and scalable digital solutions."}  
           </p>
 
           {/* Contact info */}
           <div className="contact-info text-start mt-4 px-4">
-            <p><FaPhoneAlt /> 9518311798</p>
-            <p><FaEnvelope /> email@yoursite.com</p>
-            <p><FaGlobe /> www.yoursite.com</p>
-            <p><FaMapMarkerAlt /> 12/34, Area, City - 456789</p>
+            <p><FaPhoneAlt /> {data.phone || "9518311798" }</p>
+            <p><FaEnvelope /> {data.email || "email@yoursite.com"}</p>
+            <p><FaGlobe /> {data.portfolio || "www.yoursite.com"}</p>
+            <p><FaMapMarkerAlt /> {data.address || "12/34, Area, City - 456789"}</p>
           </div>
 
           {/* Social icons */}
