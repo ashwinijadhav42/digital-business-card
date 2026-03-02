@@ -114,7 +114,7 @@
 
 /* Save Button */
 .fs-se-save-btn {
-  width: 80%;
+  width: 60%;
   margin: 15px auto;
   display: block;
   background: #ffbf00;
@@ -124,6 +124,17 @@
   font-weight: 700;
 }
 
+.profile-img {
+  width: 305px;
+  height: 205px;
+  border-radius: 0%;
+  
+  border: 2px solid #0e0d0d;
+  
+  object-fit: cover;;      
+  background: #ffffff;            
+  padding: 2px;
+}
 /* Bottom */
 .fs-se-bottom {
   background: #1e2a32;
@@ -149,5 +160,4 @@
   align-items: center;
   font-size: 14px;
 }
-
 

@@ -14,6 +14,8 @@ function CreateFreelancerCard() {
     phone: "",
     portfolio: "",
     bio: "",
+    address: "",
+    logo: "",
   });
 
   // 🔥 Select template dynamically
@@ -39,6 +41,8 @@ function CreateFreelancerCard() {
     alert("Freelancer Card Created Successfully!");
   };
 
+  
+
   return (
     <div className="container py-4">
       <h3 className="text-center mb-4">
@@ -58,6 +62,7 @@ function CreateFreelancerCard() {
                 className="form-control"
                 onChange={handleChange}
                 required
+                placeholder="Full Name"
               />
             </div>
 
@@ -68,6 +73,7 @@ function CreateFreelancerCard() {
                 name="profession"
                 className="form-control"
                 onChange={handleChange}
+                placeholder="Profession"
               />
             </div>
 
@@ -89,6 +95,7 @@ function CreateFreelancerCard() {
                 name="email"
                 className="form-control"
                 onChange={handleChange}
+                placeholder="Email"
               />
             </div>
 
@@ -100,6 +107,19 @@ function CreateFreelancerCard() {
                 maxLength="10"
                 className="form-control"
                 onChange={handleChange}
+                placeholder="Phone"
+              />
+            </div>
+
+              <div className="mb-3">
+              <label className="form-label">Address</label>
+              <input
+                type="text"
+                name="address"
+                
+                className="form-control"
+                onChange={handleChange}
+                placeholder="address"
               />
             </div>
 
@@ -110,6 +130,7 @@ function CreateFreelancerCard() {
                 name="portfolio"
                 className="form-control"
                 onChange={handleChange}
+                placeholder="Portfolio Link"
               />
             </div>
 
@@ -120,8 +141,29 @@ function CreateFreelancerCard() {
                 className="form-control"
                 rows="3"
                 onChange={handleChange}
+                placeholder="Short Bio"
               />
             </div>
+
+              <div className="mb-3">
+  <label className="form-label">Upload Logo</label>
+  <input
+    type="file"
+    accept="image/*"
+    className="form-control"
+    onChange={(e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const imageURL = URL.createObjectURL(file);
+
+        setFormData({
+          ...formData,
+          logo: imageURL,
+        });
+      }
+    }}
+  />
+</div>    
 
             <button type="submit" className="btn btn-success w-100">
               Save Freelancer Card
@@ -131,7 +173,7 @@ function CreateFreelancerCard() {
 
         {/* RIGHT SIDE PREVIEW */}
         <div className="col-md-6">
-          <SelectedTemplate formData={formData} />
+          <SelectedTemplate data={formData} />
         </div>
       </div>
     </div>

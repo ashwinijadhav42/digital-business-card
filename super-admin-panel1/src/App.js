@@ -21,6 +21,7 @@ import AddAdmin from "./pages/AddAdmin";
 import EditBlog from "./pages/EditBlog";  
 import EditPricing from "./pages/EditPricing";
 import FeatureMaster from "./pages/FeatureMaster";
+import EditAdmin from "./pages/EditAdmin";  
 
 import "./styles/layout.css";
 import "./styles/form.css";
@@ -58,7 +59,7 @@ function App() {
               <Route path="/pricing/add" element={<AddPricing />} />
               <Route path="/editpricing/:id" element={<EditPricing />} />
               <Route path="/featuremaster" element={<FeatureMaster />} />
-
+              <Route path="/edit-admin/:id" element={<EditAdmin />} />
             </Routes>
           </div>
         </div>
