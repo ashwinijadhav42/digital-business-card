@@ -14,6 +14,8 @@ const LoginPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
 
+
+  
   //  Validation Function
   const validateForm = () => {
     let newErrors = {};
