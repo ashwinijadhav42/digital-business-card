@@ -2,34 +2,37 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./BusinessAnalyst.css";
 
 import {
+  FiMail,
+  FiPhone,
+  FiGithub,
+  FiLinkedin,
+  FiGlobe,
+  FiMapPin,
+  
+} from "react-icons/fi";
+
+import {
   Phone,
   Mail,
   MapPin,
-  FaLinkedinIn,
   Linkedin,
   Globe,
   Github,
   MessageCircle
 } from "lucide-react";
-
 import profileImg from "../../../assets/images/CorporateProfile.jpg";
+
 
 export default function BusinessAnalystCard({ data = {} }) {
   return (
-    <div className="ba-card container p-0">
+    <div className="ba-card container p-0 ">
 
       {/* Header */}
-      <div className="ba-header text-center">
-        <img
-          src={data.image || profileImg}
-          alt="profile"
-          className="ba-profile-img"
-        />
+      <div className="ba-header  text-center">
+        <img src={data.image || profileImg} alt="logo" className="ba-profile-img" />
+        
 
-        <h4 className="mt-2 mb-0">
-          {data.designation || "Business & Data Analyst"}
-        </h4>
-
+        <h4 className="mt-2 mb-0">Business & Data Analyst</h4>
         <small className="ba-tagline">
           {data.companyName || "Data • Analytics • Strategy"}
         </small>
@@ -37,94 +40,89 @@ export default function BusinessAnalystCard({ data = {} }) {
 
       {/* Profile Section */}
       <div className="ba-profile text-center">
-        <h5 className="mt-3 mb-0">
-          {data.name || "Rimpa Morgon"}
+       
+        <h5 className="mt-5 mb-2">
+          {data.name || "Rimpa Morgan"}
         </h5>
 
-        <small className="text-muted">
-          {data.designation || "Business Analyst"}
-        </small>
+        <small className="text-muted">Business Analyst</small>
 
         <p className="ba-desc mt-2">
-          {data.description ||
-            "Helping organizations make smarter decisions through data-driven insights."}
+          {data.description || "Helping organizations make smarter decisions through data-driven analysis, reporting, and strategic insights."}
         </p>
       </div>
 
       {/* Contact Info */}
       <div className="ba-contact mt-3">
-
         <div className="ba-contact-item">
-          <Phone size={16} className="me-2" />
-          <span>{data.phone || "9876543210"}</span>
+          <Phone size={18} />
+          <span>{data.phone || "+91 9518311798"}</span>
         </div>
 
         <div className="ba-contact-item">
-          <Mail size={16} className="me-2" />
-          <span>{data.email || "example@email.com"}</span>
+          <Mail size={18} />
+          <span>{data.email || "email@yoursite.com"}</span>
         </div>
 
-        
-          <div className="ba-contact-item">
-            <MapPin size={16} className="me-2" />
-            <span>{data.address || "Address"}</span>
-          </div>
-            
-          <div className="ba-contact-item">
-            <MapPin size={16} className="me-2" />
-            <span>{data.FaLinkedinIn || "LinkedIn"}</span>
-          </div>
-            
+        <div className="ba-contact-item">
+          <MapPin size={18} />
+          <span>{data.address || "Pune, India"}</span>
+        </div>
       </div>
-
 
       {/* Social Links */}
       
-      <div className="ba-contact-item">
 
-        {data.linkedin && (
-          <a href={data.linkedin} target="_blank" rel="noreferrer">
-            <linkedin size={16} />
-          </a>
-        )}
+{/* Action Icons */}
+      <div className="icon-row">
 
-        {data.github && (
-          <a href={data.github} target="_blank" rel="noreferrer">
-            <github size={20} />
-          </a>
-        )}
+        <a
+          href={`mailto:${data.email || "engineer@email.com"}`}
+          className="icon-circle"
+        >
+          <FiMail />
+        </a>
 
-        {data.portfolio && (
-          <a href={data.portfolio} target="_blank" rel="noreferrer">
-            <Globe size={20} />
-          </a>
-        )}
+        <a
+          href={`tel:${data.phone || "+919999999999"}`}
+          className="icon-circle"
+        >
+          <FiPhone />
+        </a>
 
-        {data.whatsapp && (
-          <a
-            href={`https://wa.me/${data.whatsapp}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MessageCircle size={20} />
-          </a>
-        )}
+        <a
+          href={data.linkedin || "https://linkedin.com/in/username"}
+          target="_blank"
+          rel="noreferrer"
+          className="icon-circle"
+        >
+          <FiLinkedin />
+        </a>
+
+        <a
+          href={data.website || "https://portfolio.com"}
+          target="_blank"
+          rel="noreferrer"
+          className="icon-circle"
+        >
+          <FiGlobe />
+        </a>
+
+        <a
+          href={data.address || "https://www.google.com/maps"}
+          target="_blank"
+          rel="noreferrer"
+          className="icon-circle"
+        >
+          <FiMapPin />
+        </a>
 
       </div>
 
-      {/* Github Button */}
-      {data.github && (
-        <a
-          href={data.github}
-          target="_blank"
-          rel="noreferrer"
-          className="btn btn-primary mt-3 w-100"
-        >
-          View Github Portfolio
-        </a>
-      )}
 
+<button className="btn btn-primary mt-2 text-center w-100">
+          View Github Portfolio
+        </button>
     </div>
   );
 }
-//Working
