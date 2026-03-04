@@ -12,7 +12,7 @@ export default function Users() {
           className="page-action-btn"
           onClick={() => navigate("/users/add")}
         >
-          Add User
+          + Add User
         </button>
       </div>
 
