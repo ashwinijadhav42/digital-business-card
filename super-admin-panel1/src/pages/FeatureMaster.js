@@ -100,7 +100,7 @@ function FeatureMaster() {
 
         <hr />
 
-        <table className="table table-bordered table-striped">
+        <table className="table table-bordered table-hover align-middle">
           <thead className="table-dark">
             <tr>
               <th>Sr.No</th>
