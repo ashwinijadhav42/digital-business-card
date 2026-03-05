@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -12,6 +14,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,12 +36,14 @@ public class PricingPlan {
 	    private String duration;
 	    private PlanStatus status;
 
-	    @ManyToMany
+	    @ManyToMany(fetch = FetchType.EAGER)
 	    @JoinTable(
 	            name = "pricing_plan_features",
 	            joinColumns = @JoinColumn(name = "pricing_plan_id"),
 	            inverseJoinColumns = @JoinColumn(name = "feature_id")
 	    )
+	    
+	    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	    private Set<Feature> features = new HashSet<>();
 
 	    // getters and setters

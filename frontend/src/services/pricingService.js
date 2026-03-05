@@ -1,21 +1,33 @@
 import axios from "axios";
 
-const API = "http://localhost:8080/api/pricing";
+const API_BASE = "http://localhost:8080/api/pricing";
 
-export const getAllPlans = () => axios.get(`${API}/allPlans`);
-
-export const createPlan = (data) =>
-  axios.post(`${API}/createNewPlan`, data);
-
-
-export const updatePlan = (id, data) => {
-  return axios.put(`${API}/updatePlan/${id}`, data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+// Get All Plans (Admin)
+export const getAllPlans = () => {
+  return axios.get(`${API_BASE}/allPlans`);
 };
 
+// Get Active Plans (User)
+export const getActivePlans = () => {
+  return axios.get(`${API_BASE}/activePlans`);
+};
 
-export const deletePlan = (id) =>
-  axios.delete(`${API}/deletePlan/${id}`);
+// Get Plan By ID
+export const getPlanById = (id) => {
+  return axios.get(`${API_BASE}/${id}`);
+};
+
+// Create Plan
+export const createPlan = (data) => {
+  return axios.post(`${API_BASE}/createNewPlan`, data);
+};
+
+// Update Plan
+export const updatePlan = (id, data) => {
+  return axios.put(`${API_BASE}/updatePlan/${id}`, data);
+};
+
+// Delete Plan
+export const deletePlan = (id) => {
+  return axios.delete(`${API_BASE}/deletePlan/${id}`);
+};

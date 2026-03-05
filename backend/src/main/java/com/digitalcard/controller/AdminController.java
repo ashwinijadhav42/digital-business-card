@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admins")
@@ -120,7 +122,28 @@ public class AdminController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+    
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody Map<String, String> request) {
 
+        String oldPassword = request.get("oldPassword");
+        String newPassword = request.get("newPassword");
+
+        // You must get logged-in admin properly (for now just example)
+        Optional<Admin> adminOpt = adminRepository.findByEmail("admin@gmail.com");
+
+        if (adminOpt.isPresent()) {
+            Admin admin = adminOpt.get();
+
+            if (admin.getPassword().equals(oldPassword)) {
+                admin.setPassword(newPassword);
+                adminRepository.save(admin);
+                return ResponseEntity.ok("Password updated");
+            }
+        }
+
+        return ResponseEntity.badRequest().body("Invalid password");
+    }
     // ✅ Delete Admin
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAdmin(@PathVariable Long id) {
