@@ -12,97 +12,215 @@ import {
   FaGlobe,
   FaLinkedinIn,
   FaWhatsapp,
+  FaIdCard,
+  FaBriefcase,
+  FaFilePdf,
+  FaVideo
 } from "react-icons/fa";
 
-import houseImg from "../../../assets/images/realEstate/house.jpg";
+import defaultHouse from "../../../assets/images/realEstate/house.jpg";
+//import defaultProfile from "../../../assets/images/defaultProfile.png";
 
-export default function RealEstate({ data = {} }) {
-  return (
-    <div className="realestate-card">
+const formatFacebookUrl = (value) => {
+  if (!value) return "#";
+  if (value.startsWith("http")) return value;
+  return `https://facebook.com/${value.replace("@", "")}`;
+};
 
+const formatLinkedinUrl = (value) => {
+  if (!value) return "#";
+  if (value.startsWith("http")) return value;
+  return `https://linkedin.com/in/${value.replace("@", "")}`;
+};
+
+const formatYoutubeUrl = (value) => {
+  if (!value) return "#";
+  if (value.startsWith("http")) return value;
+  return `https://youtube.com/${value.replace("@", "")}`;
+};
+
+const formatInstagramUrl = (value) => {
+  if (!value) return "#";
+  if (value.startsWith("http")) return value;
+  return `https://instagram.com/${value.replace("@", "")}`;
+};
+const formatTwitterUrl = (value) => {
+  if (!value) return "#";
+  if (value.startsWith("http")) return value;
+  return `https://twitter.com/${value.replace("@", "")}`;
+};
+
+export default function RealEstate({ data = {}, showAllIcons = false }) {
+return (
+    <div className="realestate-card shadow-lg">
       {/* Top Banner */}
       <div className="banner">
         <img
-          src={data.image || houseImg}
-          alt="house"
+          src={data.profilePhoto || defaultHouse}
+          alt="property"
           className="banner-img"
-        />
+        />      
       </div>
 
-      {/* Business Info */}
-      <div className="business-info text-center">
-  <h4>{data.agencyName || "JK Builders & Developers"}</h4>
+      {/* Profile Section */}
+      <div className="profile-section text-center">
+        
+       <h4>{data.agencyName || "JK Builders & Developers"}</h4>
 
-      
-         
-        <h5 className="highlight">
-          {data.name || "Name"}
-        </h5>
+<p className="info-line">
+  <FaIdCard className="me-2" />
+  {data.reraNumber
+    ? `RERA: ${data.reraNumber}`
+    : "RERA: A123456789"}
+</p>
+      </div>
 
-        <p className="highlight">
-          {data.tagline || "Quality Homes, Trusted Development."}
-        </p>
-
-        <p className="desc">
+      {/* About */}
+      <div className="px-4 mt-3">
+        <p className="text-center">
           {data.description ||
-            "JK Builders & Developers creates thoughtfully designed residential and commercial spaces with a focus on quality, innovation, and long-term value."}
-        </p>
-
-        <p className="desc">
-          {data.designation ||
-            "Property Consultant"}
-        </p>
-
-          <p className="desc">
-          {data.experience || "Total Experience"}
+            "Trusted real estate expert helping clients buy, sell and rent properties ."}
         </p>
       </div>
 
-      {/* Contact Section */}
-      <div className="contact-section px-4">
+      {/* Specialization */}
+<div className="jk-specialization-wrapper px-4 mt-4">
+  <h5 className="jk-specialization-title text-center mb-4">
+    Our Expertise
+  </h5>
 
-        <div className="contact-item">
-          <FaPhoneAlt />
-          <span>{data.phone || "9518311798"}</span>
-        </div>
+  <div className="specialization-grid">
 
-        <div className="contact-item">
-          <FaEnvelope />
-          <span>{data.email || "email@yoursite.com"}</span>
-        </div>
-
-        <div className="contact-item">
-          <FaMapMarkerAlt />
-          <span>{data.officeAddress || "12/34, Area, City - 456789"}</span>
-        </div>
-
-        <div className="contact-item">
-          <FaGlobe />
-          <span>{data.website || "www.realEstate.com"}</span>
-        </div>
-
+    <div className="specialization-box">
+      <div className="spec-heading">Property Type</div>
+      <div className="spec-content">
+        {data.propertyType || "Apartment • Villa • Commercial"}
       </div>
-
-      {/* View More Images Button */}
-      <div className="text-center my-4">
-        <button className="btn btn-warning view-more-btn">
-          View more images of Real Estate
-        </button>
-      </div>
-
-      {/* Social Icons */}
-      <div className="social-icons text-center mb-3">
-
-        {data.facebook && <FaFacebookF />}
-        {data.instagram && <FaInstagram />}
-        {data.youtube && <FaYoutube />}
-        {data.twitter && <FaTwitter />}
-        {data.linkedin && <FaLinkedinIn />}
-        {data.whatsapp && <FaWhatsapp />}
-
-      </div>
-
-      <div className="zigzag"></div>
     </div>
+
+    <div className="specialization-box">
+      <div className="spec-heading">Transaction</div>
+      <div className="spec-content">
+        {data.transactionType || "Buy • Sell • Rent"}
+      </div>
+    </div>
+
+    <div className="specialization-box">
+      <div className="spec-heading">Budget Range</div>
+      <div className="spec-content highlight-text">
+        {data.budgetRange || "₹50L – ₹2Cr"}
+      </div>
+    </div>
+
+    <div className="specialization-box">
+      <div className="spec-heading">Preferred Locations</div>
+      <div className="spec-content">
+        {data.preferredLocations || "Baner • Wakad • Hinjewadi"}
+      </div>
+    </div>
+
+  </div>
+</div>
+{/* Contact Section */}
+<div className="contact-section px-4 mt-3">
+
+  {/* Phone */}
+  <div className="contact-item">
+    <FaPhoneAlt />
+    <span className={!data.phone ? "disabled-contact" : ""}>
+      {data.phone || "8436983423"}
+    </span>
+  </div>
+
+  {/* Email */}
+  <div className="contact-item">
+    <FaEnvelope />
+    <span className={!data.email ? "disabled-contact" : ""}>
+      {data.email || "Email Address"}
+    </span>
+  </div>
+
+  {/* Address */}
+  <div className="contact-item">
+    <FaMapMarkerAlt />
+    <span className={!data.officeAddress ? "disabled-contact" : ""}>
+      {data.officeAddress || "Office Address"}
+    </span>
+  </div>
+
+  {/* Website */}
+  <div className="contact-item">
+    <FaGlobe />
+    <span className={!data.website ? "disabled-contact" : ""}>
+      {data.website || "Website URL"}
+    </span>
+  </div>
+</div>
+
+{/* View More Images Button */} 
+<div className="text-center my-4"> <button className="btn btn-warning view-more-btn"> View more images of Real Estate </button> </div>
+{/* Social Icons */}
+<div className="social-icons text-center mt-4 mb-3">
+{(!showAllIcons || data?.whatsapp) && (
+    <a
+      href={`https://wa.me/${data?.whatsapp}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaWhatsapp />
+    </a>
+  )}
+  {(!showAllIcons || data?.facebook) && (
+            <a
+              href={formatFacebookUrl(data?.facebook)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebookF />
+            </a>
+          )}
+  
+          {(!showAllIcons || data?.linkedin) && (
+            <a
+              href={formatLinkedinUrl(data?.linkedin)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedinIn />
+            </a>
+          )}
+  
+          {(!showAllIcons || data?.youtube) && (
+            <a
+              href={formatYoutubeUrl(data?.youtube)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaYoutube />
+            </a>
+          )}
+  
+          {(!showAllIcons || data?.instagram) && (
+            <a
+              href={formatInstagramUrl(data?.instagram)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram />
+            </a>
+          )}
+          {(!showAllIcons || data?.twitter) && (
+            <a
+              href={formatTwitterUrl(data?.twitter)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter />
+            </a>
+          )}
+</div>
+
+   <div className="zigzag"></div> </div>
+    
   );
 }

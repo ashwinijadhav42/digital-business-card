@@ -5,12 +5,13 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   overflow: hidden;
   font-family: "Segoe UI", sans-serif;
+  color:black;
 }
 
 /* Banner */
 .banner {
   position: relative;
-  height: 180px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -42,10 +43,11 @@
 .logo-box img {
   width: 100px;
 }
-
+.profile-section {
+   margin-top: 10px;
+}
 /* Business Info */
 .business-info { 
-  padding: 20px  20px 5px;
   color:black;
 }
 
@@ -59,8 +61,78 @@
 
 .desc {
   font-size: 14px;
+
+}
+.info-line {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 4px;
+  text-decoration-line: underline;
+  text-decoration-color: #f4b400; /* Gold shade */
+  text-decoration-thickness: 3px;
+}
+/* ===== Specialization Premium Style ===== */
+
+.jk-specialization-wrapper {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 14px;
 }
 
+
+.specialization-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #222;
+  position: relative;
+}
+
+.specialization-title::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #ffc107;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+.specialization-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.specialization-box {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  transition: 0.3s ease;
+}
+
+.specialization-box:hover {
+  transform: translateY(-3px);
+}
+
+.spec-heading {
+  font-size: 13px;
+  color: #777;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.spec-content {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.highlight-text {
+  color: #ffc107;
+  font-weight: 700;
+}
 /* Contact Items */
 .contact-item {
   display: flex;

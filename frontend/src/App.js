@@ -23,9 +23,10 @@ import CreateDoctorCard from "./components/cards/DoctorCard/CreateDoctorCard";
 import ViewDoctorCard from "./components/cards/DoctorCard/ViewDoctorCard";
 import TemplatesByCategory from "./pages/TemplatesByCategory";
 import CreateFreelancerCard from "./components/cards/FreelancerCards/CreateFreelancerCard";
+import ViewFreelancerCard from "./components/cards/FreelancerCards/ViewFreelancerCard";
 import CreateCorporateCard from "./components/cards/CorporateCard/CreateCorporateCard";
 import CreateRealEstateCard from "./components/cards/RealEstateCard/CreateRealEstateCard";
-
+import ViewRealEstateCard from "./components/cards/RealEstateCard/ViewRealEstateCard";
 function App() {
   return (
     <BrowserRouter>
@@ -65,15 +66,18 @@ function App() {
         <Route path="/login/:templateType" element={<LoginPage />} /> */}
 
         <Route path="/login/:category/:templateType" element={<LoginPage />} />
-       
+
 
         <Route path="/create-doctor-card/:templateType" element={<CreateDoctorCard />} />
         <Route path="/view-doctor-card/:slug" element={<ViewDoctorCard />} />
 
         <Route path="/create-freelancer-card/:templateType" element={<CreateFreelancerCard />} />
-        <Route path="/create-corporate-card/:templateType" element={<CreateCorporateCard />} />
-        <Route path="/create-realestate-card/:templateType" element={<CreateRealEstateCard />} />
+        <Route path="/view-freelancer-card/:slug" element={<ViewFreelancerCard />} />
 
+        <Route path="/create-corporate-card/:templateType" element={<CreateCorporateCard />} />
+
+        <Route path="/create-realestate-card/:templateType" element={<CreateRealEstateCard />} />
+        <Route path="/view-realestate-card/:slug" element={<ViewRealEstateCard />} />
 
       </Routes>
       <Footer />

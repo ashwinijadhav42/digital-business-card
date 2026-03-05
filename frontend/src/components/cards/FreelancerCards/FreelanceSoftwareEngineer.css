@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f1f3f6;
    color:black;
 }
 
@@ -16,8 +15,7 @@
   background: #3fc1cd21;
   //border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-  border: 1px solid #0e0d0d; 
+  border: 1px solid #171212; 
 }
 
 /* Top Section */
@@ -68,7 +66,9 @@
   margin-top:10px;
   padding: 0px 20px 20px;
 }
-
+.fs-se svg{
+background: #ffbf00;
+}
 .fs-se-name {
   font-weight: 700;
 }
@@ -87,30 +87,46 @@
   margin-top: 15px;
 }
 
-.fs-se-item {
+/* Contact Items */
+.fs-se-contact-item {
   display: flex;
-  font-size: 18px;
-  margin: 6px;
   align-items: center;
-   gap: 20px;
+  gap: 15px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #3cdbde29;
+  border-radius: 6px;
+  font-size: 15px;
+
 }
 
+.fs-se-contact-item svg {
+  background: #f39c12;
+  color: #000;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 30px;
+}
 
 
 /* Social */
 .fs-se-social {
-  color: #ffbf00;
-  padding: 12px;
-  display: flex;
-  justify-content: space-around;
-  font-size: 30px;
-  background: #101010;
+  
+  background: #3cdbde29;
+}
+.fs-se-social svg{
+background: #333;
+  color: #f39c12;
+  padding: 5px;
+  margin-top:20px;
+  margin-left:15px;
+  gap:40px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 35px;
 }
 
-.fs-se-icon {
-  color: #fff;
-  font-size: 18px;
-}
+
 
 /* Save Button */
 .fs-se-save-btn {
@@ -122,6 +138,7 @@
   padding: 10px;
   border-radius: 25px;
   font-weight: 700;
+  color: #1a1a1af4;
 }
 
 .profile-img {
@@ -137,7 +154,7 @@
 }
 /* Bottom */
 .fs-se-bottom {
-  background: #1e2a32;
+  background: #3cdbde29;
   display: flex;
   justify-content: space-between;
   padding: 12px;

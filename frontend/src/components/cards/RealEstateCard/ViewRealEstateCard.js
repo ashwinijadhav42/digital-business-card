@@ -1,0 +1,113 @@
+import { useEffect, useState, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { QRCodeCanvas } from "qrcode.react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
+import RealEstate from "./RealEstate";
+import UnityRealEstate from "./UnityRealEstate";
+
+function ViewRealEstateCard() {
+  const cardRef = useRef();
+  const { slug } = useParams();
+  const [card, setCard] = useState(null);
+
+  const handleDownloadPDF = async () => {
+    const element = cardRef.current;
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "mm", "a4");
+    const imgWidth = 190;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+    pdf.save(`${slug}.pdf`);
+  };
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/api/realestate-cards/public/${slug}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Private");
+        return res.json();
+      })
+      .then((data) => setCard(data))
+      .catch(() => setCard("PRIVATE"));
+  }, [slug]);
+
+  if (card === "PRIVATE")
+    return <h3 className="text-center mt-5">This Card is Private</h3>;
+
+  if (!card) return <h4>Loading...</h4>;
+
+  const publicUrl =
+    `${window.location.origin}/view-realestate-card/${slug}`;
+
+  return (
+    <div className="text-center">
+
+      {/* Card Section */}
+      <div ref={cardRef} id="card-to-download">
+        {card.templateType === "template1" && (
+          <RealEstate data={card} />
+        )}
+        {card.templateType === "template2" && (
+          <UnityRealEstate data={card} />
+        )}
+      </div>
+
+      {/* QR Section */}
+      <div className="mt-4">
+        <h5>Scan QR Code</h5>
+        <QRCodeCanvas value={publicUrl} size={200} />
+      </div>
+
+      {/* Download Button */}
+      <button
+        className="btn btn-success mt-4"
+        onClick={handleDownloadPDF}
+      >
+        Download as PDF
+      </button>
+
+      {/* Share Section */}
+      <div className="mt-4">
+        <h5>Share This Card</h5>
+
+        {/* WhatsApp */}
+        <a
+          href={`https://wa.me/?text=${encodeURIComponent(publicUrl)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-success m-2"
+        >
+          Share on WhatsApp
+        </a>
+
+        {/* LinkedIn */}
+        <a
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(publicUrl)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-primary m-2"
+        >
+          Share on LinkedIn
+        </a>
+
+        {/* Copy Link */}
+        <button
+          className="btn btn-dark m-2"
+          onClick={() => {
+            navigator.clipboard.writeText(publicUrl);
+            alert("Link Copied!");
+          }}
+        >
+          Copy Link
+        </button>
+      </div>
+
+    </div>
+  );
+}
+
+export default ViewRealEstateCard;

@@ -98,10 +98,9 @@ const LoginPage = () => {
 
   
 if (isLogin) {
-  navigate(`/create-${category}-card/${templateType}`);
+  //navigate(`/create-${category}-card/${templateType}`);
+  navigate(`/create-${category}-card/template${templateType}`);
 }
-
-
 
     } catch (err) {
       console.error("Error:", err);

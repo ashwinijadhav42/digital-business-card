@@ -12,10 +12,13 @@ import {
   FaYoutube,
   FaLinkedinIn,
   FaTelegramPlane,
+  FaTwitter,
   FaWhatsapp,
+  FaIdCard,
 } from "react-icons/fa";
 
-export default function UnityRealEstate({ data = {} }) {
+export default function UnityRealEstate({ data = {}, showAllIcons = false }) {
+
   return (
     <div className="real-card container p-0">
 
@@ -24,43 +27,28 @@ export default function UnityRealEstate({ data = {} }) {
         <div className="unity-logo-circle">
          
             <img src={logo} alt="logo" />
-
-            
-         
+ 
         </div>
 
       </div>
 
   
       {/* Content */}
-      <div className="card-body-custom text-center text-white px-4">
-       
+      <div className="card-body-custom text-center px-4">
+       <div className="unity-header">
         <h4>{data.agencyName || "Unity Developers"}</h4>
 
-
-        <p className="tagline">
-          <b> Building Trust. Creating Value</b>
+        <p className="unity-info-line">
+          <FaIdCard className="me-2" />
+          {data.reraNumber
+            ? `RERA: ${data.reraNumber}`
+            : "RERA: A123456789"}
         </p>
-
         <p className="description">
           {data.description ||
-          "Unity Developers is a trusted real-estate company delivering quality residential and commercial projects with a focus on transparency, timely delivery, and lasting value"}
+          "Unity Developers is a trusted real-estate company delivering quality residential and commercial projects "}
         </p>
-
-        <h5 className="highlight">
-          {data.name || "Name"}
-        </h5>
-
-        <p className="highlight">
-          {data.designation ||
-            "Property Consultant"}
-        </p>
-
-        <p className="dedescriptionsc">
-          {data.experience || "Total Experience"}
-        </p>
-
-
+</div>
         {/* Contact Info */}
         <div className="contact-list mt-4">
           <div className="contact-item">
@@ -84,25 +72,107 @@ export default function UnityRealEstate({ data = {} }) {
           </div>
         </div>
 
-        
+{/* Specialization */}
+<div className="unity-specialization-wrapper px-4 mt-4">
+  <h5 className="specialization-title text-center mb-4">
+    Our Expertise
+  </h5>
 
+  <div className="specialization-grid">
+
+    <div className="specialization-box">
+      <div className="spec-heading">Property Type</div>
+      <div className="spec-content">
+        {data.propertyType || "Apartment • Villa • Commercial"}
+      </div>
+    </div>
+
+    <div className="specialization-box">
+      <div className="spec-heading">Transaction</div>
+      <div className="spec-content">
+        {data.transactionType || "Buy • Sell • Rent"}
+      </div>
+    </div>
+
+    <div className="specialization-box">
+      <div className="spec-heading">Budget Range</div>
+      <div className="spec-content highlight-text">
+        {data.budgetRange || "₹50L – ₹2Cr"}
+      </div>
+    </div>
+
+    <div className="specialization-box">
+      <div className="spec-heading">Preferred Locations</div>
+      <div className="spec-content">
+        {data.preferredLocations || "Baner • Wakad • Hinjewadi"}
+      </div>
+    </div>
+
+  </div>
+</div>
         {/* Social Icons */}
         <div className="social-icons mt-4">
-          <FaFacebookF />
-          <FaInstagram />
-          <FaYoutube />
-          <FaLinkedinIn />
-          <FaTelegramPlane />
-          <FaWhatsapp/>
-        </div>
-      </div>
 
-      <div className="text-center my-4">
-  <button className="btn btn-warning view-more-image-btn">
-    View more images of Real Estate
-  </button>
+  {(!showAllIcons || data.facebook) && (
+    <a href={data.facebook || "#"} target="_blank" rel="noopener noreferrer">
+      <FaFacebookF />
+    </a>
+  )}
+
+  {(!showAllIcons || data.instagram) && (
+    <a href={data.instagram || "#"} target="_blank" rel="noopener noreferrer">
+      <FaInstagram />
+    </a>
+  )}
+
+  {(!showAllIcons || data.youtube) && (
+    <a href={data.youtube || "#"} target="_blank" rel="noopener noreferrer">
+      <FaYoutube />
+    </a>
+  )}
+
+  {(!showAllIcons || data.linkedin) && (
+    <a href={data.linkedin || "#"} target="_blank" rel="noopener noreferrer">
+      <FaLinkedinIn />
+    </a>
+  )}
+
+  {(!showAllIcons || data.whatsapp) && (
+    <a
+      href={
+        data.whatsapp
+          ? `https://wa.me/${data.whatsapp}`
+          : "#"
+      }
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaWhatsapp />
+    </a>
+  )}
+  {(!showAllIcons || data.twitter) && (
+    <a
+      href={
+        data.twitter
+          ? `https://wa.me/${data.twitter}`
+          : "#"
+      }
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaTwitter />
+    </a>
+  )}
+
 </div>
 
-    </div>
+              </div>
+
+      <div className="text-center mt-2 mb-4">
+  <button className="btn unity-view-more-image-btn">
+     View more images of Unity Real Estate
+  </button>
+</div>
+</div>
   );
 }

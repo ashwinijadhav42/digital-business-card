@@ -242,21 +242,8 @@ function CreateDoctorCard() {
       <h3 className="mb-4 text-center">Create Doctor Digital Card</h3>
 
       <div className="row align-items-start">
-
-        {/* LEFT PREVIEW */}
-        <div className="col-md-6 py-2">
-          {selectedTemplate === "template1" && (
-            <DoctorCard1 data={formData} />
-          )}
-
-          {selectedTemplate === "template2" && (
-            <DoctorCard2 data={formData} />
-          )}
-        </div>
-
-
         {/* RIGHT FORM */}
-        <div className="col-md-6 p-4 border rounded ">
+        <div className="col-md-6 p-4 ms-5 border rounded ">
           <form onSubmit={handleSave}>
             <h6 className="mb-3 text-center ">
               Please enter details to preview your digital card
@@ -586,6 +573,17 @@ function CreateDoctorCard() {
             </button>
           </form>
         </div>
+{/* LEFT PREVIEW */}
+        <div className="col-md-4 py-2 ms-5">
+          {selectedTemplate === "template1" && (
+            <DoctorCard1 data={formData} />
+          )}
+
+          {selectedTemplate === "template2" && (
+            <DoctorCard2 data={formData} />
+          )}
+        </div>
+
       </div>
     </div>
   );
