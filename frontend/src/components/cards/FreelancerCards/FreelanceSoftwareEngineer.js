@@ -2,6 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./FreelanceSoftwareEngineer.css";
 import logo from "../../../assets/images/CorporateProfile.jpg";
 
+import CardActions from "./CardActions";
+
+
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -21,6 +24,7 @@ import {
 /* ============================= */
 /* Social URL Format Functions   */
 /* ============================= */
+
 
 const formatGithubUrl = (value) => {
   if (!value) return "#";
@@ -66,18 +70,15 @@ const formatWhatsappUrl = (value) => {
   return `https://wa.me/${cleanedNumber}`;
 };
 
-/* ============================= */
-/* Component                     */
-/* ============================= */
-
-export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = true }) {
+export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = true ,publicUrl,onDownload,slug}) {
+  
   return (
     <div className="fs-se-wrapper">
-      <div className="fs-se-card">
+      <div className="fs-se-card text-center">
 
         {/* ===== LOGO ===== */}
         <div className="fs-se-top-images">
-          <div className="fs-se-logo">
+          <div className="fs-se-logo-img">
 
             <img
               src={
@@ -89,19 +90,20 @@ export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = tr
               }
               alt="Logo"
               className="fs-se-logo-img"
+              
             />
 
           </div>
         </div>
 
         {/* ===== CONTENT ===== */}
-        <div className="fs-se-content text-center mt-2">
+        <div className="fs-se-content text-center ">
 
           <h3>{data.name || "Sonali Mule"}</h3>
 
-          <h5>{data.profession || "Freelance Software Engineer"}</h5>
+          <h6>{data.profession || "Freelance Software Engineer"}</h6>
 
-          <p className="fs-se-tagline">
+          <p className="fs-se-skills">
             {data.skills
               ? data.skills.split(",").map((skill, i) => (
                   <span key={i}>• {skill.trim()} </span>
@@ -154,7 +156,7 @@ export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = tr
 
         {/* ===== SOCIAL ICONS ===== */}
 
-        <div className="fs-se-social">
+        <div className="fs-se-social ">
 
           {(showAllIcons || data?.twitter) && (
             <a
@@ -226,7 +228,11 @@ export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = tr
           )}
 
         </div>
-
+<CardActions
+  slug={slug}
+  publicUrl={publicUrl}
+  onDownload={onDownload}
+/>
       </div>
     </div>
   );

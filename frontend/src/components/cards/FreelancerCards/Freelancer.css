@@ -1,15 +1,15 @@
-
+ 
 .freelancer-card-page {
-  max-width: 360px;
+  max-width: 460px;
   background: #1fc3c9 ;
   color:black;
   min-height: auto;
   margin-top: 0;
   margin-left: auto;
-  margin-right: 100px;
+  //margin-right: 100px;
   border: 1px solid #0e0d0d; 
   
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  
 
 }
 
@@ -17,9 +17,10 @@
 .freelancer-business-card {
   background: #fff;
   width: 100%;
-  max-width: 380px;;
-   padding: 30px 0 20px;
-  border-radius: 200px;
+  max-width: 680px;;
+  
+   padding: 30px 10px 20px 20px;
+  border-radius: 200px 200px 100px 100px;
 }
 
 /* Logo circle */
@@ -82,7 +83,7 @@
   gap: 15px;
   padding: 12px;
   margin-bottom: 10px;
-  background: #f7f7f7;
+  background: #1868c42f;
   border-radius: 6px;
   font-size: 15px;
 
@@ -96,21 +97,55 @@
   font-size: 30px;
 }
 /* Social Icons - Opposite Style */
-.freelancer-social-icons svg{
-background: #333;
-  color: #f39c12;
-  padding: 5px;
-  margin-top:20px;
-  margin-left:15px;
-  gap:40px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 35px;
+.freelancer-social-icons{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
 }
 
+.freelancer-social-icons a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #333;
+  color: #f39c12;
+
+  width: 42px;
+  height: 42px;
+  margin: 6px;
+
+  border-radius: 6px;
+  text-decoration: none;
+
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.freelancer-social-icons a svg{
+  font-size: 22px;
+}
+.freelancer-btn{
+   background: #fff;
+   padding:10px;
+   border :2px solid #f39c12;
+}
+
+.freelancer-btn a{
+   background: #fff;
+   text-decoration: none;
+   color:black;
+   padding:10px;
+}
 /* Bottom bar */
 .freelancer-bottom-bar button {
   font-size: 19px;
   background: #fff;
   color: black;
 }
+
+.freelancer-btn:disabled{
+  
+  cursor:not-allowed;
+}   

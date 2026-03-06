@@ -14,11 +14,16 @@ function ViewFreelancerCard() {
   const [card, setCard] = useState(null);
 
   // ================= PDF DOWNLOAD =================
- const handleDownloadPDF = async () => {
+const handleDownloadPDF = async () => {
   const element = cardRef.current;
 
+  if (!element) {
+    alert("Card not loaded yet");
+    return;
+  }
+
   const canvas = await html2canvas(element, {
-    scale: 2,
+    scale: 4,
     useCORS: true
   });
 
@@ -32,21 +37,19 @@ function ViewFreelancerCard() {
   const imgWidth = canvas.width;
   const imgHeight = canvas.height;
 
-  // Calculate ratio to fit inside page
   const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
 
   const finalWidth = imgWidth * ratio;
   const finalHeight = imgHeight * ratio;
 
-  // Center the card
   const x = (pageWidth - finalWidth) / 2;
   const y = (pageHeight - finalHeight) / 2;
 
   pdf.addImage(imgData, "PNG", x, y, finalWidth, finalHeight);
 
   pdf.save(`${slug}.pdf`);
-};
-// ================= FETCH CARD =================
+   element.style.width = "100%";
+};// ================= FETCH CARD =================
   useEffect(() => {
     fetch(`http://localhost:8080/api/freelancer-cards/${slug}`)
       .then((res) => {
@@ -72,65 +75,22 @@ function ViewFreelancerCard() {
   <div className="d-flex justify-content-center mt-5">
     <div ref={cardRef} id="card-to-download">
       {card.templateType === "template1" && (
-        <FreelancerTemplate1 data={card} showAllIcons={true} />
+        <FreelancerTemplate1 data={card} 
+        showAllIcons={true}
+         onDownload={handleDownloadPDF}
+          cardRef={cardRef} />
       )}
 
       {card.templateType === "template2" && (
-        <FreelancerTemplate2 data={card} showAllIcons={true} />
+        <FreelancerTemplate2 data={card} 
+        showAllIcons={true}
+         onDownload={handleDownloadPDF}
+          cardRef={cardRef} />
       )}
     </div>
   </div>
-      {/* ================= QR SECTION ================= */}
-      <div className="mt-4">
-        <h5>Scan QR Code</h5>
-        <QRCodeCanvas value={publicUrl} size={200} />
-      </div>
-
-      {/* ================= DOWNLOAD ================= */}
-      <button
-        className="btn btn-success mt-4"
-        onClick={handleDownloadPDF}
-      >
-        Download as PDF
-      </button>
-
-      {/* ================= SHARE SECTION ================= */}
-      <div className="mt-4">
-        <h5>Share This Card</h5>
-
-        {/* WhatsApp */}
-        <a
-          href={`https://wa.me/?text=${encodeURIComponent(publicUrl)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-success m-2"
-        >
-          Share on WhatsApp
-        </a>
-
-        {/* LinkedIn */}
-        <a
-          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(publicUrl)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary m-2"
-        >
-          Share on LinkedIn
-        </a>
-
-        {/* Copy Link */}
-        <button
-          className="btn btn-dark m-2"
-          onClick={() => {
-            navigator.clipboard.writeText(publicUrl);
-            alert("Link Copied!");
-          }}
-        >
-          Copy Link
-        </button>
-      </div>
-
-    </div>
+  
+    </div> 
   );
 }
 

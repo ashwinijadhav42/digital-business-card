@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState ,useRef} from "react";
+
 import { useParams } from "react-router-dom";
 import FreelancerTemplate1 from "./Freelancer";
 import FreelancerTemplate2 from "./FreelanceSoftwareEngineer";
+import { FaBedPulse } from "react-icons/fa6";
 
-function CreateFreelancerCard({ data, showAllIcons = false }) {
+function CreateFreelancerCard({ data, showAllIcons = true }) {
   const { templateType } = useParams();
 
   const [selectedTemplate, setSelectedTemplate] = useState(
@@ -27,11 +29,14 @@ function CreateFreelancerCard({ data, showAllIcons = false }) {
     twitter: "",
     instagram: "",
     telegram: "",
+    youtube:"",
   };
 
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
 
+
+const fileInputRef = useRef(null);
   // ================= HANDLE CHANGE =================
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -137,12 +142,16 @@ Object.keys(formData).forEach((key) => {
 };
 
   const handleReset = () => {
-    const confirmReset = window.confirm("Are you sure you want to reset?");
-    if (confirmReset) {
-      setFormData(initialFormData);
-      setErrors({});
-      setSelectedTemplate("template1");
+  const confirmReset = window.confirm("Are you sure you want to reset?");
+  if (confirmReset) {
+    setFormData(initialFormData);
+    setErrors({});
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
+  }
+
   };
 
 
@@ -206,6 +215,7 @@ Object.keys(formData).forEach((key) => {
                 <input
                   type="file"
                   className="form-control"
+                   ref={fileInputRef}
                   onChange={handleImageChange}
                 />
               </div>
@@ -474,20 +484,9 @@ Object.keys(formData).forEach((key) => {
   </div>
 </div>
 
-{/* Row 4 */}
-<div className="row freelancer-social-row">
-  <div className="col-md-6 mb-3">
-    <input
-      type="text"
-      name="whatsapp"
-      placeholder="WhatsApp Number"
-      className="form-control freelancer-input"
-      value={formData.whatsapp}
-      onChange={handleChange}
-    />
-  </div>
+
 </div>
-</div><button className="btn btn-primary w-50">
+<button className="btn btn-primary w-50">
               Create Card
             </button>
 
@@ -503,12 +502,11 @@ Object.keys(formData).forEach((key) => {
         </div>
 
         {/* LEFT PREVIEW */}
-        {/* LEFT PREVIEW */}
                 <div className="col-md-4  ms-5">
                   {selectedTemplate === "template1" &&
-                    <FreelancerTemplate1 data={formData} showAllIcons={true} />}
+                    <FreelancerTemplate1 data={formData} showAllIcons={false} />}
                   {selectedTemplate === "template2" &&
-                    <FreelancerTemplate2 data={formData} showAllIcons={true} />
+                    <FreelancerTemplate2 data={formData} showAllIcons={false} />
                   }
                 </div>
 
