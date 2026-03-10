@@ -1,6 +1,7 @@
 .doctor-card {
-  max-width: 420px;
+  max-width: 460px;
   margin: 30px auto ;
+  color:black;
   background: #f7fbff;
   border-radius: 20px;
   border: 1px solid #000;
@@ -19,34 +20,8 @@
   
 }
 
-/* Right side vertical icons – DoctorCard1 ONLY */
-.doctor-card-1 .doctor1-social-icons {
-  position: absolute;
-  top: 10%;
-  right: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 10;
-}
 
-.doctor-card-1 .doctor1-social-icons svg {
-  background: #ffffff;
-  color: #1e88e5;
-  width: 36px;
-  height: 36px;
-  padding: 4px;
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
 
-.doctor-card-1 .doctor1-social-icons svg:hover {
-  background: #1e88e5;
-  color: #ffffff;
-  transform: scale(1.1);
-}
 
 /* Header */
 .doctor-header {
@@ -91,36 +66,96 @@
   object-fit: contain;
   border-radius: 50%;
 }
+/* ================= SOCIAL ICONS ================= */
 
-/* Contact Items */
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0;   /* slightly reduced */
-  font-size: 15px;
+.doctor-card-1 .doctor1-social-icons{
+  position:absolute;
+  top:6%;
+  right:15px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.contact-item svg {
-  color: #1e88e5;
-  font-size: 25px;
+.doctor1-icon{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#ffffff;
+  color:#1e88e5;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* Footer */
-.doctor-footer {
-  padding: 0;
-  margin: 0;
+.doctor1-icon svg{
+  width:30px;
+  height:30px;
+  padding:2px;
 }
+
+/* ================= CONTACT ================= */
+
+.doctor1-contact-list{
+  margin-top:15px;
+}
+
+.doctor1-contact-item{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin:15px 0;
+}
+
+.doctor1-contact-icon{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  
+}
+
+.doctor1-contact-icon svg{
+  width:25px;
+   padding:2px;
+
+  height:25px;
+}
+
+/* colors */
+
+.phone{ background:#198754; }
+.email{ background:#ffc107; color:#000; }
+.location{ background:#dc3545; }
+.clock{ background:#212529; }
+.hospital{ background:#0d6efd; }
+
+/* social colors */
+
+.facebook{ background:#1877F2; color:#fff; }
+.linkedin{ background:#0A66C2; color:#fff; }
+.youtube{ background:#FF0000; color:#fff; }
+.instagram{ background:#E1306C; color:#fff; }
+
+
+
+
 /* Button inside footer */
-.doctor-footer .btn {
-  width: 100%;
+.doctor-whatsapp-btn .btn {
+  width: 70%;
   padding: 14px 0;
   font-size: 15px;
   font-weight: 500;
   background: linear-gradient(135deg, #1e88e5, #42a5f5);
-  border: none;
-  border-radius: 0 0 20px 20px;
-  margin: 0;
+ border:1px solid #0c0c0c;
+  
+  border-radius: 20px;
+  margin-left: 15%;
+  margin-top:10px;
 }
 
 

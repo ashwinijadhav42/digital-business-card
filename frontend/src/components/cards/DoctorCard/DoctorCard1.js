@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./DoctorCard1.css";
+import CardActions from "../../CardActions";
 
 import {
   FaFacebookF,
@@ -38,9 +39,9 @@ const formatInstagramUrl = (value) => {
   return `https://instagram.com/${value.replace("@", "")}`;
 };
 
-function DoctorCard1({ data, showAllIcons = false }) {
+function DoctorCard1({ data = {}, showAllIcons = true ,publicUrl,onDownload,slug}) {
   return (
-    <div className="doctor-card doctor-card-1">
+    <div className="doctor-card doctor-card-1 text-center">
       {/* Top Header */}
       <div className="doctor-header text-center py-2">
         <h5 className="text-white mb-0 fw-semibold">
@@ -50,46 +51,41 @@ function DoctorCard1({ data, showAllIcons = false }) {
 
       {/* Right Side Social Icons */}
       <div className="doctor1-social-icons">
-        {(showAllIcons || data?.facebook) && (
-          <a
-            href={formatFacebookUrl(data?.facebook)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaFacebookF />
-          </a>
-        )}
 
-        {(showAllIcons || data?.linkedin) && (
-          <a
-            href={formatLinkedinUrl(data?.linkedin)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedinIn />
-          </a>
-        )}
+  {(showAllIcons || data?.facebook) && (
+    <a href={formatFacebookUrl(data?.facebook)} target="_blank" rel="noopener noreferrer">
+      <span className="doctor1-icon facebook">
+        <FaFacebookF />
+      </span>
+    </a>
+  )}
+  {(showAllIcons || data?.instagram) && (
+    <a href={formatInstagramUrl(data?.instagram)} target="_blank" rel="noopener noreferrer">
+      <span className="doctor1-icon instagram">
+        <FaInstagram />
+      </span>
+    </a>
+  )}
 
-        {(showAllIcons || data?.youtube) && (
-          <a
-            href={formatYoutubeUrl(data?.youtube)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaYoutube />
-          </a>
-        )}
 
-        {(showAllIcons || data?.instagram) && (
-          <a
-            href={formatInstagramUrl(data?.instagram)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaInstagram />
-          </a>
-        )}
-      </div>
+  {(showAllIcons || data?.linkedin) && (
+    <a href={formatLinkedinUrl(data?.linkedin)} target="_blank" rel="noopener noreferrer">
+      <span className="doctor1-icon linkedin">
+        <FaLinkedinIn />
+      </span>
+    </a>
+  )}
+
+  {(showAllIcons || data?.youtube) && (
+    <a href={formatYoutubeUrl(data?.youtube)} target="_blank" rel="noopener noreferrer">
+      <span className="doctor1-icon youtube">
+        <FaYoutube />
+      </span>
+    </a>
+  )}
+
+  
+</div>
 
       {/* Doctor Info */}
       <div className="doctor-body text-center px-4">
@@ -112,34 +108,49 @@ function DoctorCard1({ data, showAllIcons = false }) {
         <hr />
 
         {/* Contact Info */}
-        <div className="contact-item">
-          <FaGlobe />
-          <span>{data?.hospitalName || "Hospital Name"}</span>
-        </div>
+        {/* Contact Info */}
 
-        <div className="contact-item">
-          <FaPhoneAlt />
-          <span>{data?.phone || "+91 XXXXXXXX"}</span>
-        </div>
+<div className="doctor1-contact-list">
 
-        <div className="contact-item">
-          <FaEnvelope />
-          <span>{data?.email || "doctor@email.com"}</span>
-        </div>
+  <div className="doctor1-contact-item">
+    <span className="doctor1-contact-icon hospital">
+      <FaGlobe />
+    </span>
+    <span>{data?.hospitalName || "Hospital Name"}</span>
+  </div>
 
-        <div className="contact-item">
-          <FaMapMarkerAlt />
-          <span>{data?.address || "Hospital Address"}</span>
-        </div>
+  <div className="doctor1-contact-item">
+    <span className="doctor1-contact-icon phone">
+      <FaPhoneAlt />
+    </span>
+    <span>{data?.phone || "+91 XXXXXXXX"}</span>
+  </div>
 
-        <div className="contact-item">
-          <FaClock />
-          <span>{data?.time || "Dr's Availability at Hospital (Time)"}</span>
-        </div>
-      </div>
+  <div className="doctor1-contact-item">
+    <span className="doctor1-contact-icon email">
+      <FaEnvelope />
+    </span>
+    <span>{data?.email || "doctor@email.com"}</span>
+  </div>
 
+  <div className="doctor1-contact-item">
+    <span className="doctor1-contact-icon location">
+      <FaMapMarkerAlt />
+    </span>
+    <span>{data?.address || "Hospital Address"}</span>
+  </div>
+
+  <div className="doctor1-contact-item">
+    <span className="doctor1-contact-icon clock">
+      <FaClock />
+    </span>
+    <span>{data?.time || "Dr's Availability at Hospital (Time)"}</span>
+  </div>
+
+</div>
+</div>
       {/* WhatsApp Button */}
-      <div className="doctor-footer">
+      <div className="doctor-whatsapp-btn">
         {showAllIcons ? (
           <a
             href="#"
@@ -164,6 +175,11 @@ function DoctorCard1({ data, showAllIcons = false }) {
           </div>
         )}
       </div>
+      <CardActions
+        slug={slug}
+        publicUrl={publicUrl}
+        onDownload={onDownload}
+      />
     </div>
   );
 }

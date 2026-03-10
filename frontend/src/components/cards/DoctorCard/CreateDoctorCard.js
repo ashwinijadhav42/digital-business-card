@@ -2,7 +2,7 @@ import { useState } from "react";
 import DoctorCard1 from "./DoctorCard1";
 import DoctorCard2 from "./DoctorCard2";
 
-function CreateDoctorCard() {
+function CreateDoctorCard(showAllIcons = true) {
   const [templates, , category, setTemplates] = useState([]);
 
   const [selectedTemplate, setSelectedTemplate] = useState("template1");
@@ -576,11 +576,13 @@ function CreateDoctorCard() {
 {/* LEFT PREVIEW */}
         <div className="col-md-4 py-2 ms-5">
           {selectedTemplate === "template1" && (
-            <DoctorCard1 data={formData} />
+            <DoctorCard1 data={formData}
+            showAllIcons={false} />
           )}
 
           {selectedTemplate === "template2" && (
-            <DoctorCard2 data={formData} />
+            <DoctorCard2 data={formData}
+            showAllIcons={false} />
           )}
         </div>
 

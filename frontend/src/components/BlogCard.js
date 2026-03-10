@@ -1,7 +1,7 @@
 function BlogCard({ image, title, description, date }) {
   return (
     <div className="col-12 col-sm-6 col-lg-4 mb-4 bg-light">
-      <div className="card h-10 shadow-sm border-0">
+      <div className="card h-10 shadow-sm border-2">
         <img
           src={image}
           alt={title}

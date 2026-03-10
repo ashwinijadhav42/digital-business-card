@@ -1,12 +1,11 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { QRCodeCanvas } from "qrcode.react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 
 import FreelancerTemplate1 from "./Freelancer";
 import FreelancerTemplate2 from "./FreelanceSoftwareEngineer";
+
+import { downloadCardPDF } from "../../../utils/downloadPDF";
 
 function ViewFreelancerCard() {
   const cardRef = useRef();
@@ -14,42 +13,11 @@ function ViewFreelancerCard() {
   const [card, setCard] = useState(null);
 
   // ================= PDF DOWNLOAD =================
-const handleDownloadPDF = async () => {
-  const element = cardRef.current;
+const handleDownloadPDF = () => {
+  downloadCardPDF(cardRef.current, slug);
+};
 
-  if (!element) {
-    alert("Card not loaded yet");
-    return;
-  }
-
-  const canvas = await html2canvas(element, {
-    scale: 4,
-    useCORS: true
-  });
-
-  const imgData = canvas.toDataURL("image/png");
-
-  const pdf = new jsPDF("p", "mm", "a4");
-
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
-
-  const imgWidth = canvas.width;
-  const imgHeight = canvas.height;
-
-  const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
-
-  const finalWidth = imgWidth * ratio;
-  const finalHeight = imgHeight * ratio;
-
-  const x = (pageWidth - finalWidth) / 2;
-  const y = (pageHeight - finalHeight) / 2;
-
-  pdf.addImage(imgData, "PNG", x, y, finalWidth, finalHeight);
-
-  pdf.save(`${slug}.pdf`);
-   element.style.width = "100%";
-};// ================= FETCH CARD =================
+// ================= FETCH CARD =================
   useEffect(() => {
     fetch(`http://localhost:8080/api/freelancer-cards/${slug}`)
       .then((res) => {

@@ -21,7 +21,7 @@ import {
 export default function UnityRealEstate({ data = {}, showAllIcons = false ,slug,publicUrl,onDownload}) {
 
   return (
-    <div className="real-card text-center container p-0">
+    <div className="real-card text-center container p-0 ">
 
       {/* Top curved header */}
       <div className="card-header-custom">

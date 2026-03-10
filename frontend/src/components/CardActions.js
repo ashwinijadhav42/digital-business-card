@@ -1,4 +1,11 @@
 import { QRCodeCanvas } from "qrcode.react";
+import {
+  FaDownload,
+  FaWhatsapp,
+  FaShoppingCart,
+  FaCopy
+} from "react-icons/fa";
+
 
 function CardActions({ slug, publicUrl, onDownload }) {
 
@@ -17,7 +24,7 @@ function CardActions({ slug, publicUrl, onDownload }) {
   };
 
   return (
-    <div className="card-actions mt-4">
+    <div className="card-actions mt-4 mb-4">
 
       {/* ================= QR ================= */}
       <div className="mt-4">
@@ -39,6 +46,7 @@ function CardActions({ slug, publicUrl, onDownload }) {
           onDownload();
         }}
       >
+        <FaDownload className="me-2" />
         Download as PDF
       </button>
 
@@ -52,10 +60,11 @@ function CardActions({ slug, publicUrl, onDownload }) {
 
         {/* WhatsApp */}
         <button
-          className="freelancer-btn m-2"
+          className="freelancer-btn m-1"
           disabled={!slug}
           onClick={handleWhatsapp}
         >
+          <FaWhatsapp className="me-1" />
           Share on WhatsApp
         </button>
 
@@ -64,6 +73,7 @@ function CardActions({ slug, publicUrl, onDownload }) {
           className="freelancer-btn m-2"
           disabled={!slug}
         >
+          <FaShoppingCart className="me-1" />
           Buy Now
         </button>
 
@@ -72,7 +82,8 @@ function CardActions({ slug, publicUrl, onDownload }) {
           className="freelancer-btn m-2"
           disabled={!slug}
           onClick={handleCopy}
-        >
+        > 
+        <FaCopy className="me-1"/>
           Copy Link
         </button>
 

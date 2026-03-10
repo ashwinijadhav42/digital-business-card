@@ -5,6 +5,7 @@
   background: rgba(11,15,20,0.6);
   
   border-radius: 250px 250px 80px 80px ;
+  padding-bottom:10px;
   overflow: hidden;
   color:#fff;
   }
@@ -79,19 +80,8 @@
 .contact-list{
   text-align:left;
 }
-/* Contact Item */
 
-.unity-social-icons{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-}
 
-.unity-social-icons a{
-  text-decoration:none;
-}
-
-/* icon container */
 /* Contact List */
 
 .contact-list{

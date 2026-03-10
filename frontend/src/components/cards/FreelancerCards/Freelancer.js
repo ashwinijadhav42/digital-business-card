@@ -87,13 +87,13 @@ export default function Freelancer({ data = {}, showAllIcons = true, onDownload,
       });
   }, [slug]);
 
-  if (!card) return <h4 className="text-center mt-5">Loading...</h4>;
+  if (!card) return <h4 className="text-center mt-5 ">Loading...</h4>;
   const publicUrl =
     `${window.location.origin}/view-freelancer-card/${slug}`;
 
 
   return (
-    <div ref={cardRef} className="container p-0 mb-3 freelancer-card-page text-center">
+    <div ref={cardRef} className="container p-0 mb-10 freelancer-card-page text-center">
       {/* Card */}
       <div className="container d-flex justify-content-center">
         <div className="freelancer-business-card mt-2 text-center position-relative">
