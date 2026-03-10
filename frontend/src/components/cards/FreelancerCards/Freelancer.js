@@ -138,7 +138,7 @@ export default function Freelancer({ data = {}, showAllIcons = true, onDownload,
             )}
           </div>
           {/* Contact info */}
-          <div className="freelancer-contact-info mt-4 px-4">
+          <div className="freelancer-contact-info">
 
             <div className="freelancer-contact-item">
               <FaPhoneAlt />

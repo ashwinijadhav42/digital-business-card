@@ -12,18 +12,44 @@ function ViewRealEstateCard() {
   const { slug } = useParams();
   const [card, setCard] = useState(null);
 
-  const handleDownloadPDF = async () => {
-    const element = cardRef.current;
-    const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
+  
+  // ================= PDF DOWNLOAD =================
+const handleDownloadPDF = async () => {
+  const element = cardRef.current;
 
-    const pdf = new jsPDF("p", "mm", "a4");
-    const imgWidth = 190;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  if (!element) {
+    alert("Card not loaded yet");
+    return;
+  }
 
-    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
-    pdf.save(`${slug}.pdf`);
-  };
+  const canvas = await html2canvas(element, {
+    scale: 4,
+    useCORS: true
+  });
+
+  const imgData = canvas.toDataURL("image/png");
+
+  const pdf = new jsPDF("p", "mm", "a4");
+
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+
+  const imgWidth = canvas.width;
+  const imgHeight = canvas.height;
+
+  const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+
+  const finalWidth = imgWidth * ratio;
+  const finalHeight = imgHeight * ratio;
+
+  const x = (pageWidth - finalWidth) / 2;
+  const y = (pageHeight - finalHeight) / 2;
+
+  pdf.addImage(imgData, "PNG", x, y, finalWidth, finalHeight);
+
+  pdf.save(`${slug}.pdf`);
+   element.style.width = "100%";
+};
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/realestate-cards/public/${slug}`)
@@ -44,67 +70,31 @@ function ViewRealEstateCard() {
     `${window.location.origin}/view-realestate-card/${slug}`;
 
   return (
-    <div className="text-center">
+     <div className="text-center">
+    <div className="d-flex justify-content-center mt-5">
 
       {/* Card Section */}
       <div ref={cardRef} id="card-to-download">
         {card.templateType === "template1" && (
-          <RealEstate data={card} />
+          <RealEstate data={card} 
+           showAllIcons={true}
+    onDownload={handleDownloadPDF}
+    cardRef={cardRef}
+    slug={slug}
+    publicUrl={publicUrl}/>
         )}
         {card.templateType === "template2" && (
-          <UnityRealEstate data={card} />
+          <UnityRealEstate data={card} 
+           showAllIcons={true}
+    onDownload={handleDownloadPDF}
+    cardRef={cardRef}
+    slug={slug}
+    publicUrl={publicUrl}
+    />
         )}
       </div>
+</div>
 
-      {/* QR Section */}
-      <div className="mt-4">
-        <h5>Scan QR Code</h5>
-        <QRCodeCanvas value={publicUrl} size={200} />
-      </div>
-
-      {/* Download Button */}
-      <button
-        className="btn btn-success mt-4"
-        onClick={handleDownloadPDF}
-      >
-        Download as PDF
-      </button>
-
-      {/* Share Section */}
-      <div className="mt-4">
-        <h5>Share This Card</h5>
-
-        {/* WhatsApp */}
-        <a
-          href={`https://wa.me/?text=${encodeURIComponent(publicUrl)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-success m-2"
-        >
-          Share on WhatsApp
-        </a>
-
-        {/* LinkedIn */}
-        <a
-          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(publicUrl)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary m-2"
-        >
-          Share on LinkedIn
-        </a>
-
-        {/* Copy Link */}
-        <button
-          className="btn btn-dark m-2"
-          onClick={() => {
-            navigator.clipboard.writeText(publicUrl);
-            alert("Link Copied!");
-          }}
-        >
-          Copy Link
-        </button>
-      </div>
 
     </div>
   );

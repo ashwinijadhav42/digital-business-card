@@ -70,7 +70,7 @@ const formatWhatsappUrl = (value) => {
   return `https://wa.me/${cleanedNumber}`;
 };
 
-export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = true ,publicUrl,onDownload,slug}) {
+export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = false,publicUrl,onDownload,slug}) {
   
   return (
     <div className="fs-se-wrapper">
@@ -120,27 +120,36 @@ export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = tr
 
           <div className="fs-se-info text-start mt-4 px-4">
 
-            <div className="fs-se-contact-item">
-              <FaPhoneAlt />
-              <span>{data?.phone || "+91 XXXXXXXX"}</span>
-            </div>
+  <div className="fs-se-contact-item">
+    <div className="fs-se-icon-box">
+      <FaPhoneAlt />
+    </div>
+    <span>{data?.phone || "+91 XXXXXXXX"}</span>
+  </div>
 
-            <div className="fs-se-contact-item">
-              <FaEnvelope />
-              <span>{data?.email || "email@yoursite.com"}</span>
-            </div>
+  <div className="fs-se-contact-item">
+    <div className="fs-se-icon-box">
+      <FaEnvelope />
+    </div>
+    <span>{data?.email || "email@yoursite.com"}</span>
+  </div>
 
-            <div className="fs-se-contact-item">
-              <FaMapMarkerAlt />
-              <span>{data?.address || "Your Address Here"}</span>
-            </div>
+  <div className="fs-se-contact-item">
+    <div className="fs-se-icon-box">
+      <FaMapMarkerAlt />
+    </div>
+    <span>{data?.address || "Your Address Here"}</span>
+  </div>
 
-            <div className="fs-se-contact-item">
-              <FaGlobe />
-              <span>{data?.website || "www.yoursite.com"}</span>
-            </div>          </div>
-        </div>
+  <div className="fs-se-contact-item">
+    <div className="fs-se-icon-box">
+      <FaGlobe />
+    </div>
+    <span>{data?.website || "www.yoursite.com"}</span>
+  </div>
 
+</div>
+</div>
         {/* ===== CTA BUTTON ===== */}
 
         {(showAllIcons || data?.whatsapp) && (
@@ -155,79 +164,86 @@ export default function FreelanceSoftwareEngineer({ data = {}, showAllIcons = tr
         )}
 
         {/* ===== SOCIAL ICONS ===== */}
+<div className="fs-se-social">
 
-        <div className="fs-se-social ">
+  {(showAllIcons || data?.twitter) && (
+    <a
+      href={formatTwitterUrl(data?.twitter)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fs-se-social-icon"
+    >
+      <FaTwitter />
+    </a>
+  )}
 
-          {(showAllIcons || data?.twitter) && (
-            <a
-              href={formatTwitterUrl(data?.twitter)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaTwitter />
-            </a>
-          )}
+  {(showAllIcons || data?.linkedin) && (
+    <a
+      href={formatLinkedinUrl(data?.linkedin)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fs-se-social-icon"
+    >
+      <FaLinkedinIn />
+    </a>
+  )}
 
-          {(showAllIcons || data?.linkedin) && (
-            <a
-              href={formatLinkedinUrl(data?.linkedin)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaLinkedinIn />
-            </a>
-          )}
+  {(showAllIcons || data?.telegram) && (
+    <a
+      href={formatTelegramUrl(data?.telegram)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fs-se-social-icon"
+    >
+      <FaTelegramPlane />
+    </a>
+  )}
 
-          {(showAllIcons || data?.telegram) && (
-            <a
-              href={formatTelegramUrl(data?.telegram)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaTelegramPlane />
-            </a>
-          )}
+  {(showAllIcons || data?.youtube) && (
+    <a
+      href={formatYoutubeUrl(data?.youtube)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fs-se-social-icon"
+    >
+      <FaYoutube />
+    </a>
+  )}
 
-          {(showAllIcons || data?.youtube) && (
-            <a
-              href={formatYoutubeUrl(data?.youtube)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaYoutube />
-            </a>
-          )}
+  {(showAllIcons || data?.github) && (
+    <a
+      href={formatGithubUrl(data?.github)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fs-se-social-icon"
+    >
+      <FaGithub />
+    </a>
+  )}
 
-          {(showAllIcons || data?.github) && (
-            <a
-              href={formatGithubUrl(data?.github)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub />
-            </a>
-          )}
-{(showAllIcons || data?.facebook) && (
-            <a
-              href={formatInstagramUrl(data?.facebook)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaFacebook />
-            </a>
-          )}
+  {(showAllIcons || data?.facebook) && (
+    <a
+      href={formatInstagramUrl(data?.facebook)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fs-se-social-icon"
+    >
+      <FaFacebook />
+    </a>
+  )}
 
-          {(showAllIcons || data?.instagram) && (
-            <a
-              href={formatInstagramUrl(data?.instagram)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaInstagram />
-            </a>
-          )}
+  {(showAllIcons || data?.instagram) && (
+    <a
+      href={formatInstagramUrl(data?.instagram)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fs-se-social-icon"
+    >
+      <FaInstagram />
+    </a>
+  )}
 
-        </div>
+</div>
 <CardActions
   slug={slug}
   publicUrl={publicUrl}

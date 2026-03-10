@@ -247,7 +247,7 @@ function CreateRealEstateCard() {
             <div className="row mb-3 align-items-center">
               <div className="col-md-4">
                 <label className="form-label">
-                  RERA Number <span className="text-danger">*</span>
+                  RERA Number
                 </label>
               </div>
               <div className="col-md-8">

@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./UnityRealEstate.css";
 import logo from "../../../assets/images/realEstate/UnityLogo.png";
+import CardActions from "../../CardActions";
 
 import {
   FaPhoneAlt,
@@ -17,20 +18,25 @@ import {
   FaIdCard,
 } from "react-icons/fa";
 
-export default function UnityRealEstate({ data = {}, showAllIcons = false }) {
+export default function UnityRealEstate({ data = {}, showAllIcons = false ,slug,publicUrl,onDownload}) {
 
   return (
-    <div className="real-card container p-0">
+    <div className="real-card text-center container p-0">
 
       {/* Top curved header */}
       <div className="card-header-custom">
-        <div className="unity-logo-circle">
-         
-            <img src={logo} alt="logo" />
+         <div className="banner">
+        <img
+          src={data.profilePhoto || logo}
+          alt="property"
+          className="unity-logo-circle"
+        />      
+      </div>
+            
  
         </div>
 
-      </div>
+      
 
   
       {/* Content */}
@@ -50,28 +56,37 @@ export default function UnityRealEstate({ data = {}, showAllIcons = false }) {
         </p>
 </div>
         {/* Contact Info */}
-        <div className="contact-list mt-4">
-          <div className="contact-item">
-            <FaPhoneAlt />
-            <span>{data.phone || "9518311798"}</span>
-          </div>
+<div className="contact-list mt-4">
 
-          <div className="contact-item">
-            <FaEnvelope /> 
-            <span>{data.email || "email@yoursite.com"}</span>
-          </div>
+  <div className="unity-contact-item">
+    <span className="unity-contact-icon phone">
+      <FaPhoneAlt />
+    </span>
+    <span>{data.phone || "9518311798"}</span>
+  </div>
 
-          <div className="contact-item">
-            <FaMapMarkerAlt /> 
-            <span>{data.officeAddress || "12/34, Area, City - 456789"}</span>
-          </div>
+  <div className="unity-contact-item">
+    <span className="unity-contact-icon email">
+      <FaEnvelope />
+    </span>
+    <span>{data.email || "email@yoursite.com"}</span>
+  </div>
 
-          <div className="contact-item">
-            <FaGlobe />
-            <span>{data.website || "www.realEstate.com"}</span>
-          </div>
-        </div>
+  <div className="unity-contact-item">
+    <span className="unity-contact-icon location">
+      <FaMapMarkerAlt />
+    </span>
+    <span>{data.officeAddress || "12/34, Area, City - 456789"}</span>
+  </div>
 
+  <div className="unity-contact-item">
+    <span className="unity-contact-icon website">
+      <FaGlobe />
+    </span>
+    <span>{data.website || "www.realEstate.com"}</span>
+  </div>
+
+</div>
 {/* Specialization */}
 <div className="unity-specialization-wrapper px-4 mt-4">
   <h5 className="specialization-title text-center mb-4">
@@ -111,68 +126,77 @@ export default function UnityRealEstate({ data = {}, showAllIcons = false }) {
   </div>
 </div>
         {/* Social Icons */}
-        <div className="social-icons mt-4">
+<div className="unity-social-icons mt-4">
 
   {(!showAllIcons || data.facebook) && (
     <a href={data.facebook || "#"} target="_blank" rel="noopener noreferrer">
-      <FaFacebookF />
+      <span className="icon facebook">
+        <FaFacebookF />
+      </span>
     </a>
   )}
 
   {(!showAllIcons || data.instagram) && (
     <a href={data.instagram || "#"} target="_blank" rel="noopener noreferrer">
-      <FaInstagram />
+      <span className="icon instagram">
+        <FaInstagram />
+      </span>
     </a>
   )}
 
   {(!showAllIcons || data.youtube) && (
     <a href={data.youtube || "#"} target="_blank" rel="noopener noreferrer">
-      <FaYoutube />
+      <span className="icon youtube">
+        <FaYoutube />
+      </span>
     </a>
   )}
 
   {(!showAllIcons || data.linkedin) && (
     <a href={data.linkedin || "#"} target="_blank" rel="noopener noreferrer">
-      <FaLinkedinIn />
+      <span className="icon linkedin">
+        <FaLinkedinIn />
+      </span>
     </a>
   )}
 
   {(!showAllIcons || data.whatsapp) && (
     <a
-      href={
-        data.whatsapp
-          ? `https://wa.me/${data.whatsapp}`
-          : "#"
-      }
+      href={data.whatsapp ? `https://wa.me/${data.whatsapp}` : "#"}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <FaWhatsapp />
+      <span className="icon whatsapp">
+        <FaWhatsapp />
+      </span>
     </a>
   )}
+
   {(!showAllIcons || data.twitter) && (
     <a
-      href={
-        data.twitter
-          ? `https://wa.me/${data.twitter}`
-          : "#"
-      }
+      href={data.twitter || "#"}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <FaTwitter />
+      <span className="icon twitter">
+        <FaTwitter />
+      </span>
     </a>
   )}
 
 </div>
-
-              </div>
+</div>
 
       <div className="text-center mt-2 mb-4">
   <button className="btn unity-view-more-image-btn">
      View more images of Unity Real Estate
   </button>
 </div>
+<CardActions
+  slug={slug}
+  publicUrl={publicUrl}
+  onDownload={onDownload}
+/>
 </div>
   );
 }

@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./RealEstate.css";
+import CardActions from "../../CardActions";
 
 import {
   FaPhoneAlt,
@@ -50,9 +51,9 @@ const formatTwitterUrl = (value) => {
   return `https://twitter.com/${value.replace("@", "")}`;
 };
 
-export default function RealEstate({ data = {}, showAllIcons = false }) {
+export default function RealEstate({ data = {}, showAllIcons = false ,publicUrl,onDownload,slug}) {
 return (
-    <div className="realestate-card shadow-lg">
+    <div className="realestate-card text-center ">
       {/* Top Banner */}
       <div className="banner">
         <img
@@ -219,7 +220,12 @@ return (
             </a>
           )}
 </div>
-
+<CardActions
+  slug={slug}
+  publicUrl={publicUrl}
+  onDownload={onDownload}
+/>
+   
    <div className="zigzag"></div> </div>
     
   );

@@ -76,17 +76,24 @@ const handleDownloadPDF = async () => {
     <div ref={cardRef} id="card-to-download">
       {card.templateType === "template1" && (
         <FreelancerTemplate1 data={card} 
-        showAllIcons={true}
+        showAllIcons={false}
          onDownload={handleDownloadPDF}
-          cardRef={cardRef} />
+          cardRef={cardRef} 
+    slug={slug}
+    publicUrl={publicUrl}
+    />
       )}
 
       {card.templateType === "template2" && (
-        <FreelancerTemplate2 data={card} 
-        showAllIcons={true}
-         onDownload={handleDownloadPDF}
-          cardRef={cardRef} />
-      )}
+  <FreelancerTemplate2
+    data={card}
+    showAllIcons={false}
+    onDownload={handleDownloadPDF}
+    cardRef={cardRef}
+    slug={slug}
+    publicUrl={publicUrl}
+  />
+)}
     </div>
   </div>
   
