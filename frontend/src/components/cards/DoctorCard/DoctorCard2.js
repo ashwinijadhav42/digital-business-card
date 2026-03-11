@@ -1,3 +1,6 @@
+import "./DoctorCard2.css";
+import CardActions from "../../CardActions";
+
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -10,7 +13,6 @@ import {
   FaWhatsapp,
   FaClock,
 } from "react-icons/fa";
-import "./DoctorCard2.css";
 
 const formatFacebookUrl = (value) => {
   if (!value) return "#";
@@ -36,10 +38,10 @@ const formatInstagramUrl = (value) => {
   return `https://instagram.com/${value.replace("@", "")}`;
 };
 
-function DoctorCard2({ data, showAllIcons = false }) {
+function DoctorCard2({ data, showAllIcons = true ,slug,onDownload,publicUrl}) {
   return (
 
-    <div className="card doctor-card-2 mx-auto ">
+    <div className="card doctor-card-2 mx-auto text-center ">
 
       {/* Header */}
       <div className="card-header text-center position-relative">
@@ -71,103 +73,134 @@ function DoctorCard2({ data, showAllIcons = false }) {
             "Doctor description and experience here"}
         </p>
 
-        {/* Contact Items */}
-        <div className="contact-item">
-          <FaUserMd className="icon bg-primary" />
-          <span>{data?.hospitalName || "Hospital Name"}</span>
-        </div>
-        <div className="contact-item">
-          <FaPhoneAlt className="icon bg-success" />
-          <span>{data?.phone || "+91 XXXXXXXX"}</span>
-        </div>
-
-        <div className="contact-item">
-          <FaEnvelope className="icon bg-warning" />
-          <span>{data?.email || "doctor@email.com"}</span>
-        </div>
-
-
-
-        <div className="contact-item">
-          <FaMapMarkerAlt className="icon bg-danger" />
-          <span>{data?.address || "Hospital Address"}</span>
-        </div>
-
-        <div className="contact-item mb-3">
-          <FaClock className="icon bg-dark" />
-          <span>{data?.time || "Availability Time"}</span>
-        </div>
-
         {/* Social Icons */}
-        <div className="social-icons mt-3 py-1">
-          {(showAllIcons || data?.facebook) && (
-            <a
-              href={formatFacebookUrl(data?.facebook)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaFacebookF />
-            </a>
-          )}
+        <div className="doctor-social-icons mt-2">
+ {(showAllIcons || data?.youtube) && (
+    <a
+      href={formatYoutubeUrl(data?.youtube)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className="icon youtube">
+        <FaYoutube />
+      </span>
+    </a>
+  )}
 
-          {(showAllIcons || data?.linkedin) && (
-            <a
-              href={formatLinkedinUrl(data?.linkedin)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaLinkedinIn />
-            </a>
-          )}
+  {(showAllIcons || data?.instagram) && (
+    <a
+      href={formatInstagramUrl(data?.instagram)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className="icon instagram">
+        <FaInstagram />
+      </span>
+    </a>
+  )}
 
-          {(showAllIcons || data?.youtube) && (
-            <a
-              href={formatYoutubeUrl(data?.youtube)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaYoutube />
-            </a>
-          )}
 
-          {(showAllIcons || data?.instagram) && (
-            <a
-              href={formatInstagramUrl(data?.instagram)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaInstagram />
-            </a>
-          )}
-        </div>
-      </div>
+  {(showAllIcons || data?.facebook) && (
+    <a
+      href={formatFacebookUrl(data?.facebook)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className="icon facebook">
+        <FaFacebookF />
+      </span>
+    </a>
+  )}
+
+  {(showAllIcons || data?.linkedin) && (
+    <a
+      href={formatLinkedinUrl(data?.linkedin)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className="icon linkedin">
+        <FaLinkedinIn />
+      </span>
+    </a>
+  )}
+
+ </div>
+        
+       {/* Contact Items */}
+
+<div className="doctor-contact-list mt-4">
+
+  <div className="doctor2-contact-item">
+    <span className="doctor2-contact-icon hospital">
+      <FaUserMd />
+    </span>
+    <span>{data?.hospitalName || "Hospital Name"}</span>
+  </div>
+
+  <div className="doctor2-contact-item">
+    <span className="doctor2-contact-icon phone">
+      <FaPhoneAlt />
+    </span>
+    <span>{data?.phone || "+91 XXXXXXXX"}</span>
+  </div>
+
+  <div className="doctor2-contact-item">
+    <span className="doctor2-contact-icon email">
+      <FaEnvelope />
+    </span>
+    <span>{data?.email || "doctor@email.com"}</span>
+  </div>
+
+  <div className="doctor2-contact-item">
+    <span className="doctor2-contact-icon location">
+      <FaMapMarkerAlt />
+    </span>
+    <span>{data?.address || "Hospital Address"}</span>
+  </div>
+
+  <div className="doctor2-contact-item mb-3">
+    <span className="doctor2-contact-icon clock">
+      <FaClock />
+    </span>
+    <span>{data?.time || "Availability Time"}</span>
+  </div>
+</div>
+
 
       {/* Footer */}
-      <div className=" card-footer text-center get-in-touch">
-        {showAllIcons ? (
-          <div className="text-muted">
-            <FaWhatsapp className="me-2 " />
-            Whatsapp for Appointment
-          </div>
-        ) : data?.whatsapp ? (
-          <a
-            href={`https://wa.me/${data.whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn d-flex justify-content-center align-items-center"
+<div className=" text-center">
 
-          >
-            <FaWhatsapp className="me-2" />
-            Chat With Us (Book Appointment)
-          </a>
-        ) : (
-          <div className="btn text-center  text-muted py-2">
-            Enter WhatsApp number to enable booking
-          </div>
-        )}
-      </div>
+  {showAllIcons ? (
+    <div className="doctor2-whatsapp-btn">
+      <FaWhatsapp className="mt-1"/>
+      Whatsapp for Appointment
     </div>
 
+  ) : data?.whatsapp ? (
+    <a
+      href={`https://wa.me/${data.whatsapp}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="doctor2-whatsapp-btn"
+    >
+      <FaWhatsapp/>
+      Chat With Us (Book Appointment)
+    </a>
+
+  ) : (
+    <div className="doctor2-whatsapp-btn text-muted disabled-btn">
+      Enter WhatsApp number to enable booking
+    </div>
+  )}
+
+</div>
+      <CardActions
+slug={slug}
+publicUrl={publicUrl}
+onDownload={onDownload}
+      />
+    </div>
+</div>
   );
 }
 

@@ -1,11 +1,10 @@
 .ba-card {
   width: 360px;              /* FIXED width */
-  height: 600px;             /* FIXED height */
+  height: 650px;             /* FIXED height */
   margin-bottom: 20px;
-  border-radius: 16px;
+  border-radius: 0px;
   background: #f4f7fb;
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  overflow: hidden;
   border: 1px solid #0e0d0d;
   display: flex;
   flex-direction: column;    /* Important */
@@ -16,14 +15,14 @@
 .ba-header {
   background: linear-gradient(135deg, #0d6efd, #003c8f);
   color: #fff;
-  padding: 25px 20px;
+  padding: 15px 20px 1px;
   text-align: center;
 }
 
 /* Profile */
 .ba-profile {
   text-align: center;
-  margin-top: -50px;
+  margin-top: -40px;
 }
 
 .ba-profile-img {
@@ -33,6 +32,8 @@
   object-fit: cover;
   border: 4px solid #fff;
 }
+
+
 
 /* Description */
 .ba-desc {
@@ -69,6 +70,16 @@
   text-align: center;
   margin-top: auto;
   margin-bottom: 15px;
+}
+
+.ba-social{
+ position: absolute;
+  top: 10%;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
 }
 
 .ba-social svg {

@@ -56,7 +56,7 @@ function TemplatesByCategory() {
           return (
             <div
               key={template.id}
-              className="col-md-6 col-lg-4 d-flex"
+              className="col-md-8 col-lg-6 d-flex"
             >
               <div className="w-100">
                 <Link

@@ -11,7 +11,7 @@ import com.digitalcard.repository.DoctorCardRepository;
 
 @RestController
 @RequestMapping("/api/doctor-cards")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class DoctorCardController {
 
     @Autowired
