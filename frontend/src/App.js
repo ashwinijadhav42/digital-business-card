@@ -27,6 +27,10 @@ import ViewFreelancerCard from "./components/cards/FreelancerCards/ViewFreelance
 import CreateCorporateCard from "./components/cards/CorporateCard/CreateCorporateCard";
 import CreateRealEstateCard from "./components/cards/RealEstateCard/CreateRealEstateCard";
 import ViewRealEstateCard from "./components/cards/RealEstateCard/ViewRealEstateCard";
+import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard";
+import ViewSampleCard from "./components/cards/OtherCard/ViewSampleCard"
+
+import SampleCard from "./components/cards/OtherCard/SampleCard";
 function App() {
   return (
     <BrowserRouter>
@@ -37,6 +41,7 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         // <Route path="/pricingDesign" element={<Pricing />} />
         <Route path="/loginPage" element={<LoginPage />} />
+
 
 
         <Route path="/createCard" element={<CreateCard />} />
@@ -50,7 +55,7 @@ function App() {
         <Route path="/templates/:category" element={<TemplatesByCategory />} />
         <Route path="/templates/freelancerTemplates" element={<FreelancerTemplates />} />
         <Route path="/templates/buiseness" element={<BusinessCard />} />
-
+{/* <Route path ="templates/other" element={<SampleCard/>} /> */}
 
         <Route path="/template-category/add" element={<TemplateCategoryForm />} />
         <Route path="/add-blog" element={<AddBlog />} />
@@ -78,6 +83,9 @@ function App() {
 
         <Route path="/create-realestate-card/:templateType" element={<CreateRealEstateCard />} />
         <Route path="/view-realestate-card/:slug" element={<ViewRealEstateCard />} />
+
+        <Route path="/create-other-card/:templateType" element={<CreateSampleCard />} />
+       <Route path="/view-sample-card/:slug" element={<ViewSampleCard />} />
 
       </Routes>
       <Footer />
