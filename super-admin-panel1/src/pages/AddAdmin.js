@@ -78,8 +78,9 @@ export default function AddAdmin() {
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <form onSubmit={handleSubmit}>
-          <div className="form-grid">
+          <div className="form-control mb-2">
             <input
+              className="form-control mb-2"
               name="name"
               placeholder="Admin Name *"
               value={form.name}
@@ -88,6 +89,7 @@ export default function AddAdmin() {
             />
 
             <input
+              className="form-control mb-2"
               name="email"
               type="email"
               placeholder="Email *"
@@ -97,6 +99,7 @@ export default function AddAdmin() {
             />
 
             <input
+              className="form-control mb-2"
               name="phone"
               placeholder="Phone Number"
               value={form.phone}
@@ -104,6 +107,7 @@ export default function AddAdmin() {
             />
 
             <select
+              className="form-control mb-2"
               name="role"
               value={form.role}
               onChange={handleChange}
@@ -113,6 +117,7 @@ export default function AddAdmin() {
             </select>
 
             <input
+              className="form-control mb-2"
               name="password"
               type="password"
               placeholder="Password *"
@@ -122,6 +127,7 @@ export default function AddAdmin() {
             />
 
             <input
+              className="form-control mb-2"
               name="confirmPassword"
               type="password"
               placeholder="Confirm Password *"

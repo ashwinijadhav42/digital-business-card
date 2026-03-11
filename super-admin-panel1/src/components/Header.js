@@ -59,7 +59,9 @@ function Header({ onToggle, authUser, onLogout ,collapsed}) {
 
           <ul className="dropdown-menu dropdown-menu-end">
             <li>
+              
               <button className="dropdown-item" onClick={goToProfile}>
+                <FaUserCircle className="me-2" />
                 Profile
               </button>
             </li>

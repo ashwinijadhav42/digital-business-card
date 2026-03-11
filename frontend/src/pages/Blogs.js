@@ -31,8 +31,9 @@ function Blogs() {
             {blogs.map((blog) => (
               <BlogCard
                 key={blog.id}
-                image={`http://localhost:8080/uploads/blogs/${blog.imageUrl}`}   
-                date={blog.publishDate}                                      
+                id={blog.id}
+                image={`http://localhost:8080/uploads/blogs/${blog.imageUrl}`}
+                date={blog.publishDate}
                 title={blog.title}
                 description={blog.description}
               />

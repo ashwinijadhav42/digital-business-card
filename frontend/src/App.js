@@ -26,6 +26,8 @@ import CreateFreelancerCard from "./components/cards/FreelancerCards/CreateFreel
 import ViewFreelancerCard from "./components/cards/FreelancerCards/ViewFreelancerCard";
 import CreateCorporateCard from "./components/cards/CorporateCard/CreateCorporateCard";
 import CreateRealEstateCard from "./components/cards/RealEstateCard/CreateRealEstateCard";
+import BlogDetails from "./pages/BlogDetails";
+
 import ViewRealEstateCard from "./components/cards/RealEstateCard/ViewRealEstateCard";
 import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard";
 import ViewSampleCard from "./components/cards/OtherCard/ViewSampleCard"
@@ -59,6 +61,7 @@ function App() {
 
         <Route path="/template-category/add" element={<TemplateCategoryForm />} />
         <Route path="/add-blog" element={<AddBlog />} />
+        <Route path="/blogs/:id" element={<BlogDetails />} />
 
         <Route path="/pricing" element={<PricingList />} />
         <Route path="/add-pricing" element={<AddPricing />} />
