@@ -1,9 +1,9 @@
-function PricingCard({ title, price, duration, features, highlight }) {
+function PricingCard({ title, price, duration, features = [], highlight }) {
   return (
     <div className="col-12 col-md-6 col-lg-4 mb-4">
       <div
         className={`card h-100 text-center shadow-sm ${
-          highlight ? "border-primary" : ""
+          highlight ? "border-primary border-2" : ""
         }`}
       >
         <div className="card-body p-4">
@@ -14,12 +14,27 @@ function PricingCard({ title, price, duration, features, highlight }) {
             <small className="text-muted fs-6">/{duration}</small>
           </h2>
 
-          <ul className="list-unstyled text-muted mb-4">
-            {features.map((item, index) => (
-              <li key={index} className="mb-2">
-                ✔ {item}
+          <ul
+            className="list-unstyled text-muted mb-4"
+            style={
+              features.length > 7
+              ? {
+                maxHeight: "200px",
+                overflowY: "auto",
+                paddingRight: "8px",
+              }
+            : {}
+            }
+            >
+              {Array.isArray(features) && features.length > 0 ? (
+              features.map((feature) => (
+              <li key={feature.id} className="mb-2">
+                ✔ {feature.name}
               </li>
-            ))}
+            ))
+            ) : (
+              <li>No Features Available</li>
+            )}
           </ul>
 
           <button

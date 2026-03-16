@@ -7,6 +7,7 @@ import FreelanceSoftwareEngineer from "../components/cards/FreelancerCards/Freel
 import Freelancer from "../components/cards/FreelancerCards/Freelancer";
 import RealEstate from "../components/cards/RealEstateCard/RealEstate";
 import UnityRealEstate from "../components/cards/RealEstateCard/UnityRealEstate";
+import SampleCard from "../components/cards/OtherCard/SampleCard";
 
 
 const templateMap = {
@@ -27,6 +28,11 @@ const templateMap = {
     { id: 1, component: RealEstate },
     { id: 2, component: UnityRealEstate },
   ],
+  other:[
+{
+  id:1,component:SampleCard
+}
+  ]
 
 };
 
@@ -56,7 +62,7 @@ function TemplatesByCategory() {
           return (
             <div
               key={template.id}
-              className="col-md-6 col-lg-4 d-flex"
+              className="col-md-8 col-lg-6 d-flex"
             >
               <div className="w-100">
                 <Link

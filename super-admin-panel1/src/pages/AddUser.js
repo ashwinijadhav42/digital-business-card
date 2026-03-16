@@ -14,26 +14,14 @@ export default function AddUser() {
         </div>
 
         <div className="form-grid">
-          <input placeholder="First Name *" />
-          <input placeholder="Last Name *" />
+          <input placeholder="Full Name *" />
+          
 
           <input placeholder="Email *" />
           <input placeholder="Contact No" />
 
           <input type="password" placeholder="Password *" />
           <input type="password" placeholder="Confirm Password *" />
-
-          <select>
-            <option>Select Plan</option>
-            <option>Basic</option>
-            <option>Premium</option>
-          </select>
-
-          <div className="file-upload">
-            <label>Profile</label>
-            <input type="file" />
-            <small>png, jpg, jpeg</small>
-          </div>
         </div>
 
         <div className="form-actions">

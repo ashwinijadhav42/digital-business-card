@@ -35,7 +35,7 @@ function Pricing() {
                 title={plan.title}
                 price={plan.price}
                 duration={plan.duration}
-                features={plan.features.map(f => f.feature)}
+               features={plan.features}
               />
             ))}
 

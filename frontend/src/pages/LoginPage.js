@@ -14,6 +14,8 @@ const LoginPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
 
+
+  
   //  Validation Function
   const validateForm = () => {
     let newErrors = {};
@@ -96,10 +98,9 @@ const LoginPage = () => {
 
   
 if (isLogin) {
-  navigate(`/create-${category}-card/${templateType}`);
+  //navigate(`/create-${category}-card/${templateType}`);
+  navigate(`/create-${category}-card/template${templateType}`);
 }
-
-
 
     } catch (err) {
       console.error("Error:", err);

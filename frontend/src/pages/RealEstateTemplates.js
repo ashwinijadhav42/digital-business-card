@@ -31,6 +31,14 @@ function RealEstateTemplates() {
                         </Link>
           </div>
         </div>
+        <div className="col-md-6 col-lg-4 d-flex">
+          <div className="w-100">
+            <Link to="/loginPage/realestate/1"
+              className="card-link text-decoration-none" >
+              <UnityRealEstate data={{}} showAllIcons={true} />
+            </Link>
+          </div>
+        </div>
 
         
         

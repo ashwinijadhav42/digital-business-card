@@ -1,33 +1,34 @@
-
-.card-page {
-  max-width: 360px;
+ 
+.freelancer-card-page {
+  max-width: 460px;
   background: #1fc3c9 ;
-  
+  color:black;
   min-height: auto;
   margin-top: 0;
   margin-left: auto;
-  margin-right: 100px;
+  //margin-right: 100px;
   border: 1px solid #0e0d0d; 
   
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  
 
 }
 
 /* White oval card */
-.business-card {
+.freelancer-business-card {
   background: #fff;
   width: 100%;
-  max-width: 380px;;
-   padding: 40px 0 60px;
-  border-radius: 200px;
+  max-width: 680px;;
+  
+   padding: 30px 10px 20px 20px;
+  border-radius: 200px 200px 100px 100px;
 }
 
 /* Logo circle */
 .freelancer-profile-img{
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  margin: -10px auto 30px;
+  margin: -10px auto 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,42 +36,116 @@
   text-align: center;
 }
 
-/* Contact */
-.contact-info p {
+/* Name */
+.freelancer-name {
+  font-weight: 700;
+  
+}
+
+/* Title */
+.freelancer-title {
+  color: #1fc3c9;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Tagline */
+.freelancer-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Skills */
+.freelancer-skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+/* Contact Section - Yellow Background */
+.contact-info {
+  border-radius: 12px;
+  padding: 20px;
+}
+.freelancer-social-icons svg,
+.freelancer-contact-item svg {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+}
+/* Contact Items */
+.freelancer-contact-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 18px;
+  gap: 15px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #1868c42f;
+  border-radius: 6px;
+  font-size: 15px;
+
 }
 
-/* Social icons */
-.social-icons {
- 
-  left: 0;
-  right: 0;
+.freelancer-contact-item svg {
+  background: #f39c12;
+  color: #000;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 30px;
+}
+/* Social Icons - Opposite Style */
+.freelancer-social-icons{
   display: flex;
   justify-content: center;
-  gap: 5px; 
-  margin-top: 30px;
-  position: relative;  
+  flex-wrap: wrap;
+  padding: 10px 0;
 }
 
+.freelancer-social-icons a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-/* TARGET THE SVG DIRECTLY */
-.social-icons svg {
-  width: 35px;
-  height: 35px;
-  background: #c91fc676;
-  color: #fff;
-  padding: 7px;
-  border-radius: 50%;
-  cursor: pointer;
+  background: #333;
+  color: #f39c12;
+
+  width: 42px;
+  height: 42px;
+  margin: 6px;
+
+  border-radius: 6px;
+  text-decoration: none;
+
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
+.freelancer-social-icons a svg{
+  font-size: 22px;
+}
+.freelancer-btn{
+   background: #fff;
+   padding:5px;
+   border :2px solid #f39c12;
+}
 
+.freelancer-btn a{
+   background: #fff;
+   text-decoration: none;
+   color:black;
+   padding:10px;
+}
 /* Bottom bar */
 .freelancer-bottom-bar button {
   font-size: 19px;
-  background: #c91fc676;
+  background: #fff;
   color: black;
 }
+
+.freelancer-btn:disabled{
+  
+  cursor:not-allowed;
+}   
