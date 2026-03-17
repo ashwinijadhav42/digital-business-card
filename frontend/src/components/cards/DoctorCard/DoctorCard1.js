@@ -170,7 +170,7 @@ function DoctorCard1({ data = {}, showAllIcons = true ,publicUrl,onDownload,slug
             Chat With Us now(Book Appointment)
           </a>
         ) : (
-          <div className="btn text-center small text-muted py-2">
+          <div className="btn text-center small text-muted ">
             Enter WhatsApp number to enable booking 
           </div>
         )}

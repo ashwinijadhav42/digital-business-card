@@ -1,6 +1,15 @@
 import { useState } from "react";
 import SampleCard from "./SampleCard";
 
+import {
+  defaultGallery,
+  defaultServices,
+  defaultProducts,
+  defaultTestimonials,
+  defaultBusinessHours,
+  defaultBlogs
+} from "./DefaultData";
+
 function CreateSampleCard() {
 
   const initialFormData = {
@@ -21,7 +30,14 @@ function CreateSampleCard() {
     youtube: "",
     linkedin: "",
     twitter: "",
-    telegram: ""
+    telegram: "",
+
+    gallery: [],
+    services: [],
+    products: defaultProducts,
+    testimonials: defaultTestimonials,
+    businessHours: defaultBusinessHours,
+    blogs: defaultBlogs
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -109,42 +125,42 @@ function CreateSampleCard() {
   // ================= SAVE =================
   const handleSave = async (e) => {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  try {
+    try {
 
-    const response = await fetch(
-      "http://localhost:8080/api/sample-cards",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
+      const response = await fetch(
+        "http://localhost:8080/api/sample-cards",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to create card");
       }
-    );
 
-    if (!response.ok) {
-      throw new Error("Failed to create card");
+      const savedCard = await response.json();
+
+      alert("Card Created Successfully!");
+
+      // open card in new tab using slug
+      window.open(
+        `/view-sample-card/${savedCard.slug}`,
+        "_blank"
+      );
+
+    } catch (error) {
+      console.error(error);
+      alert("Error creating card");
     }
-
-    const savedCard = await response.json();
-
-    alert("Card Created Successfully!");
-
-    // open card in new tab using slug
-    window.open(
-      `/view-sample-card/${savedCard.slug}`,
-      "_blank"
-    );
-
-  } catch (error) {
-    console.error(error);
-    alert("Error creating card");
-  }
-};  const handleReset = () => {
+  }; const handleReset = () => {
 
     const confirmReset = window.confirm("Reset form?");
 
@@ -154,8 +170,48 @@ function CreateSampleCard() {
     }
   };
 
-  // ================= JSX =================
+  /* ================= DYNAMIC LIST UPDATE ================= */
+
+  const updateList = (section, index, field, value) => {
+
+    const updated = [...formData[section]];
+
+    updated[index][field] = value;
+
+    setFormData((prev) => ({
+      ...prev,
+      [section]: updated
+    }));
+  };
+
+  /* ================= ADD ITEM ================= */
+
+  const addItem = (section, template) => {
+
+    setFormData((prev) => ({
+      ...prev,
+      [section]: [...prev[section], template]
+    }));
+  };
+
+  /* ================= REMOVE ITEM ================= */
+
+  const removeItem = (section, index) => {
+
+    const updated = [...formData[section]];
+
+    updated.splice(index, 1);
+
+    setFormData((prev) => ({
+      ...prev,
+      [section]: updated
+    }));
+  };
+
   return (
+
+
+    // ================= JSX =================
 
     <div className="container-fluid py-4">
 
@@ -410,7 +466,7 @@ function CreateSampleCard() {
             </div>
 
             {/* Social Media */}
-            <h5 className="mt-4 mb-3">Social Media</h5>
+            <h5 className="mt-4 mb-3 text-center">Social Media</h5>
 
             <div className="row">
 
@@ -480,16 +536,177 @@ function CreateSampleCard() {
                 />
               </div>
 
-            </div>
 
+              {/* ================= GALLERY ================= */}
+
+              <h5 className="mt-4 text-center">Gallery</h5>
+
+              <div className="row">
+
+                {formData.gallery.map((img, index) => (
+
+                  <div key={index} className="col-6 mb-3">
+
+                    <div className="sc-gallery-upload-card">
+
+                      <input
+                        type="file"
+                        className="form-control mb-2"
+                        accept="image/*"
+                        onChange={(e) => {
+
+                          const file = e.target.files[0];
+                          if (!file) return;
+
+                          const imageUrl = URL.createObjectURL(file);
+
+                          setFormData((prev) => {
+
+                            const updatedGallery = [...prev.gallery];
+
+                            updatedGallery[index] = {
+                              url: imageUrl,
+                              name: file.name
+                            };
+
+                            return {
+                              ...prev,
+                              gallery: updatedGallery
+                            };
+                          });
+
+                        }}
+                      />
+                      {img?.url && (
+
+                        <div className="sc-gallery-preview">
+
+                          <img
+                            src={img.url}
+                            alt="preview"
+                            className="sc-gallery-preview-img"
+                          />
+
+                          <small className="d-block text-center mt-1">
+                            {img.name}
+                          </small>
+
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-danger sc-gallery-remove"
+                            onClick={() => removeItem("gallery", index)}
+                          >
+                            ✕
+                          </button>
+
+                        </div>
+                      )}
+
+                    </div>
+
+                  </div>
+
+                ))}
+
+              </div>
+              <div className="text-center mt-3">
+                <button
+                  type="button"
+                  className="btn btn-success btn-sm w-50 mb-3"
+                  onClick={() =>
+                    addItem("gallery", { url: "", name: "" })
+                  }
+                >
+                  <i className="bi bi-image me-1"></i>
+                  Add Image
+                </button>
+              </div>
+              {/* ================= SERVICES ================= */}
+              <h5 className="mt-4 text-center">Services</h5>
+
+
+              {formData.services.map((service, index) => (
+
+                <div key={index} className="border p-2 mb-2">
+
+                  <input
+                    placeholder="Title"
+                    className="form-control mb-2"
+                    value={service.title}
+                    onChange={(e) =>
+                      updateList(
+                        "services",
+                        index,
+                        "title",
+                        e.target.value
+                      )
+                    }
+                  />
+                  <input
+                    type="file"
+                    className="form-control mb-2"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (!file) return;
+
+                      const imageUrl = URL.createObjectURL(file);
+
+                      updateList("services", index, "image", imageUrl);
+                    }}
+                  />
+
+                  <textarea
+                    placeholder="Description"
+                    className="form-control"
+                    value={service.description}
+                    onChange={(e) =>
+                      updateList(
+                        "services",
+                        index,
+                        "description",
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <button
+                    className="btn btn-danger btn-sm mt-2"
+                    onClick={() =>
+                      removeItem("services", index)
+                    }
+                  >
+                    Remove
+                  </button>
+
+                </div>
+
+              ))}
+             <div className="text-center">
+  <button
+    type="button"
+    className="btn btn-success btn-sm w-50 mt-3"
+    onClick={() =>
+      addItem("services", {
+        image: "",
+        title: "",
+        description: ""
+      })
+    }
+  >
+    + Add Service
+  </button>
+</div>
+            </div>
             {/* Buttons */}
-            <button className="btn btn-primary w-50">
+
+            <button className="btn btn-primary w-50 m-1">
               Create Card
             </button>
 
             <button
               type="button"
-              className="btn btn-danger w-50"
+              className="btn btn-danger w-40"
               onClick={handleReset}
             >
               Reset
@@ -499,13 +716,17 @@ function CreateSampleCard() {
 
         </div>
 
+
+
         {/* ================= PREVIEW ================= */}
 
-        <div className="col-md-4 ms-5">
+        <div className="col-md-4 ms-4">
 
           <SampleCard
             data={formData}
             showAllIcons={true}
+            slug="preview"
+            publicUrl="preview"
           />
 
         </div>
@@ -513,6 +734,7 @@ function CreateSampleCard() {
       </div>
 
     </div>
+
   );
 }
 

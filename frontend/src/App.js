@@ -61,7 +61,7 @@ function App() {
 
         <Route path="/template-category/add" element={<TemplateCategoryForm />} />
         <Route path="/add-blog" element={<AddBlog />} />
-        <Route path="/blogs/:id" element={<BlogDetails />} />
+        <Route path="/blogs/:id" element={<BlogDetails />} />  
 
         <Route path="/pricing" element={<PricingList />} />
         <Route path="/add-pricing" element={<AddPricing />} />
