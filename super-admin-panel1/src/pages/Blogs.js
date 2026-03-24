@@ -56,7 +56,7 @@ const Blog = () => {
       <div className="page-header d-flex justify-content-between align-items-center mb-3">
         <h3 className="page-title">Blog List</h3>
         <button
-          className="btn btn-primary"
+          className="page-action-btn"
           onClick={() => navigate("/blogs/add")}
         >
           + Add Blog

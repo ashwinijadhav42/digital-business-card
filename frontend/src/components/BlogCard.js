@@ -15,7 +15,7 @@ function BlogCard({ id, image, title, description, date }) {
 
           <h5 className="fw-semibold">{title}</h5>
 
-          <p className="text-muted small flex-grow-1">
+          <p className="blog-desc">
             {description}
           </p>
 

@@ -63,14 +63,15 @@
 ========================= */
 
 body {
-  padding-top: 72px; /* height of fixed navbar */
+  padding-top: 72px;
+  /* height of fixed navbar */
 }
 
 /* =========================
    HERO SECTION
 ========================= */
 
-.hero-section  {
+.hero-section {
   background: linear-gradient(135deg, #0f4c7567, #145673);
   color: #fff;
   padding: 120px 0 90px;
@@ -95,13 +96,14 @@ body {
     font-size: 16px;
   }
 }
+
 .footer {
   background: linear-gradient(135deg, #0f4c7567, #0d2f3f);
   color: #ffffff;
 }
 
 .template-img {
-  height: 180px;     
+  height: 180px;
   object-fit: cover;
 }
 
@@ -170,14 +172,15 @@ body {
 ========================= */
 
 body {
-  padding-top: 72px; /* height of fixed navbar */
+  padding-top: 72px;
+  /* height of fixed navbar */
 }
 
 /* =========================
    HERO SECTION
 ========================= */
 
-.hero-section  {
+.hero-section {
   background: linear-gradient(135deg, #0f4c7567, #145673);
   color: #fff;
   padding: 120px 0 90px;
@@ -202,34 +205,46 @@ body {
     font-size: 16px;
   }
 }
+
 .footer {
   background: linear-gradient(135deg, #0f4c7567, #0d2f3f);
   color: #ffffff;
 }
 
 .template-img {
-  height: 180px;     
+  height: 180px;
   object-fit: cover;
 }
 
 
 .custom-cta-card {
-    background: #ffffff;
-    border-radius: 50px; 
-    padding: 60px 20px;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08); 
-    max-width: 700px;
-    margin: 50px auto;
-    text-align: center;
-    border: none;
+  background: #ffffff;
+  border-radius: 50px;
+  padding: 60px 20px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
+  margin: 50px auto;
+  text-align: center;
+  border: none;
 }
 
 /* green button design */
 .btn-green-custom {
-    background-color: #1a7a44 !important; 
-    color: white !important;
-    border-radius: 12px !important;
-    padding: 12px 35px !important;
-    border: none !important;
-    font-weight: bold;
+  background-color: #1a7a44 !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 12px 35px !important;
+  border: none !important;
+  font-weight: bold;
+}
+
+/* For bolg card description */
+
+.blog-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

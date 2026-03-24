@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaMoon, FaSun, FaBars, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function Header({ onToggle, authUser, onLogout ,collapsed}) {
+function Header({ onToggle, authUser, onLogout, collapsed }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -10,6 +10,7 @@ function Header({ onToggle, authUser, onLogout ,collapsed}) {
     location.pathname.split("/")[1]?.toUpperCase() || "DASHBOARD";
 
   const [theme, setTheme] = useState("light");
+  const [timeLeft, setTimeLeft] = useState("60:00");
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -19,11 +20,43 @@ function Header({ onToggle, authUser, onLogout ,collapsed}) {
     document.body.classList.add(newTheme);
   };
 
-  
-
   const goToProfile = () => {
     navigate("/profile");
   };
+
+  // Session Countdown Timer
+  useEffect(() => {
+    const updateTimer = () => {
+      const loginTime = parseInt(localStorage.getItem("loginTime"));
+
+      if (!loginTime) return;
+
+      const now = new Date().getTime();
+      const diff = now - loginTime;
+
+      const remaining = 60 * 60 * 1000 - diff;
+
+      if (remaining <= 0) {
+        onLogout();
+        return;
+      }
+
+      const minutes = Math.floor(remaining / 60000);
+      const seconds = Math.floor((remaining % 60000) / 1000);
+
+      setTimeLeft(
+        `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`
+      );
+    };
+
+    updateTimer();
+
+    const interval = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(interval);
+  }, [onLogout]);
 
   return (
     <nav className="navbar shadow-sm px-4">
@@ -33,19 +66,25 @@ function Header({ onToggle, authUser, onLogout ,collapsed}) {
       </div>
 
       <div className="d-flex align-items-center gap-3">
+
+        {/* Session Timer */}
+        <span className="badge bg-warning text-dark">
+          ⏳ {timeLeft}
+        </span>
+
         {/* Theme Toggle */}
         <button className="btn btn-light" onClick={toggleTheme}>
           {theme === "light" ? <FaMoon /> : <FaSun />}
         </button>
 
         <div className="d-flex align-items-center">
-        <a
-          href="http://localhost:3000"
-          className="btn btn-light"
-        >
-          User View
-        </a>
-      </div>
+          <a
+            href="http://localhost:3000"
+            className="btn btn-light"
+          >
+            User View
+          </a>
+        </div>
 
         {/* Profile Dropdown */}
         <div className="dropdown">
@@ -59,25 +98,25 @@ function Header({ onToggle, authUser, onLogout ,collapsed}) {
 
           <ul className="dropdown-menu dropdown-menu-end">
             <li>
-              
               <button className="dropdown-item" onClick={goToProfile}>
                 <FaUserCircle className="me-2" />
                 Profile
               </button>
             </li>
+
             <li>
-               {/* Logout Button */}
-                  <div
-                    className="dropdown-item text-danger"
-                    onClick={onLogout}
-                    style={{ cursor: "pointer", marginTop: "20px", color: "red" }}
-                  >
-                    <FaSignOutAlt />
-                    {!collapsed && <span>Logout</span>}
-                  </div>
+              <div
+                className="dropdown-item text-danger"
+                onClick={onLogout}
+                style={{ cursor: "pointer", marginTop: "20px" }}
+              >
+                <FaSignOutAlt />
+                {!collapsed && <span className="ms-2">Logout</span>}
+              </div>
             </li>
           </ul>
         </div>
+
       </div>
     </nav>
   );

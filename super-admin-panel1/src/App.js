@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
@@ -10,6 +10,7 @@ import AddAdmin from "./pages/AddAdmin";
 import EditAdmin from "./pages/EditAdmin";
 import Users from "./pages/Users";
 import AddUser from "./pages/AddUser";
+import EditUser from "./pages/EditUser";
 import Cards from "./pages/Cards";
 import Templates from "./pages/Templates";
 import PricingList from "./pages/PricingList";
@@ -17,7 +18,7 @@ import AddPricing from "./pages/AddPricing";
 import EditPricing from "./pages/EditPricing";
 import Blogs from "./pages/Blogs";
 import AddBlog from "./pages/AddBlog";
-import EditBlog from "./pages/EditBlog";  
+import EditBlog from "./pages/EditBlog";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
 import EditCategory from "./pages/EditCategory";
@@ -31,16 +32,41 @@ import "./styles/page.css";
 import "./styles/theme.css";
 import "./styles/login.css";
 
-
 function App() {
   const [collapsed, setCollapsed] = useState(false);
 
-  // ❌ Removed sessionStorage
-  const [authUser, setAuthUser] = useState(null);
+  const [authUser, setAuthUser] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
 
   const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("loginTime");
     setAuthUser(null);
   };
+
+  useEffect(() => {
+    if (authUser) {
+      const loginTime = localStorage.getItem("loginTime");
+      const now = new Date().getTime();
+
+      if (loginTime) {
+        const diff = now - loginTime;
+        const remaining = 60 * 60 * 1000 - diff;
+
+        if (remaining <= 0) {
+          handleLogout();
+        } else {
+          const timer = setTimeout(() => {
+            alert("Session expired. Please login again.");
+            handleLogout();
+          }, remaining);
+
+          return () => clearTimeout(timer);
+        }
+      }
+    }
+  }, [authUser]);
 
   return (
     <Router>
@@ -53,12 +79,12 @@ function App() {
             role={authUser.role}
             onLogout={handleLogout}
           />
-          
+
           <div className={`main-content ${collapsed ? "collapsed" : ""}`}>
-           <Header
-                onToggle={() => setCollapsed(!collapsed)}
-                authUser={authUser}
-                onLogout={handleLogout}
+            <Header
+              onToggle={() => setCollapsed(!collapsed)}
+              authUser={authUser}
+              onLogout={handleLogout}
             />
 
             <div className="page-content">
@@ -70,6 +96,7 @@ function App() {
                 <Route path="/admin/edit/:id" element={<EditAdmin />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/users/add" element={<AddUser />} />
+                <Route path="/users/edit/:id" element={<EditUser />} />
                 <Route path="/cards" element={<Cards />} />
                 <Route path="/templates" element={<Templates />} />
                 <Route path="/pricinglist" element={<PricingList />} />

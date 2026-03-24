@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-export default function AddUser() {
+export default function EditUser() {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const [form, setForm] = useState({
     fullName: "",
@@ -14,59 +15,70 @@ export default function AddUser() {
   });
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  // Handle Input Change
+  // Fetch User by ID
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/api/user/${id}`);
+        setForm({
+          fullName: res.data.fullName,
+          email: res.data.email,
+          mobile: res.data.mobile,
+          password: "",
+          confirmPassword: "",
+        });
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load user");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [id]);
+
+  // Handle Change
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Submit Form
+  // Submit Update
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     // Validation
-    if (!form.fullName || !form.email || !form.mobile || !form.password) {
-      setError("Please fill all required fields");
+    if (!form.fullName || !form.email || !form.mobile) {
+      setError("Please fill required fields");
       return;
     }
 
-    if (!/^[0-9]{10}$/.test(form.mobile)) {
-      setError("Enter valid 10 digit mobile number");
-      return;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(form.email)) {
-      setError("Invalid email format");
-      return;
-    }
-
-    if (form.password.length < 6) {
-      setError("Password must be at least 6 characters");
-      return;
-    }
-
-    if (form.password !== form.confirmPassword) {
+    if (form.password && form.password !== form.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
 
     try {
-      await axios.post("http://localhost:8080/api/user/signup", {
+      await axios.put(`http://localhost:8080/api/user/${id}`, {
         fullName: form.fullName,
         email: form.email,
         mobile: form.mobile,
         password: form.password,
       });
 
-      alert("User added successfully ✅");
-      navigate("/users"); // change route if needed
+      alert("User updated successfully ✅");
+      navigate("/users");
 
     } catch (err) {
       console.error(err);
-      setError(err.response?.data || "Failed to add user");
+      setError(err.response?.data || "Update failed");
     }
   };
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="form-wrapper">
@@ -74,7 +86,7 @@ export default function AddUser() {
 
         {/* Header */}
         <div className="page-header">
-          <h3 className="form-title">Add User</h3>
+          <h3 className="form-title">Edit User</h3>
           <button
             type="button"
             className="btn-back"
@@ -123,20 +135,18 @@ export default function AddUser() {
               className="form-control mb-2"
               name="password"
               type="password"
-              placeholder="Password *"
+              placeholder="New Password (optional)"
               value={form.password}
               onChange={handleChange}
-              required
             />
 
             <input
               className="form-control mb-2"
               name="confirmPassword"
               type="password"
-              placeholder="Confirm Password *"
+              placeholder="Confirm Password"
               value={form.confirmPassword}
               onChange={handleChange}
-              required
             />
 
           </div>
@@ -144,7 +154,7 @@ export default function AddUser() {
           {/* Buttons */}
           <div className="form-actions">
             <button type="submit" className="btn-save">
-              Save
+              Update
             </button>
 
             <button
@@ -152,7 +162,7 @@ export default function AddUser() {
               className="btn-discard"
               onClick={() => navigate("/users")}
             >
-              Discard
+              Cancel
             </button>
           </div>
 
