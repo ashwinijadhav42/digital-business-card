@@ -71,17 +71,15 @@ export const defaultTestimonials = [
     message: "Great service and professional work."
   }
 ];
-
 export const defaultBusinessHours = [
-  { day: "Monday", time: "9AM - 6PM" },
-  { day: "Tuesday", time: "9AM - 6PM" },
-  { day: "Wednesday", time: "9AM - 6PM" },
-  { day: "Thursday", time: "9AM - 6PM" },
-  { day: "Friday", time: "9AM - 6PM" },
-  { day: "Saturday", time: "10AM - 4PM" },
-  { day: "Sunday", time: "Closed" }
+  { day: "Monday", open: true, start: "09:00", end: "18:00" },
+  { day: "Tuesday", open: true, start: "09:00", end: "18:00" },
+  { day: "Wednesday", open: true, start: "09:00", end: "18:00" },
+  { day: "Thursday", open: true, start: "09:00", end: "18:00" },
+  { day: "Friday", open: true, start: "09:00", end: "18:00" },
+  { day: "Saturday", open: true, start: "09:00", end: "18:00" },
+  { day: "Sunday", open: false, start: "", end: "" }
 ];
-
 export const defaultBlogs = [
   {
     title: "Blog1 Sample Blog Title",

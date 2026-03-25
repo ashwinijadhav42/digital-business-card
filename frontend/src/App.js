@@ -29,7 +29,7 @@ import CreateRealEstateCard from "./components/cards/RealEstateCard/CreateRealEs
 import BlogDetails from "./pages/BlogDetails";
 
 import ViewRealEstateCard from "./components/cards/RealEstateCard/ViewRealEstateCard";
-import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard";
+import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard/CreateSampleCard";
 import ViewSampleCard from "./components/cards/OtherCard/ViewSampleCard"
 
 import SampleCard from "./components/cards/OtherCard/SampleCard";

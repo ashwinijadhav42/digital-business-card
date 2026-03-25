@@ -72,6 +72,7 @@ const formatTwitterUrl = (value) => {
 
 export default function SampleCard({
   data = {},
+  formData ={},
   showAllIcons = false,
   publicUrl,
   onDownload,
@@ -83,6 +84,11 @@ export default function SampleCard({
 const services = data.services?.length ? data.services : defaultServices;
 
 const products = data.products?.length ? data.products : defaultProducts;
+
+const productsToShow =
+  data?.products && data.products.length > 0
+    ? data.products
+    : defaultProducts;
 
 const testimonials = data.testimonials?.length
   ? data.testimonials
@@ -101,8 +107,20 @@ const galleryToShow =
     ? data.gallery
     : defaultGallery;
 
+    const formatTime = (time) => {
+  if (!time) return "";
+
+  const [hour, minute] = time.split(":");
+  const h = parseInt(hour);
+  const suffix = h >= 12 ? "PM" : "AM";
+  const formattedHour = h % 12 || 12;
+
+  return `${formattedHour}:${minute} ${suffix}`;
+};
 const [selectedDate, setSelectedDate] = useState(null);
 const datePickerRef = useRef(null);
+
+
   return (
     <div className="sc-card text-center">
 
@@ -248,8 +266,13 @@ const datePickerRef = useRef(null);
   )}
 
 </div>
-{/* Gallery */}{/* Gallery */}
-<div className="sc-section">
+{/* Gallery */}
+
+{(
+  slug !== "preview" ||
+  (slug === "preview" && formData?.showGallery)
+) && (
+  <div className="sc-section">
   <h5>Gallery</h5>
 
   <Swiper
@@ -280,8 +303,13 @@ const datePickerRef = useRef(null);
   </Swiper>
 
 </div>
+)}
 {/* Our Services */}
-<div className="sc-section">
+{(
+  slug !== "preview" ||
+  (slug === "preview" && formData?.showServices)
+) && (
+  <div className="sc-section">
   <h5>Our Services</h5>
 
   <div className="row">
@@ -296,93 +324,134 @@ const datePickerRef = useRef(null);
     ))}
   </div>
 </div>
+)}
 
 {/* Make Appointment */}
-{/* Make Appointment */}
-<div className="sc-section">
+{(
+  slug !== "preview" ||
+  (slug === "preview" && formData?.showAppointment)
+) && (
+  <div className="sc-section">
   <h5>Make an Appointment</h5>
 
-  <div className="sc-appointment-box">
+  {/* ALWAYS visible button */}
+  <button className="btn btn-warning w-100">
+    Book Appointment
+  </button>
 
-    <DatePicker
-      ref={datePickerRef}
-      selected={selectedDate}
-      onChange={(date) => setSelectedDate(date)}
-      minDate={new Date()}
-      dateFormat="dd/MM/yyyy"
-      className="d-none"
-    />
-
-    <button
-      className="btn btn-warning w-100 sc-appointment-btn"
-      onClick={() => datePickerRef.current.setOpen(true)}
-    >
-      
-      Book Appointment
-      <FaCalendarAlt className="me-2" />
-    </button>
-
-  </div>
+  {/* Show date ONLY if selected */}
+  {data.appointmentDate && (
+    <small className="d-block mt-2 text-center">
+      Selected: {new Date(data.appointmentDate).toLocaleDateString()}
+    </small>
+  )}
 </div>
+)}
+
 {/* Business Hours */}
-<div className="sc-section">
-  <h5>Business Hours</h5>
+{(
+  slug !== "preview" ||
+  (slug === "preview" && formData?.showBusinessHours)
+) && (
+  <div className="sc-section">
+    <h5>Business Hours</h5>
 
-  {businessHours.map((hour, index) => (
-    <div key={index} className="sc-hours">
-      <span>{hour.day}</span>
-      <span>{hour.time}</span>
-    </div>
-  ))}
-</div>
+    {(data?.businessHours?.length
+      ? data.businessHours
+      : defaultBusinessHours
+    ).map((hour, index) => (
+      <div key={index} className="sc-hours d-flex justify-content-between">
+        <span>{hour.day}</span>
 
-
-
-{/* Products */}
-<div className="sc-section">
-  <h5>Products</h5>
-
-  <div className="row">
-    {products.map((product, index) => (
-      <div className="col-6 mb-3" key={index}>
-        <div className="sc-product-card">
-          <img src={product.image} alt="product" />
-          <h6>{product.name}</h6>
-          <span>₹{product.price}</span>
-        </div>
+        <span>
+          {hour.open
+            ? `${formatTime(hour.start)} - ${formatTime(hour.end)}`
+            : "Closed"}
+        </span>
       </div>
     ))}
   </div>
-</div>
+)}
 
+{/* Products */}
+{(
+  slug !== "preview" ||
+  (slug === "preview" && formData?.showProducts)
+) && (
+  <div className="sc-section">
+    <h5>Products</h5>
+
+    <div className="row">
+      {(data?.products?.length
+        ? data.products
+        : defaultProducts
+      ).map((product, index) => (
+        <div className="col-6 mb-3" key={index}>
+          <div className="sc-product-card">
+
+            <img src={product.image} alt="product" />
+
+            <h6>{product.name}</h6>
+
+            <span>₹{product.price}</span>
+
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
 
 {/* Blog */}
-<div className="sc-section">
-  <h5>Blog</h5>
+{(
+  slug !== "preview" ||
+  (slug === "preview" && formData?.showBlogs)
+) && (
+  <div className="sc-section">
+    <h5>Blog</h5>
 
-  {blogs.map((blog, index) => (
-    <div key={index} className="sc-blog">
-      <img src={blog.image} alt="blog" />
-      <h6>{blog.title}</h6>
-      <p>{blog.description}</p>
-    </div>
-  ))}
+    {(data?.blogs?.length
+      ? data.blogs
+      : defaultBlogs
+    ).map((blog, index) => (
+      <div key={index} className="sc-blog">
+        <div className="sc-blog-img-box">
+  <img
+    src={
+      blog.image ||
+      "https://via.placeholder.com/300x150?text=Default+Blog"
+    }
+    alt="blog"
+  />
 </div>
+        <h6>{blog.title || "Blog Title"}</h6>
+        <p>{blog.description || "Blog description..."}</p>
+      </div>
+    ))}
+  </div>
+)}
 
+{/* Testimonials */}{(
+  //  ALWAYS SHOW on PUBLIC page
+  slug !== "preview" ||
 
-{/* Testimonials */}
-<div className="sc-section">
-  <h5>Testimonials</h5>
+  //  In preview → show only if enabled
+  (slug === "preview" && formData?.showTestimonials)
+) && (
+  <div className="sc-section">
+    <h5>Testimonials</h5>
 
-  {testimonials.map((item, index) => (
-    <div key={index} className="sc-testimonial">
-      <p>"{item.message}"</p>
-      <strong>{item.name}</strong>
-    </div>
-  ))}
-</div>
-
-
+    {(data?.testimonials?.length
+      ? data.testimonials
+      : defaultTestimonials
+    ).map((item, index) => (
+      <div key={index} className="sc-testimonial">
+        <p>"{item.message}"</p>
+        <strong>{item.name}</strong>
+      </div>
+    ))}
+  </div>
+)}
 {/*  QR Code
 <div className="sc-section text-center">
   <h5>QR Code</h5>
@@ -391,60 +460,86 @@ const datePickerRef = useRef(null);
   <p className="mt-2">Scan to save contact details</p>
 </div>  */}
 
-{/* Payment Details */}
-<div className="sc-section">
-  <h5>Payment Details</h5>
+{/* Payment Details */}{(
+  slug !== "preview" ||
+  (slug === "preview" && formData?.showPayment)
+) && (
+  <div className="sc-section">
+    <h5>Payment Details</h5>
 
-  <div className="sc-payment-card">
+    <div className="sc-payment-card">
+      <div className="sc-payment-row">
+        <strong>UPI ID:</strong>
+        <span>{payment.upiId}</span>
+      </div>
 
-    <div className="sc-payment-row">
-      <strong>UPI ID:</strong>
-      <span>{payment.upiId}</span>
+      <div className="sc-payment-row">
+        <strong>Account Name:</strong>
+        <span>{payment.accountName}</span>
+      </div>
+
+      <div className="sc-payment-row">
+        <strong>Bank Name:</strong>
+        <span>{payment.bankName}</span>
+      </div>
+
+      <div className="sc-payment-row">
+        <strong>Account No:</strong>
+        <span>{payment.accountNumber}</span>
+      </div>
+
+      <div className="sc-payment-row">
+        <strong>IFSC:</strong>
+        <span>{payment.ifsc}</span>
+      </div>
+
+      <p className="sc-payment-note">
+        {payment.paymentNote}
+      </p>
     </div>
-
-    <div className="sc-payment-row">
-      <strong>Account Name:</strong>
-      <span>{payment.accountName}</span>
-    </div>
-
-    <div className="sc-payment-row">
-      <strong>Bank Name:</strong>
-      <span>{payment.bankName}</span>
-    </div>
-
-    <div className="sc-payment-row">
-      <strong>Account No:</strong>
-      <span>{payment.accountNumber}</span>
-    </div>
-
-    <div className="sc-payment-row">
-      <strong>IFSC:</strong>
-      <span>{payment.ifsc}</span>
-    </div>
-
-    <p className="sc-payment-note">
-      {payment.paymentNote}
-    </p>
-
   </div>
-</div>
-
+)}
 {/* Inquiry Form */}
-<div className="sc-section">
-  <h5>Inquiries</h5>
+{(
+  slug !== "preview" ||
+  (slug === "preview" && formData?.showInquiry)
+) && (
+  <div className="sc-section">
+    <h5>Inquiries</h5>
 
-  <input className="form-control mb-2" placeholder="Your Name" />
-  <input className="form-control mb-2" placeholder="Phone Number" />
-  <input className="form-control mb-2" placeholder="Email Address" />
-  <textarea
-    className="form-control mb-2"
-    placeholder="Type your message"
-  />
+    <input
+      className="form-control mb-2"
+      placeholder="Your Name"
+      value={formData?.inquiry?.name || ""}
+      readOnly={slug !== "preview"}   // editable only in preview
+    />
 
-  <button className="btn btn-warning w-100">
-    Send Message
-  </button>
-</div>
+    <input
+      className="form-control mb-2"
+      placeholder="Phone Number"
+      value={formData?.inquiry?.phone || ""}
+      readOnly={slug !== "preview"}
+    />
+
+    <input
+      className="form-control mb-2"
+      placeholder="Email Address"
+      value={formData?.inquiry?.email || ""}
+      readOnly={slug !== "preview"}
+    />
+
+    <textarea
+      className="form-control mb-2"
+      placeholder="Type your message"
+      value={formData?.inquiry?.message || ""}
+      readOnly={slug !== "preview"}
+    />
+
+    <button className="btn btn-warning w-100">
+      Send Message
+    </button>
+  </div>
+)}
  {/* Card Actions */}
       <CardActions
         slug={slug}
