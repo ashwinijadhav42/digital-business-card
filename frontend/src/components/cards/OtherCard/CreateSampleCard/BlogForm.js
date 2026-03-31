@@ -89,11 +89,11 @@ function BlogForm({ blogs, updateList, addItem, removeItem }) {
             })
           }
         >
-          + Add Blog Add blog
+          + Add Blog 
         </button>
       </div>
     </>
   );
 }
 
-export default BlogForm;
+export default BlogForm;  

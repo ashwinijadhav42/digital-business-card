@@ -14,6 +14,7 @@ const templateMap = {
   doctor: [
     { id: 1, component: DoctorCard1 },
     { id: 2, component: DoctorCard2 },
+    
   ],
 
   corporate: [

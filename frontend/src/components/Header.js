@@ -108,6 +108,14 @@ function Header() {
       >
         Pricing
       </NavLink>
+      </li>
+      <li>
+      <NavLink
+        to="/SampleCardInquiryList"
+        className="dropdown-item"
+      >
+        SampleCardInquiryList
+      </NavLink>
     </li>
   </ul>
 </li>

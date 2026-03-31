@@ -31,6 +31,7 @@ import BlogDetails from "./pages/BlogDetails";
 import ViewRealEstateCard from "./components/cards/RealEstateCard/ViewRealEstateCard";
 import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard/CreateSampleCard";
 import ViewSampleCard from "./components/cards/OtherCard/ViewSampleCard"
+import SampleCardInquiryList from "./components/cards/OtherCard/InquiryList"
 
 import SampleCard from "./components/cards/OtherCard/SampleCard";
 function App() {
@@ -89,6 +90,7 @@ function App() {
 
         <Route path="/create-other-card/:templateType" element={<CreateSampleCard />} />
        <Route path="/view-sample-card/:slug" element={<ViewSampleCard />} />
+       <Route path="/SampleCardInquiryList" element={<SampleCardInquiryList />} /> 
 
       </Routes>
       <Footer />

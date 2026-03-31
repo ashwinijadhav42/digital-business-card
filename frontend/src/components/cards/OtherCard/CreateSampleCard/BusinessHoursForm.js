@@ -31,10 +31,10 @@ function BusinessHoursForm({ formData, setFormData }) {
 
   return (
     <>
-      {/* ✅ Center Heading */}
+      {/* Center Heading */}
       <h5 className="mt-4 text-center">Business Hours</h5>
 
-      {/* ✅ Show Button */}
+      {/*  Show Button */}
       <div className="text-center mt-2">
         <button
           type="button"
@@ -45,7 +45,7 @@ function BusinessHoursForm({ formData, setFormData }) {
         </button>
       </div>
 
-      {/* ✅ Show content only when clicked */}
+      {/* Show content only when clicked */}
       {showHours && (
         <>
           {/* Open All Toggle */}

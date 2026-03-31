@@ -56,12 +56,7 @@ function CreateSampleCard() {
       businessHours: defaultBusinessHours.map((item) => ({ ...item })),
     blogs:[],
 testimonials:[],
-inquiry: {
-  name: "",
-  phone: "",
-  email: "",
-  message: ""
-},
+
 
 appointmentEnabled: false,
 appointmentDate: null,
@@ -248,16 +243,17 @@ const allSelected =
   /* ================= DYNAMIC LIST UPDATE ================= */
 
   const updateList = (section, index, field, value) => {
+  setFormData((prev) => {
+    const updated = prev[section].map((item, i) =>
+      i === index ? { ...item, [field]: value } : item
+    );
 
-    const updated = [...formData[section]];
-
-    updated[index][field] = value;
-
-    setFormData((prev) => ({
+    return {
       ...prev,
       [section]: updated
-    }));
-  };
+    };
+  });
+};
 
   /* ================= ADD ITEM ================= */
 
@@ -577,17 +573,7 @@ const allSelected =
     setFormData={setFormData}
   />
 )}
-
-{/* =================  ENQUIRY =================  */}
-
-{formData.showInquiry && (
-  <InquiryForm
-    formData={formData}
-    setFormData={setFormData}
-  />
-)}
-
-            {/* Buttons */}
+ {/* Buttons */}
 
             <button className="btn btn-primary w-50 ">
               Create Card
@@ -602,6 +588,7 @@ const allSelected =
             </button>
 
 
+           
           </form>
 
         </div>
@@ -614,9 +601,10 @@ const allSelected =
 
           <SampleCard
             data={formData}
-            formData={formData}
+           formData={formData}
             showAllIcons={true}
-            slug="preview"
+            
+            slug={null}
             publicUrl="preview"
             
           />

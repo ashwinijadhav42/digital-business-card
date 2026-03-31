@@ -3,7 +3,9 @@
 ========================= */
 
 .sc-card{
-  max-width:460px;
+   width: 460px;   /* FIX */
+  max-width: none;
+ 
   margin:auto;
   background:#0d2b6b;
   border-radius:14px;
@@ -447,7 +449,16 @@
   border-radius:8px;
   font-weight:600;
 }
+/*INQUIRY*/
+fieldset:disabled {
+  cursor: not-allowed;
+}
 
+fieldset:disabled input,
+fieldset:disabled textarea,
+fieldset:disabled button {
+  cursor: not-allowed;
+}
 /* =========================
    RESPONSIVE
 ========================= */

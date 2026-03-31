@@ -37,13 +37,22 @@ function ProductForm({ products, updateList, addItem, removeItem }) {
                 type="file"
                 className="form-control mb-2"
                 accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (!file) return;
+                onChange={async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
 
-                  const imageUrl = URL.createObjectURL(file);
-                  updateList("products", index, "image", imageUrl);
-                }}
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch("http://localhost:8080/api/upload/products", {
+    method: "POST",
+    body: formData
+  });
+
+  const imageUrl = await res.text();
+
+  updateList("products", index, "image", imageUrl);
+}}
               />
 
               {/* Remove */}

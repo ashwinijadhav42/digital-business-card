@@ -44,11 +44,13 @@ function ViewSampleCard() {
       <div className="d-flex justify-content-center mt-5">
 
         {/* Card Section */}
+        <div className="pdf-wrapper">
         <div ref={cardRef} id="card-to-download">
 
           <SampleCard
             data={card}
             showAllIcons={true}
+            
             onDownload={handleDownloadPDF}
             cardRef={cardRef}
             slug={slug}
@@ -56,7 +58,7 @@ function ViewSampleCard() {
           />
 
         </div>
-
+</div>
       </div>
 
     </div>

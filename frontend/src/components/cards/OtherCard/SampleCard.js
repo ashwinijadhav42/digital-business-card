@@ -100,13 +100,58 @@ const businessHours = data.businessHours?.length
 
 const blogs = data.blogs?.length ? data.blogs : defaultBlogs;
 
-const payment = data.payment || defaultPayment;
+const payment = data?.payment && Object.keys(data.payment).length > 0
+  ? data.payment
+  : defaultPayment;
 
 const galleryToShow =
   data.gallery && data.gallery.length > 0
     ? data.gallery
     : defaultGallery;
 
+    const [inquiry, setInquiry] = useState({
+  name: "",
+  phone: "",
+  email: "",
+  message: ""
+});
+const isDisabled = !slug || slug === "preview";
+
+const handleInquiryChange = (e) => {
+  setInquiry({
+    ...inquiry,
+    [e.target.name]: e.target.value
+  });
+};
+
+const handleInquirySubmit = async () => {
+  try {
+    const res = await fetch(
+      `http://localhost:8080/api/inquiries/slug/${slug}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(inquiry)
+      }
+    );
+
+    if (!res.ok) throw new Error();
+
+    alert("Inquiry submitted successfully ✅");
+
+    setInquiry({
+      name: "",
+      phone: "",
+      email: "",
+      message: ""
+    });
+
+  } catch {
+    alert("Error submitting inquiry ❌");
+  }
+};
     const formatTime = (time) => {
   if (!time) return "";
 
@@ -267,48 +312,49 @@ const datePickerRef = useRef(null);
 
 </div>
 {/* Gallery */}
-
 {(
   slug !== "preview" ||
   (slug === "preview" && formData?.showGallery)
 ) && (
   <div className="sc-section">
-  <h5>Gallery</h5>
+    <h5>Gallery</h5>
 
-  <Swiper
-    modules={[Pagination, Autoplay]}
-    pagination={{ clickable: true }}
-    slidesPerView={1}
-    spaceBetween={10}
-    loop={true}
-    autoplay={{
-      delay: 3000,
-      disableOnInteraction: false
-    }}
-    className="sc-gallery-slider"
-  >
+    <Swiper
+      modules={[Pagination, Autoplay]}
+      pagination={{ clickable: true }}
+      slidesPerView={1}
+      spaceBetween={10}
+      loop={true}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false
+      }}
+      className="sc-gallery-slider"
+    >
+      {galleryToShow.map((img, index) => (
+        <SwiperSlide key={index}>
+          <img
+  src={
+    img.preview
+      ? img.preview // preview (instant UI)
+      : img.image
+       ? img.image   //  DIRECT USE // from backend
+      : img.url // default
+  }
+  className="sc-gallery-img"
+  alt={img.name || "gallery"}
+/>
 
-    {galleryToShow.map((img, index) => (
-      <SwiperSlide key={index}>
-
-        <img
-          src={img.url}
-          className="sc-gallery-img"
-          alt={img.name || "gallery"}
-        />
-
-      </SwiperSlide>
-    ))}
-
-  </Swiper>
-
-</div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
 )}
 {/* Our Services */}
 {(
-  slug !== "preview" ||
-  (slug === "preview" && formData?.showServices)
-) && (
+  (slug === "preview" && formData?.showServices) ||
+(slug !== "preview")
+) && ( 
   <div className="sc-section">
   <h5>Our Services</h5>
 
@@ -347,7 +393,6 @@ const datePickerRef = useRef(null);
   )}
 </div>
 )}
-
 {/* Business Hours */}
 {(
   slug !== "preview" ||
@@ -416,13 +461,14 @@ const datePickerRef = useRef(null);
     ).map((blog, index) => (
       <div key={index} className="sc-blog">
         <div className="sc-blog-img-box">
-  <img
-    src={
-      blog.image ||
-      "https://via.placeholder.com/300x150?text=Default+Blog"
-    }
-    alt="blog"
-  />
+ <img
+  src={
+    blog.image
+      ? blog.image
+      : "https://via.placeholder.com/300x150?text=Default+Blog"
+  }
+  alt="blog"
+/>
 </div>
         <h6>{blog.title || "Blog Title"}</h6>
         <p>{blog.description || "Blog description..."}</p>
@@ -504,48 +550,63 @@ const datePickerRef = useRef(null);
   slug !== "preview" ||
   (slug === "preview" && formData?.showInquiry)
 ) && (
-  <div className="sc-section">
-    <h5>Inquiries</h5>
+ <div className="sc-section">
+  <h5>Inquiries</h5>
+
+  <fieldset disabled={isDisabled}>
 
     <input
+      name="name"
       className="form-control mb-2"
       placeholder="Your Name"
-      value={formData?.inquiry?.name || ""}
-      readOnly={slug !== "preview"}   // editable only in preview
+      value={isDisabled ? "" : inquiry.name}
+      onChange={handleInquiryChange}
     />
 
     <input
+      name="phone"
       className="form-control mb-2"
       placeholder="Phone Number"
-      value={formData?.inquiry?.phone || ""}
-      readOnly={slug !== "preview"}
+      value={isDisabled ? "" : inquiry.phone}
+      onChange={handleInquiryChange}
     />
 
     <input
+      name="email"
       className="form-control mb-2"
       placeholder="Email Address"
-      value={formData?.inquiry?.email || ""}
-      readOnly={slug !== "preview"}
+      value={isDisabled ? "" : inquiry.email}
+      onChange={handleInquiryChange}
     />
 
     <textarea
+      name="message"
       className="form-control mb-2"
       placeholder="Type your message"
-      value={formData?.inquiry?.message || ""}
-      readOnly={slug !== "preview"}
+      value={isDisabled ? "" : inquiry.message}
+      onChange={handleInquiryChange}
     />
 
-    <button className="btn btn-warning w-100">
+    <button
+      className="btn btn-warning w-100"
+      onClick={handleInquirySubmit}
+      disabled={isDisabled}
+      title={isDisabled ? "Not available in preview" : ""}
+    >
       Send Message
     </button>
-  </div>
+
+  </fieldset>
+
+</div>
 )}
  {/* Card Actions */}
       <CardActions
-        slug={slug}
-        publicUrl={publicUrl}
-        onDownload={onDownload}
-      />
+  slug={slug}
+  publicUrl={publicUrl}
+  onDownload={onDownload}
+   variant="dark"
+/>
     </div>
   );
 }
