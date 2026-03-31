@@ -98,7 +98,7 @@ const LoginPage = () => {
         throw new Error(text || "Request failed");
       }
 
-      const data = await res.json();
+      /*const data = await res.json();
       console.log("Success:", data);
 
       alert(isLogin ? "Login successful!" : "Account created successfully!");
@@ -109,6 +109,30 @@ const LoginPage = () => {
 if (isLogin) {
   //navigate(`/create-${category}-card/${templateType}`);
   navigate(`/create-${category}-card/template${templateType}`);
+}*/
+      
+const data = await res.json();
+console.log("Success:", data);
+
+// ✅ IMPORTANT: store user from DB
+if (isLogin) {
+  const userData = {
+  id: data.id,
+  name: data.fullName,
+  email: data.email,
+  mobile: data.mobile,
+};
+
+localStorage.setItem("user", JSON.stringify(userData));
+
+// 🔥 Force UI update
+window.location.href = `/create-${category}-card/template${templateType}`;
+
+  alert("Login successful!");
+
+  navigate(`/create-${category}-card/template${templateType}`);
+} else {
+  alert("Account created successfully!");
 }
 
     } catch (err) {

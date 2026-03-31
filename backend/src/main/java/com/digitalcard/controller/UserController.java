@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.*;
 
 import com.digitalcard.entity.User;
 import com.digitalcard.repository.UserRepository;
+import com.digitalcard.dto.LoginRequest;
+import com.digitalcard.dto.ChangePasswordRequest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -18,24 +21,22 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    // ✅ SIGNUP (Create User)
+    // ✅ SIGNUP
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody User user) {
 
-        Optional<User> existing = userRepository.findByMobile(user.getMobile());
-        if (existing.isPresent()) {
-            return ResponseEntity.badRequest().body("Mobile number already registered");
+        if (userRepository.findByMobile(user.getMobile()).isPresent()) {
+            return ResponseEntity.badRequest().body("Mobile already registered");
         }
 
-        User savedUser = userRepository.save(user);
-        return ResponseEntity.ok(savedUser);
+        return ResponseEntity.ok(userRepository.save(user));
     }
 
     // ✅ LOGIN
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
-        Optional<User> userOpt = userRepository.findByMobile(loginRequest.getMobile());
+        Optional<User> userOpt = userRepository.findByMobile(request.getMobile());
 
         if (userOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("User not found");
@@ -43,7 +44,7 @@ public class UserController {
 
         User user = userOpt.get();
 
-        if (!user.getPassword().equals(loginRequest.getPassword())) {
+        if (!user.getPassword().equals(request.getPassword())) {
             return ResponseEntity.badRequest().body("Invalid password");
         }
 
@@ -85,15 +86,35 @@ public class UserController {
         user.setEmail(updatedUser.getEmail());
         user.setMobile(updatedUser.getMobile());
 
-        // update password only if provided
         if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
             user.setPassword(updatedUser.getPassword());
         }
 
+        return ResponseEntity.ok(userRepository.save(user));
+    }
+
+    // ✅ CHANGE PASSWORD (FIXED)
+    /*@PutMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
+
+        Optional<User> userOpt = userRepository.findById(request.getId());
+
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("User not found");
+        }
+
+        User user = userOpt.get();
+
+        if (!user.getPassword().equals(request.getOldPassword())) {
+            return ResponseEntity.badRequest().body("Old password is incorrect");
+        }
+
+        user.setPassword(request.getNewPassword());
+
         userRepository.save(user);
 
-        return ResponseEntity.ok(user);
-    }
+        return ResponseEntity.ok("Password updated successfully");
+    }*/
 
     // ✅ DELETE USER
     @DeleteMapping("/{id}")
@@ -106,5 +127,34 @@ public class UserController {
         userRepository.deleteById(id);
 
         return ResponseEntity.ok("User deleted successfully");
+    }
+    
+    
+ // ✅ CHANGE PASSWORD API
+    @PutMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody Map<String, String> request) {
+
+        String mobile = request.get("mobile");
+        String oldPassword = request.get("oldPassword");
+        String newPassword = request.get("newPassword");
+
+        Optional<User> userOpt = userRepository.findByMobile(mobile);
+
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("User not found");
+        }
+
+        User user = userOpt.get();
+
+        // 🔒 Check old password
+        if (!user.getPassword().equals(oldPassword)) {
+            return ResponseEntity.badRequest().body("Old password is incorrect");
+        }
+
+        // ✅ Update password
+        user.setPassword(newPassword);
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Password updated successfully");
     }
 }

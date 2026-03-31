@@ -10,22 +10,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "full_name", nullable = false)
     private String fullName;
-
-    @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false, unique = true)
     private String mobile;
-
-    @Column(nullable = false)
     private String password;
 
-    // getters and setters
-
+    // Getters & Setters
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
