@@ -39,7 +39,8 @@ function CardActions({ slug, publicUrl, onDownload }) {
         </p>
       )}
       <button
-        className="freelancer-btn mt-2"
+        className="freelancer-btn mt-2
+         pdf-custom-style"
         disabled={!slug}
         onClick={() => {
           if (!slug) return;
@@ -70,7 +71,8 @@ function CardActions({ slug, publicUrl, onDownload }) {
 
         {/* Buy Now */}
         <button
-          className="freelancer-btn m-2"
+          className="freelancer-btn m-1
+            buy-now-btn"
           disabled={!slug}
         >
           <FaShoppingCart className="me-1" />
@@ -79,7 +81,8 @@ function CardActions({ slug, publicUrl, onDownload }) {
 
         {/* Copy Link */}
         <button
-          className="freelancer-btn m-2"
+          className="freelancer-btn m-1
+            copy-link-btn"
           disabled={!slug}
           onClick={handleCopy}
         > 

@@ -14,7 +14,7 @@
  
   width: 460px;
   background: #cd4d3f6b;
-  //border-radius: 20px;
+  border-radius: 20px;
   overflow: hidden;
   border: 1px solid #171212; 
 }
@@ -210,3 +210,69 @@ background: #ffbf00;
   font-size: 14px;
 }
 
+/* PDF Button New Style */
+.freelancer-btn.mt-2 {
+    background: #ff9900 !important; /* आकर्षक ऑरेंज रंग */
+    color: white !important;         /* पांढरी अक्षरे */
+    border: none !important;         /* बॉर्डर काढली */
+    padding: 8px 15px !important;  /* बटनची उंची आणि रुंदी वाढवली */
+    border-radius: 50px !important;  /* बटन गोल (Capsule) दिसेल */
+    font-weight: bold !important;    /* अक्षरे जाड केली */
+    font-size: 16px !important;      /* अक्षरांचा आकार वाढवला */
+    width: 60% !important;           /* बटनची रुंदी वाढवली */
+    margin: 15px auto !important;    /* वरून थोडी जागा आणि बटन मध्यभागी */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s all ease;       /* इफेक्ट स्मूथ होण्यासाठी */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* हलकी सावली */
+}
+
+/* बटनवर माउस नेल्यावर (Hover) */
+.freelancer-btn.mt-2:hover {
+    background: #e68a00 !important; /* थोडा गडद रंग */
+    transform: scale(1.05);          /* बटन थोडे मोठे होईल */
+}
+
+/* WhatsApp Button Style */
+.freelancer-btn.m-1 {
+    background: #25D366 !important; /* WhatsApp हिरवा रंग */
+    color: white !important;         /* पांढरी अक्षरे */
+    border: none !important;         /* बॉर्डर काढली */
+    padding: 8px 15px !important;   /* PDF बटनसारखीच साईज */
+    border-radius: 50px !important;  /* गोल कोपरे */
+    font-weight: bold !important;    /* जाड अक्षरे */
+    font-size: 14px !important;      /* अक्षरांचा आकार */
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;                       /* आयकॉन आणि अक्षरांमध्ये जागा */
+    transition: 0.3s all ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* WhatsApp बटनवर माउस नेल्यावर */
+.freelancer-btn.m-1:hover {
+    background: #128C7E !important; /* थोडा डार्क हिरवा */
+    transform: scale(1.05);          /* बटन थोडे मोठे होईल */
+}
+
+
+
+/* Buy Now Button */
+.freelancer-btn.m-1:nth-of-type(2) {
+    background: #007bff !important; /* निळा रंग */
+    color: white !important;
+    border: none !important;
+    padding: 8px 15px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    transition: 0.3s all ease;
+}
+
+.freelancer-btn.m-1:nth-of-type(2):hover {
+    background: #0056b3 !important; /* डार्क निळा */
+    transform: scale(1.05);
+}

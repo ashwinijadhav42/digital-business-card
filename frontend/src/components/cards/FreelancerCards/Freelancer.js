@@ -264,7 +264,9 @@ export default function Freelancer({ data = {}, showAllIcons = true, onDownload,
 
 {/* ================= DOWNLOAD ================= */}
 <button
-  className="freelancer-btn mt-3"
+  className="freelancer-btn mt-3" 
+    
+     
   disabled={!slug}
   onClick={() => {
     if (!slug) return;
@@ -280,7 +282,8 @@ export default function Freelancer({ data = {}, showAllIcons = true, onDownload,
 
   {/* WhatsApp */}
   <button
-    className="freelancer-btn m-2"
+    className="freelancer-btn 
+     whatsapp-btn m-2"
     disabled={!slug}
     onClick={() => {
       if (!slug) return;
