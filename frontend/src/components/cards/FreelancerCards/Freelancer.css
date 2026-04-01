@@ -6,7 +6,7 @@
   min-height: auto;
   margin-top: 0;
   margin-left: auto;
-  //margin-right: 100px;
+  margin-right: 100px;
   border: 1px solid #0e0d0d; 
   
   
@@ -144,8 +144,4 @@
   background: #fff;
   color: black;
 }
-
-.freelancer-btn:disabled{
-  
-  cursor:not-allowed;
-}   
+ 

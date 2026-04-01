@@ -5,13 +5,13 @@ const UserProfile = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  // ✅ Get user from localStorage
+  //  Get user from localStorage
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     setUser(storedUser);
   }, []);
 
-  // ✅ Change Password
+  //  Change Password
   const handlePasswordChange = async () => {
   if (!oldPassword || !newPassword) {
     alert("Please fill all fields");
@@ -20,7 +20,7 @@ const UserProfile = () => {
 
   try {
     const res = await fetch("http://localhost:8080/api/user/change-password", {
-      method: "PUT", // 🔥 FIX HERE
+      method: "PUT", //  FIX HERE
       headers: {
         "Content-Type": "application/json",
       },

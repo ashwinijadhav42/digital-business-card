@@ -93,6 +93,8 @@ function App() {
        <Route path="/view-sample-card/:slug" element={<ViewSampleCard />} />
        <Route path="/SampleCardInquiryList" element={<SampleCardInquiryList />} /> 
 
+       <Route path="/profile" element={<UserProfile/>} />
+
       </Routes>
       <Footer />
 

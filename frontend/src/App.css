@@ -247,4 +247,12 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+
+    background-color: #1a7a44 !important; 
+    color: white !important;
+    border-radius: 12px !important;
+    padding: 12px 35px !important;
+    border: none !important;
+    font-weight: bold;
 }
+

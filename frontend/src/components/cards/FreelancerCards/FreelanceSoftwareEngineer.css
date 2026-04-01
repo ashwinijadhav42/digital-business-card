@@ -14,7 +14,7 @@
  
   width: 460px;
   background: #cd4d3f6b;
-  //border-radius: 20px;
+  border-radius: 20px;
   overflow: hidden;
   border: 1px solid #171212; 
 }
@@ -209,4 +209,3 @@ background: #ffbf00;
   align-items: center;
   font-size: 14px;
 }
-
