@@ -39,7 +39,7 @@ function Admins() {
       <div className="page-header d-flex justify-content-between align-items-center mb-3">
         <h3 className="page-title">Admin List</h3>
         <button
-          className="btn btn-primary"
+          className="page-action-btn"
           onClick={() => navigate("/admin/add")}
         >
           + Add Admin
