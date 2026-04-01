@@ -1,129 +1,168 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./SoftwareEngineer.css";
-import profileImg from "../../../assets/images/CorporateProfile.jpg";
+import React, { useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 import {
-  FiMail,
-  FiPhone,
-  FiGithub,
-  FiLinkedin,
-  FiGlobe,
-  FiMapPin,
-  
-} from "react-icons/fi";
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaGlobe,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
+import QRCode from "react-qr-code";
 
-export default function SoftwareEngineer({ data = {} }) {
+const SoftwareEngineerCard = ({ data = {} }) => {
+  const cardRef = useRef();
+
+  const downloadPDF = async () => {
+  const element = cardRef.current;
+  if (!element) return;
+
+  const canvas = await html2canvas(element, {
+    scale: 2,
+    useCORS: true,
+    scrollY: -window.scrollY,
+  });
+
+  const imgData = canvas.toDataURL("image/png");
+
+  // ✅ CUSTOM SIZE (BEST FIX)
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "px",
+    format: [canvas.width, canvas.height], // ✅ exact card size
+  });
+
+  pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+
+  pdf.save("business-card.pdf");
+};
   return (
-    <div className="software-card container p-0 mb-3">
+    <div className="se-wrapper">
+      
+      {/* CARD */}
+      <div className="se-card" ref={cardRef}>
+        
+        {/* HEADER */}
+        <div className="se-header">
+        <div className="se-profile">
+  {data.imagePreview ? (
+    <img
+      src={data.imagePreview}
+      alt="preview"
+      className="profile-img"
+    />
+  ) : data.profileImage ? (
+    <img
+      src={`http://localhost:8080/uploads/${data.profileImage}`}
+      alt="profile"
+      className="profile-img"
+    />
+  ) : (
+    "👤"
+  )}
+          </div>
+          <h3>Software Engineer</h3>
+          <p>Code • Deploy • Test</p>
+        </div>
 
-      {/* Header */}
-      <div className="software-header text-center">
-        <span className="code-icon">{`</>`}</span>
-        <h4 className="mb-0">
-          {data.title || "Software Engineer"}
-        </h4>
-        <small>
-          {data.tagline || "Design • Develop • Deploy"}
-        </small>
+        {/* BODY */}
+        <div className="se-body">
+          <h2>{data.fullName || "Your Name"}</h2>
+          <p className="se-role">{data.designation || "Your Role"}</p>
+          <p className="se-desc">{data.description || "Description here"}</p>
+
+          {/* INFO */}
+          <div className="se-info">
+            {data.phone && (
+              <div className="se-info-item">
+                <FaPhone /> <span>{data.phone}</span>
+              </div>
+            )}
+            {data.email && (
+              <div className="se-info-item">
+                <FaEnvelope /> <span>{data.email}</span>
+              </div>
+            )}
+            {data.address && (
+              <div className="se-info-item">
+                <FaMapMarkerAlt /> <span>{data.address}</span>
+              </div>
+            )}
+            {data.website && (
+              <div className="se-info-item">
+                <FaGlobe /> <span>{data.website}</span>
+              </div>
+            )}
+          </div>
+
+          {/* SOCIAL */}
+          <div className="se-social">
+            {data.linkedin?.trim() && (
+              <button
+                className="se-btn linkedin"
+                onClick={() => window.open(data.linkedin, "_blank")}
+              >
+                <FaLinkedin />
+                <span>{data.linkedin.replace("https://", "")}</span>
+              </button>
+            )}
+
+            {data.github?.trim() && (
+              <button
+                className="se-btn github"
+                onClick={() => window.open(data.github, "_blank")}
+              >
+                <FaGithub />
+                <span>{data.github.replace("https://", "")}</span>
+              </button>
+            )}
+          </div>
+
+          {/* QR */}
+          {data.website && (
+            <div className="se-qr">
+              <QRCode value={data.website} size={70} />
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Profile */}
-      <div className="profile-section text-center">
-  <img
-    src={data.image || profileImg}
-    alt="profile"
-    className="profile-img"
-  />
+      {/* FOOTER */}
+      <div className="se-footer">
+        <button className="se-footer-btn pdf" onClick={downloadPDF}>
+          ⬇ PDF
+        </button>
 
-  <h4 className="profile-name">
-    {data.name || "Rimpa Morgan"}
-  </h4>
-
-  <p className="designation">
-    {data.designation || "Full Stack Engineer"}
-  </p>
-
-  <p className="company-name">
-    {data.companyName || "Company_Name"}
-  </p>
-
-  <p className="profile-description">
-    {data.description || "Passionate developer building scalable and modern applications."}
-  </p>
-</div>
-
-      {/* Action Icons */}
-      <div className="icon-row">
-
-        <a
-          href={`mailto:${data.email || "engineer@email.com"}`}
-          className="icon-circle"
-        >
-          <FiMail />
-        </a>
-
-        <a
-          href={`tel:${data.phone || "+919999999999"}`}
-          className="icon-circle"
-        >
-          <FiPhone />
-        </a>
-
-        <a
-          href={data.linkedin || "https://linkedin.com/in/username"}
-          target="_blank"
-          rel="noreferrer"
-          className="icon-circle"
-        >
-          <FiLinkedin />
-        </a>
-
-        <a
-          href={data.website || "https://portfolio.com"}
-          target="_blank"
-          rel="noreferrer"
-          className="icon-circle"
-        >
-          <FiGlobe />
-        </a>
-
-        <a
-          href={data.address || "https://www.google.com/maps"}
-          target="_blank"
-          rel="noreferrer"
-          className="icon-circle"
-        >
-          <FiMapPin />
-        </a>
-
-      </div>
-
-      {/* CTA */}
-      <div className="cta text-center">
-        <h6>
-          Looking for a <span>Software Engineer?</span>
-        </h6>
-
-        {data.github && (
-          <a
-            href={data.github}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-primary mt-2"
+        {data.phone?.trim() && (
+          <button
+            className="se-footer-btn whatsapp"
+            onClick={() =>
+              window.open(`https://wa.me/${data.phone}`, "_blank")
+            }
           >
-            View Github Portfolio
-          </a>
+            🔗 WhatsApp
+          </button>
         )}
 
-        <p className="mt-3 small fw-semibold">
-          {data.status || "Open for Freelance & Full-time Roles"}
-        </p>
-      </div>
+        <button
+          className="se-footer-btn copy"
+          onClick={() =>
+            navigator.clipboard.writeText(
+              `${data.fullName || ""} ${data.phone || ""} ${data.email || ""}`
+            )
+          }
+        >
+          📋 Copy
+        </button>
 
-      {/* Footer */}
-      <div className="software-footer text-center">
-        <small>Tap icons to connect instantly</small>
+        <button className="se-footer-btn buy">💳 Buy</button>
       </div>
-
     </div>
   );
-}
+};
+
+export default SoftwareEngineerCard;

@@ -1,130 +1,174 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./BusinessAnalyst.css";
+import React, { useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 import {
-  Phone,
-  Mail,
-  MapPin,
-  FaLinkedinIn,
-  Linkedin,
-  Globe,
-  Github,
-  MessageCircle
-} from "lucide-react";
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaGlobe,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
+import QRCode from "react-qr-code";
 
-import profileImg from "../../../assets/images/CorporateProfile.jpg";
+const BusinessAnalystCard = ({ data = {} }) => {
+  const cardRef = useRef();
 
-export default function BusinessAnalystCard({ data = {} }) {
+  // ✅ PDF DOWNLOAD FUNCTION
+  const downloadPDF = async () => {
+  const element = cardRef.current;
+  if (!element) return;
+
+  const canvas = await html2canvas(element, {
+    scale: 2,
+    useCORS: true,
+    scrollY: -window.scrollY,
+  });
+
+  const imgData = canvas.toDataURL("image/png");
+
+  // ✅ CUSTOM SIZE (BEST FIX)
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "px",
+    format: [canvas.width, canvas.height], // ✅ exact card size
+  });
+
+  pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+
+  pdf.save("business-card.pdf");
+};
+
   return (
-    <div className="ba-card container p-0">
-
-      {/* Header */}
-      <div className="ba-header text-center">
-        <img
-          src={data.image || profileImg}
-          alt="profile"
-          className="ba-profile-img"
-        />
-
-        <h4 className="mt-2 mb-0">
-          {data.designation || "Business & Data Analyst"}
-        </h4>
-
-        <small className="ba-tagline">
-          {data.companyName || "Data • Analytics • Strategy"}
-        </small>
-      </div>
-
-      {/* Profile Section */}
-      <div className="ba-profile text-center">
-        <h5 className="mt-3 mb-0">
-          {data.name || "Rimpa Morgon"}
-        </h5>
-
-        <small className="text-muted">
-          {data.designation || "Business Analyst"}
-        </small>
-
-        <p className="ba-desc mt-2">
-          {data.description ||
-            "Helping organizations make smarter decisions through data-driven insights."}
-        </p>
-      </div>
-
-      {/* Contact Info */}
-      <div className="ba-contact mt-3">
-
-        <div className="ba-contact-item">
-          <Phone size={16} className="me-2" />
-          <span>{data.phone || "9876543210"}</span>
-        </div>
-
-        <div className="ba-contact-item">
-          <Mail size={16} className="me-2" />
-          <span>{data.email || "example@email.com"}</span>
-        </div>
-
-        
-          <div className="ba-contact-item">
-            <MapPin size={16} className="me-2" />
-            <span>{data.address || "Address"}</span>
-          </div>
-            
-          <div className="ba-contact-item">
-            <MapPin size={16} className="me-2" />
-            <span>{data.FaLinkedinIn || "LinkedIn"}</span>
-          </div>
-            
-      </div>
-
-
-      {/* Social Links */}
+    <div className="card-wrapper">
       
-      <div className="ba-contact-item">
+      {/* ✅ CARD */}
+      <div className="card-container" ref={cardRef}>
+        
+        {/* Header */}
+        <div className="card-header">
+          <div className="profile-circle">
+  {data.imagePreview ? (
+  <img src={data.imagePreview} alt="profile" className="profile-img" />
+) : data.profileImage ? (
+  <img
+    src={`http://localhost:8080/uploads/corporate_card/${data.profileImage}`}
+    alt="profile"
+    className="profile-img"
+  />
+) : (
+  "👤"
+)}
+          </div>
+          <h3>Business & Data Analyst</h3>
+          <p>Data • Analytics • Strategy</p>
+        </div>
 
-        {data.linkedin && (
-          <a href={data.linkedin} target="_blank" rel="noreferrer">
-            <linkedin size={16} />
-          </a>
-        )}
+        {/* Body */}
+        <div className="card-body">
+          <h2>{data.fullName || "Your Name"}</h2>
+          <p className="role">{data.designation || "Your Role"}</p>
+          <p className="desc">{data.description || "Description here"}</p>
 
-        {data.github && (
-          <a href={data.github} target="_blank" rel="noreferrer">
-            <github size={20} />
-          </a>
-        )}
+          {/* INFO */}
+          <div className="info">
+            {data.phone && (
+              <div className="info-item">
+                <FaPhone /> <span>{data.phone}</span>
+              </div>
+            )}
 
-        {data.portfolio && (
-          <a href={data.portfolio} target="_blank" rel="noreferrer">
-            <Globe size={20} />
-          </a>
-        )}
+            {data.email && (
+              <div className="info-item">
+                <FaEnvelope /> <span>{data.email}</span>
+              </div>
+            )}
 
-        {data.whatsapp && (
-          <a
-            href={`https://wa.me/${data.whatsapp}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MessageCircle size={20} />
-          </a>
-        )}
+            {data.address && (
+              <div className="info-item">
+                <FaMapMarkerAlt /> <span>{data.address}</span>
+              </div>
+            )}
 
+            {data.website && (
+              <div className="info-item">
+                <FaGlobe /> <span>{data.website}</span>
+              </div>
+            )}
+          </div>
+
+          {/* SOCIAL BUTTONS */}
+          <div className="social-buttons">
+            {data.linkedin?.trim() && (
+              <button
+                className="social-btn linkedin"
+                onClick={() => window.open(data.linkedin, "_blank")}
+              >
+                <FaLinkedin className="icon" />
+                <span>{data.linkedin.replace("https://", "")}</span>
+              </button>
+            )}
+
+            {data.github?.trim() && (
+              <button
+                className="social-btn github"
+                onClick={() => window.open(data.github, "_blank")}
+              >
+                <FaGithub className="icon" />
+                <span>{data.github.replace("https://", "")}</span>
+              </button>
+            )}
+          </div>
+
+          {/* QR */}
+          {data.website && (
+            <div className="qr">
+              <QRCode value={data.website} size={70} />
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Github Button */}
-      {data.github && (
-        <a
-          href={data.github}
-          target="_blank"
-          rel="noreferrer"
-          className="btn btn-primary mt-3 w-100"
-        >
-          View Github Portfolio
-        </a>
-      )}
+      {/* ✅ FOOTER OUTSIDE */}
+      <div className="floating-footer">
+        
+        {/* PDF BUTTON */}
+        <button className="footer-btn pdf" onClick={downloadPDF}>
+          ⬇ PDF
+        </button>
 
+        {/* WHATSAPP */}
+        {data.phone?.trim() && (
+          <button
+            className="footer-btn whatsapp"
+            onClick={() =>
+              window.open(`https://wa.me/${data.phone}`, "_blank")
+            }
+          >
+            🔗 WhatsApp
+          </button>
+        )}
+
+        {/* COPY */}
+        <button
+          className="footer-btn copy"
+          onClick={() =>
+            navigator.clipboard.writeText(
+              `${data.fullName || ""} ${data.phone || ""} ${data.email || ""}`
+            )
+          }
+        >
+          📋 Copy
+        </button>
+
+        {/* BUY */}
+        <button className="footer-btn buy">💳 Buy Now</button>
+      </div>
     </div>
   );
-}
-//Working
+};
+
+export default BusinessAnalystCard;
