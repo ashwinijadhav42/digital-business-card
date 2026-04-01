@@ -20,7 +20,7 @@ import {
 } from "react-icons/fa";
 
 import defaultHouse from "../../../assets/images/realEstate/house.jpg";
-//import defaultProfile from "../../../assets/images/defaultProfile.png";
+
 
 const formatFacebookUrl = (value) => {
   if (!value) return "#";

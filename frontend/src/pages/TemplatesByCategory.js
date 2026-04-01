@@ -7,12 +7,14 @@ import FreelanceSoftwareEngineer from "../components/cards/FreelancerCards/Freel
 import Freelancer from "../components/cards/FreelancerCards/Freelancer";
 import RealEstate from "../components/cards/RealEstateCard/RealEstate";
 import UnityRealEstate from "../components/cards/RealEstateCard/UnityRealEstate";
+import SampleCard from "../components/cards/OtherCard/SampleCard";
 
 
 const templateMap = {
   doctor: [
     { id: 1, component: DoctorCard1 },
     { id: 2, component: DoctorCard2 },
+    
   ],
 
   corporate: [
@@ -27,6 +29,11 @@ const templateMap = {
     { id: 1, component: RealEstate },
     { id: 2, component: UnityRealEstate },
   ],
+  other:[
+{
+  id:1,component:SampleCard
+}
+  ]
 
 };
 

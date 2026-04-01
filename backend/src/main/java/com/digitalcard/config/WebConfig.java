@@ -14,8 +14,16 @@ public class WebConfig implements WebMvcConfigurer {
         registry
             .addResourceHandler("/uploads/**")
             .addResourceLocations("file:" + System.getProperty("user.dir") + "/uploads/");
-   
-         }
-   
+        
+    registry.addResourceHandler("/gallery/**")
+       .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/gallery/");
+
+    registry.addResourceHandler("/services/**")
+    .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/services/");
+    
+    registry.addResourceHandler("/products/**")
+    .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/products/");
+    
+    }
 }
 

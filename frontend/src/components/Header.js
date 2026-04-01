@@ -126,6 +126,66 @@ function Header() {
                 </a>
               </li>
 
+              <li className="nav-item dropdown mt-2 mt-lg-0">
+  <a
+    className="nav-link dropdown-toggle fw-semibold border rounded px-3 py-1"
+    href="#"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <i className="fa-solid fa-user me-1"></i> Admin
+  </a>
+
+  <ul className="dropdown-menu">
+    <li>
+      <NavLink
+        to="/template-category/add"
+        className="dropdown-item"
+      >
+        Template Category
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink
+        to="/add-blog"
+        className="dropdown-item"
+      >
+        Add Blog
+      </NavLink>
+    </li>
+     <li>
+      <NavLink
+        to="/pricing"
+        className="dropdown-item"
+      >
+        Pricing
+      </NavLink>
+      </li>
+      <li>
+      <NavLink
+        to="/SampleCardInquiryList"
+        className="dropdown-item"
+      >
+        SampleCardInquiryList
+      </NavLink>
+    </li>
+  </ul>
+</li>
+
+
+             {/* ADMIN LOGIN BUTTON */}
+{/*If you want admin dashboard to open in new tab*/}
+<a
+  href="http://localhost:3001/dashboard"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="btn btn-danger px-3 py-2 ms-lg-2"
+>
+ 
+  Admin Login
+</a>
             </ul>
           </div>
         </div>

@@ -2,7 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./FreelanceSoftwareEngineer.css";
 import logo from "../../../assets/images/CorporateProfile.jpg";
 
-import CardActions from "./CardActions";
+
+import CardActions from "../../CardActions";
 
 
 import {
