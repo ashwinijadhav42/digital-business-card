@@ -14,6 +14,7 @@ const templateMap = {
   doctor: [
     { id: 1, component: DoctorCard1 },
     { id: 2, component: DoctorCard2 },
+    
   ],
 
   corporate: [
@@ -66,7 +67,11 @@ function TemplatesByCategory() {
             >
               <div className="w-100">
                 <Link
-                  to={`/login/${category}/${template.id}`}
+                  to={
+                    localStorage.getItem("user")
+                      ? `/create-${category}-card/template${template.id}`
+                      : `/login/${category}/${template.id}`
+                  }
                   className="text-decoration-none"
                 >
                   <TemplateComponent />

@@ -15,7 +15,7 @@ public class SampleCardService {
 
     public SampleCard saveCard(SampleCard card) {
 
-        // base slug from business name
+        // ================= SLUG LOGIC =================
         String baseSlug = card.getBusinessName()
                 .toLowerCase()
                 .replaceAll("[^a-z0-9\\s]", "")
@@ -24,7 +24,6 @@ public class SampleCardService {
         String slug = baseSlug;
         int count = 1;
 
-        // check if slug already exists
         while (repo.existsBySlug(slug)) {
             slug = baseSlug + "-" + count;
             count++;
@@ -32,6 +31,54 @@ public class SampleCardService {
 
         card.setSlug(slug);
 
+        // ================= GALLERY LINK FIX =================
+        if (card.getGallery() != null) {
+            for (var g : card.getGallery()) {
+                g.setSampleCard(card);  // VERY IMPORTANT
+            }
+        }
+        
+
+        // ================= SERVICES (ADD THIS) =================
+        if (card.getServices() != null) {
+            for (var s : card.getServices()) {
+                s.setSampleCard(card);   //  IMPORTANT
+            }
+        }
+        // =================BUSINESS HOURS =================
+        if (card.getBusinessHours() != null) {
+            for (var b : card.getBusinessHours()) {
+                b.setSampleCard(card);   // IMPORTANT
+            }
+        }
+        // =================PRODUCTS =================
+        
+        if (card.getProducts() != null) {
+            for (var p : card.getProducts()) {
+                p.setSampleCard(card);   // IMPORTANT
+            }
+        }
+        
+     // ================= BLOG LINK FIX =================
+        if (card.getBlogs() != null) {
+            for (var b : card.getBlogs()) {
+                b.setSampleCard(card);
+            }
+        }
+        
+     // ================= TESTIMONIAL =================
+        if (card.getTestimonials() != null) {
+            for (var t : card.getTestimonials()) {
+                t.setSampleCard(card);   
+            }
+        }
+        
+     // ================= PAYMENT =================
+        if (card.getPayment() != null) {
+            card.getPayment().setSampleCard(card);
+        }
+
+        // ================= SAVE =================
         return repo.save(card);
     }
 

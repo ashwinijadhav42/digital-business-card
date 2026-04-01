@@ -15,7 +15,8 @@ export const downloadCardPDF = async (element, fileName = "card") => {
   const canvas = await html2canvas(element, {
     scale: 3,
     useCORS: true,
-    backgroundColor: null
+    backgroundColor: null,
+
   });
 
   const imgData = canvas.toDataURL("image/png");

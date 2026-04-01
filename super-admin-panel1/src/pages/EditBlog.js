@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 
 const EditBlog = () => {
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -11,67 +14,87 @@ const EditBlog = () => {
     description: "",
     status: true,
     publishDate: "",
-    imageFile: null,
+    imageFile: null
   });
 
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // 🔹 Load blog data
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/blogs/all`)
-      .then((res) => {
-        const blog = res.data.find((b) => b.id === parseInt(id));
 
-        if (blog) {
-          setFormData({
-            title: blog.title,
-            description: blog.description,
-            status: blog.status,
-            publishDate: blog.publishDate,
-            imageFile: null,
-          });
+    const fetchBlog = async () => {
 
-          if (blog.imageUrl) {
-            setPreview(
-              `http://localhost:8080/uploads/blogs/${blog.imageUrl}`
-            );
-          }
+      try {
+
+        const res = await axios.get(`http://localhost:8080/api/blogs/${id}`);
+        const blog = res.data;
+
+        setFormData({
+          title: blog.title || "",
+          description: blog.description || "",
+          status: blog.status ?? true,
+          publishDate: blog.publishDate
+            ? blog.publishDate.split("T")[0]
+            : "",
+          imageFile: null
+        });
+
+        if (blog.imageUrl) {
+          setPreview(`http://localhost:8080/uploads/blogs/${blog.imageUrl}`);
         }
-      })
-      .catch((err) => console.error(err));
+
+        setLoading(false);
+
+      } catch (error) {
+        console.error(error);
+      }
+
+    };
+
+    fetchBlog();
+
   }, [id]);
 
-  // 🔹 Handle input change
+
+
+  // 🔹 Handle change
   const handleChange = (e) => {
+
     const { name, value, type, checked, files } = e.target;
 
     if (type === "file") {
-      if (!files || files.length === 0) return;
 
       const file = files[0];
 
-      setFormData((prev) => ({
+      if (!file) return;
+
+      setFormData(prev => ({
         ...prev,
-        imageFile: file,
+        imageFile: file
       }));
 
       setPreview(URL.createObjectURL(file));
       return;
     }
 
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? checked : value
     }));
+
   };
 
-  // 🔹 Update blog
+
+  // 🔹 Submit update
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     try {
+
       const data = new FormData();
+
       data.append("id", id);
       data.append("title", formData.title);
       data.append("description", formData.description);
@@ -82,51 +105,69 @@ const EditBlog = () => {
         data.append("image", formData.imageFile);
       }
 
-      await axios.post(
-        "http://localhost:8080/api/blogs/update",
-        data
-      );
+      await axios.post("http://localhost:8080/api/blogs/update", data);
 
-      alert("Blog updated successfully!");
+      alert("Blog updated successfully");
+
       navigate("/blogs");
 
     } catch (error) {
+
       console.error(error);
-      alert("Error updating blog");
+      alert("Update failed");
+
     }
+
   };
 
+
+  if (loading) return <h4 className="text-center mt-5">Loading...</h4>;
+
+
   return (
+
     <div className="form-wrapper">
+
       <div className="form-card">
+
         <div className="page-header">
+
           <h3>Edit Blog</h3>
+
           <button
             className="btn-back"
             onClick={() => navigate("/blogs")}
           >
             ← Back
           </button>
+
         </div>
 
         <form onSubmit={handleSubmit}>
+
           <input
             className="form-control mb-2"
             name="title"
+            placeholder="Title"
             value={formData.title}
             onChange={handleChange}
-            placeholder="Title"
             required
           />
 
-          <textarea
-            className="form-control mb-2"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Description"
-            required
-          />
+          <div className="form-control mb-2">
+
+            <label className="form-label">Blog Content</label>
+
+            <ReactQuill
+              theme="snow"
+              value={formData.description}
+              onChange={(value) =>
+                setFormData({ ...formData, description: value })
+              }
+              style={{ height: "250px", marginBottom: "40px", whiteSpace: "pre-line" }}
+            />
+
+          </div>
 
           <input
             type="date"
@@ -138,6 +179,7 @@ const EditBlog = () => {
           />
 
           <div className="form-check mb-2">
+
             <input
               type="checkbox"
               className="form-check-input"
@@ -145,9 +187,11 @@ const EditBlog = () => {
               checked={formData.status}
               onChange={handleChange}
             />
+
             <label className="form-check-label">
               Active
             </label>
+
           </div>
 
           <input
@@ -169,10 +213,15 @@ const EditBlog = () => {
           <button className="btn btn-primary">
             Update Blog
           </button>
+
         </form>
+
       </div>
+
     </div>
+
   );
+
 };
 
 export default EditBlog;

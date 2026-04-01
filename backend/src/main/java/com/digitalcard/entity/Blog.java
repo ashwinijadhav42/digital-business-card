@@ -19,7 +19,7 @@ public class Blog {
 
     private String title;
 
-    @Column(length = 5000)
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private Boolean status; // Draft / Published

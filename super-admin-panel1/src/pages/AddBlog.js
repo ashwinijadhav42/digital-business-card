@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
@@ -79,14 +81,18 @@ const handleSubmit = async (e) => {
           required
         />
 
-        <textarea
-          className="form-control mb-2"
-          name="description"
-          placeholder="Blog Description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
+        <div className="form-control mb-2">
+          <label className="form-label">Blog Content</label>
+
+          <ReactQuill
+            theme="snow"
+            value={formData.description}
+            onChange={(value) =>
+              setFormData({ ...formData, description: value })
+            }
+            style={{ height: "250px", marginBottom: "40px" }}
+          />
+        </div>
 
         <input
           type="date"

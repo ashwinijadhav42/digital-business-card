@@ -28,9 +28,12 @@ import CreateCorporateCard from "./components/cards/CorporateCard/CreateCorporat
 import CreateRealEstateCard from "./components/cards/RealEstateCard/CreateRealEstateCard";
 import BlogDetails from "./pages/BlogDetails";
 import ViewCorporateCard from "./components/cards/CorporateCard/ViewCorporateCard";
+import UserProfile from "./pages/UserProfile";
+
 import ViewRealEstateCard from "./components/cards/RealEstateCard/ViewRealEstateCard";
-import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard";
+import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard/CreateSampleCard";
 import ViewSampleCard from "./components/cards/OtherCard/ViewSampleCard"
+import SampleCardInquiryList from "./components/cards/OtherCard/InquiryList"
 
 import SampleCard from "./components/cards/OtherCard/SampleCard";
 function App() {
@@ -48,7 +51,7 @@ function App() {
 
         <Route path="/createCard" element={<CreateCard />} />
         <Route path="/templates" element={<Templates />} />
-
+        
         {/* <Route path="/templates/doctorTemplates" element={<DoctorTemplate />} />
         <Route path="/templates/corporateTemplates" element={<CorporateTemplates />} />
         <Route path="/templates/freelancerTemplates" element={<FreelancerTemplates />} />
@@ -61,7 +64,7 @@ function App() {
 
         <Route path="/template-category/add" element={<TemplateCategoryForm />} />
         <Route path="/add-blog" element={<AddBlog />} />
-        <Route path="/blogs/:id" element={<BlogDetails />} />
+        <Route path="/blogs/:id" element={<BlogDetails />} />  
 
         <Route path="/pricing" element={<PricingList />} />
         <Route path="/add-pricing" element={<AddPricing />} />
@@ -94,6 +97,9 @@ function App() {
 
         <Route path="/create-other-card/:templateType" element={<CreateSampleCard />} />
        <Route path="/view-sample-card/:slug" element={<ViewSampleCard />} />
+       <Route path="/SampleCardInquiryList" element={<SampleCardInquiryList />} /> 
+
+       <Route path="/profile" element={<UserProfile/>} />
 
       </Routes>
       <Footer />

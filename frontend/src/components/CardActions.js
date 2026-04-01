@@ -1,4 +1,5 @@
 import { QRCodeCanvas } from "qrcode.react";
+import "./CardActions.css"
 import {
   FaDownload,
   FaWhatsapp,
@@ -7,7 +8,7 @@ import {
 } from "react-icons/fa";
 
 
-function CardActions({ slug, publicUrl, onDownload }) {
+function CardActions({ slug, publicUrl, onDownload, variant = "light" }) {
 
   const handleWhatsapp = () => {
     if (!slug) return;
@@ -34,12 +35,13 @@ function CardActions({ slug, publicUrl, onDownload }) {
 
       {/* ================= DOWNLOAD ================= */}
        {!slug && (
-        <p className="text-muted mt-2">
-          Create card first to enable download pdf and sharing features
-        </p>
+        <p className={`mt-2 ${variant === "dark" ? "text-light-custom" : "text-muted"}`}>
+  Create card first to enable download pdf and sharing features
+</p>
       )}
       <button
-        className="freelancer-btn mt-2"
+        className="freelancer-btn mt-2
+         pdf-custom-style"
         disabled={!slug}
         onClick={() => {
           if (!slug) return;
@@ -70,7 +72,8 @@ function CardActions({ slug, publicUrl, onDownload }) {
 
         {/* Buy Now */}
         <button
-          className="freelancer-btn m-2"
+          className="freelancer-btn m-1
+            buy-now-btn"
           disabled={!slug}
         >
           <FaShoppingCart className="me-1" />
@@ -79,7 +82,8 @@ function CardActions({ slug, publicUrl, onDownload }) {
 
         {/* Copy Link */}
         <button
-          className="freelancer-btn m-2"
+          className="freelancer-btn m-1
+            copy-link-btn"
           disabled={!slug}
           onClick={handleCopy}
         > 

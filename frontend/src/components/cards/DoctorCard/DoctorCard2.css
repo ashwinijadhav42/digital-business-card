@@ -2,22 +2,22 @@
   
 max-width: 460px;
   margin: 30px auto 0;
- background: #4267f87f;
+ background: linear-gradient(135deg, #075e54 0%, #00acc1 50%, #0288d1 100%) !important;
   border-radius: 20px;
-  border: 1px solid #000;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   position: relative;
-   
+  z-index: 1;
 }
+
 
 /* Header */
 .doctor-card-2 .card-header {
     margin: -1px; 
   height: 210px;
-  background: linear-gradient(135deg, #198754, #20c997);
+  background: linear-gradient(135deg, #004d40 0%, #00acc1 50%, #0288d1 100%) !important;
  border-radius: 20px 20px 40px 40px;
 }
 

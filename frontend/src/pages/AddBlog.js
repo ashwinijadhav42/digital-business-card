@@ -110,7 +110,7 @@ const handleSubmit = async (e) => {
           required
         />
 
-        {/* 🔥 IMAGE PREVIEW */}
+        {/* IMAGE PREVIEW */}
         {preview && (
           <img
             src={preview}

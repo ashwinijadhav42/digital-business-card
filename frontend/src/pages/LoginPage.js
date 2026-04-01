@@ -9,6 +9,7 @@ const LoginPage = () => {
 
   const [isLogin, setIsLogin] = useState(false);
   const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,6 +30,14 @@ const LoginPage = () => {
         newErrors.fullName = "Only letters and spaces allowed";
       }
     }
+
+    if (!isLogin) {
+  if (!email) {
+    newErrors.email = "Email is required";
+  } else if (!/\S+@\S+\.\S+/.test(email)) {
+    newErrors.email = "Email is invalid";
+  }
+}
 
     if (!mobile) {
       newErrors.mobile = "Mobile number is required";
@@ -75,7 +84,7 @@ const LoginPage = () => {
 
     const body = isLogin
       ? { mobile, password }
-      : { fullName, mobile, password };
+      : { fullName, email, mobile, password };
 
     try {
       const res = await fetch(url, {
@@ -89,7 +98,7 @@ const LoginPage = () => {
         throw new Error(text || "Request failed");
       }
 
-      const data = await res.json();
+      /*const data = await res.json();
       console.log("Success:", data);
 
       alert(isLogin ? "Login successful!" : "Account created successfully!");
@@ -100,6 +109,30 @@ const LoginPage = () => {
 if (isLogin) {
   //navigate(`/create-${category}-card/${templateType}`);
   navigate(`/create-${category}-card/template${templateType}`);
+}*/
+      
+const data = await res.json();
+console.log("Success:", data);
+
+// ✅ IMPORTANT: store user from DB
+if (isLogin) {
+  const userData = {
+  id: data.id,
+  name: data.fullName,
+  email: data.email,
+  mobile: data.mobile,
+};
+
+localStorage.setItem("user", JSON.stringify(userData));
+
+// 🔥 Force UI update
+window.location.href = `/create-${category}-card/template${templateType}`;
+
+  alert("Login successful!");
+
+  navigate(`/create-${category}-card/template${templateType}`);
+} else {
+  alert("Account created successfully!");
 }
 
     } catch (err) {
@@ -157,6 +190,29 @@ if (isLogin) {
                   {errors.fullName && (
                     <div className="invalid-feedback d-block">
                       {errors.fullName}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {!isLogin && (
+                <div className="mb-3">
+                  <label className="form-label">Email</label>
+                  <div className="input-group">
+                    <span className="input-group-text">
+                      <i className="fa-solid fa-envelope"></i>
+                    </span>
+                    <input
+                      type="email"
+                      className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                      placeholder="Email Address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  {errors.email && (
+                    <div className="invalid-feedback d-block">
+                      {errors.email}
                     </div>
                   )}
                 </div>
