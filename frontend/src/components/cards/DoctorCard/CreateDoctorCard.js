@@ -1,11 +1,18 @@
 import { useState } from "react";
 import DoctorCard1 from "./DoctorCard1";
 import DoctorCard2 from "./DoctorCard2";
+import { useParams } from "react-router-dom";
+
 
 function CreateDoctorCard(showAllIcons = true) {
   const [templates, , category, setTemplates] = useState([]);
+  
+  const { templateType } = useParams(); //  GET FROM URL
 
-  const [selectedTemplate, setSelectedTemplate] = useState("template1");
+  const [selectedTemplate, setSelectedTemplate] = useState(
+    templateType || "template1"
+  );
+
 
   const initialFormData = {
     logo: "",
