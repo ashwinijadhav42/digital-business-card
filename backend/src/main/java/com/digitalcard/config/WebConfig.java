@@ -1,6 +1,4 @@
-
 package com.digitalcard.config;
-
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -11,11 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-            .addResourceHandler("/uploads/**")
-            .addResourceLocations("file:" + System.getProperty("user.dir") + "/uploads/");
-   
-         }
-   
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:///C:/digital-business-card/backend/uploads/");
+    }
 }
-

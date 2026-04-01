@@ -1,128 +1,174 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./BusinessAnalyst.css";
+import React, { useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 import {
-  FiMail,
-  FiPhone,
-  FiGithub,
-  FiLinkedin,
-  FiGlobe,
-  FiMapPin,
-  
-} from "react-icons/fi";
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaGlobe,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
+import QRCode from "react-qr-code";
 
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Linkedin,
-  Globe,
-  Github,
-  MessageCircle
-} from "lucide-react";
-import profileImg from "../../../assets/images/CorporateProfile.jpg";
+const BusinessAnalystCard = ({ data = {} }) => {
+  const cardRef = useRef();
 
+  // ✅ PDF DOWNLOAD FUNCTION
+  const downloadPDF = async () => {
+  const element = cardRef.current;
+  if (!element) return;
 
-export default function BusinessAnalystCard({ data = {} }) {
+  const canvas = await html2canvas(element, {
+    scale: 2,
+    useCORS: true,
+    scrollY: -window.scrollY,
+  });
+
+  const imgData = canvas.toDataURL("image/png");
+
+  // ✅ CUSTOM SIZE (BEST FIX)
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "px",
+    format: [canvas.width, canvas.height], // ✅ exact card size
+  });
+
+  pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+
+  pdf.save("business-card.pdf");
+};
+
   return (
-    <div className="ba-card container p-0 ">
-
-      {/* Header */}
-      <div className="ba-header  text-center">
-        <img src={data.image || profileImg} alt="logo" className="ba-profile-img" />
-        
-
-        <h4 className="mt-2 mb-0">Business & Data Analyst</h4>
-        <small className="ba-tagline">
-          {data.companyName || "Data • Analytics • Strategy"}
-        </small>
-      </div>
-
-      {/* Profile Section */}
-      <div className="ba-profile text-center">
-       
-        <h5 className="mt-5 mb-2">
-          {data.name || "Rimpa Morgan"}
-        </h5>
-
-        <small className="text-muted">Business Analyst</small>
-
-        <p className="ba-desc mt-2">
-          {data.description || "Helping organizations make smarter decisions through data-driven analysis, reporting, and strategic insights."}
-        </p>
-      </div>
-
-      {/* Contact Info */}
-      <div className="ba-contact mt-3">
-        <div className="ba-contact-item">
-          <Phone size={18} />
-          <span>{data.phone || "+91 9518311798"}</span>
-        </div>
-
-        <div className="ba-contact-item">
-          <Mail size={18} />
-          <span>{data.email || "email@yoursite.com"}</span>
-        </div>
-
-        <div className="ba-contact-item">
-          <MapPin size={18} />
-          <span>{data.address || "Pune, India"}</span>
-        </div>
-      </div>
-
-      {/* Social Links */}
+    <div className="card-wrapper">
       
+      {/* ✅ CARD */}
+      <div className="card-container" ref={cardRef}>
+        
+        {/* Header */}
+        <div className="card-header">
+          <div className="profile-circle">
+  {data.imagePreview ? (
+  <img src={data.imagePreview} alt="profile" className="profile-img" />
+) : data.profileImage ? (
+  <img
+    src={`http://localhost:8080/uploads/corporate_card/${data.profileImage}`}
+    alt="profile"
+    className="profile-img"
+  />
+) : (
+  "👤"
+)}
+          </div>
+          <h3>Business & Data Analyst</h3>
+          <p>Data • Analytics • Strategy</p>
+        </div>
 
-{/* Action Icons */}
-      <div className="icon-row">
+        {/* Body */}
+        <div className="card-body">
+          <h2>{data.fullName || "Your Name"}</h2>
+          <p className="role">{data.designation || "Your Role"}</p>
+          <p className="desc">{data.description || "Description here"}</p>
 
-        <a
-          href={`mailto:${data.email || "engineer@email.com"}`}
-          className="icon-circle"
-        >
-          <FiMail />
-        </a>
+          {/* INFO */}
+          <div className="info">
+            {data.phone && (
+              <div className="info-item">
+                <FaPhone /> <span>{data.phone}</span>
+              </div>
+            )}
 
-        <a
-          href={`tel:${data.phone || "+919999999999"}`}
-          className="icon-circle"
-        >
-          <FiPhone />
-        </a>
+            {data.email && (
+              <div className="info-item">
+                <FaEnvelope /> <span>{data.email}</span>
+              </div>
+            )}
 
-        <a
-          href={data.linkedin || "https://linkedin.com/in/username"}
-          target="_blank"
-          rel="noreferrer"
-          className="icon-circle"
-        >
-          <FiLinkedin />
-        </a>
+            {data.address && (
+              <div className="info-item">
+                <FaMapMarkerAlt /> <span>{data.address}</span>
+              </div>
+            )}
 
-        <a
-          href={data.website || "https://portfolio.com"}
-          target="_blank"
-          rel="noreferrer"
-          className="icon-circle"
-        >
-          <FiGlobe />
-        </a>
+            {data.website && (
+              <div className="info-item">
+                <FaGlobe /> <span>{data.website}</span>
+              </div>
+            )}
+          </div>
 
-        <a
-          href={data.address || "https://www.google.com/maps"}
-          target="_blank"
-          rel="noreferrer"
-          className="icon-circle"
-        >
-          <FiMapPin />
-        </a>
+          {/* SOCIAL BUTTONS */}
+          <div className="social-buttons">
+            {data.linkedin?.trim() && (
+              <button
+                className="social-btn linkedin"
+                onClick={() => window.open(data.linkedin, "_blank")}
+              >
+                <FaLinkedin className="icon" />
+                <span>{data.linkedin.replace("https://", "")}</span>
+              </button>
+            )}
 
+            {data.github?.trim() && (
+              <button
+                className="social-btn github"
+                onClick={() => window.open(data.github, "_blank")}
+              >
+                <FaGithub className="icon" />
+                <span>{data.github.replace("https://", "")}</span>
+              </button>
+            )}
+          </div>
+
+          {/* QR */}
+          {data.website && (
+            <div className="qr">
+              <QRCode value={data.website} size={70} />
+            </div>
+          )}
+        </div>
       </div>
 
-
-<button className="btn btn-primary mt-2 text-center w-100">
-          View Github Portfolio
+      {/* ✅ FOOTER OUTSIDE */}
+      <div className="floating-footer">
+        
+        {/* PDF BUTTON */}
+        <button className="footer-btn pdf" onClick={downloadPDF}>
+          ⬇ PDF
         </button>
+
+        {/* WHATSAPP */}
+        {data.phone?.trim() && (
+          <button
+            className="footer-btn whatsapp"
+            onClick={() =>
+              window.open(`https://wa.me/${data.phone}`, "_blank")
+            }
+          >
+            🔗 WhatsApp
+          </button>
+        )}
+
+        {/* COPY */}
+        <button
+          className="footer-btn copy"
+          onClick={() =>
+            navigator.clipboard.writeText(
+              `${data.fullName || ""} ${data.phone || ""} ${data.email || ""}`
+            )
+          }
+        >
+          📋 Copy
+        </button>
+
+        {/* BUY */}
+        <button className="footer-btn buy">💳 Buy Now</button>
+      </div>
     </div>
   );
-}
+};
+
+export default BusinessAnalystCard;

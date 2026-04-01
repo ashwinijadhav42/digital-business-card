@@ -27,7 +27,7 @@ import ViewFreelancerCard from "./components/cards/FreelancerCards/ViewFreelance
 import CreateCorporateCard from "./components/cards/CorporateCard/CreateCorporateCard";
 import CreateRealEstateCard from "./components/cards/RealEstateCard/CreateRealEstateCard";
 import BlogDetails from "./pages/BlogDetails";
-
+import ViewCorporateCard from "./components/cards/CorporateCard/ViewCorporateCard";
 import ViewRealEstateCard from "./components/cards/RealEstateCard/ViewRealEstateCard";
 import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard";
 import ViewSampleCard from "./components/cards/OtherCard/ViewSampleCard"
@@ -68,6 +68,7 @@ function App() {
         <Route path="/edit-pricing/:id" element={<AddPricing />} />
 
         <Route path="/createDoctorCard" element={<CreateDoctorCard />} />
+        <Route path="/CreateCorporateCard" element={<CreateDoctorCard />} />
 
         {/*
         <Route path="/login/:category/:templateId" element={<LoginPage />} />
@@ -83,6 +84,10 @@ function App() {
         <Route path="/view-freelancer-card/:slug" element={<ViewFreelancerCard />} />
 
         <Route path="/create-corporate-card/:templateType" element={<CreateCorporateCard />} />
+        <Route path="/view-card/:slug" element={<ViewCorporateCard />} />
+
+
+      
 
         <Route path="/create-realestate-card/:templateType" element={<CreateRealEstateCard />} />
         <Route path="/view-realestate-card/:slug" element={<ViewRealEstateCard />} />
