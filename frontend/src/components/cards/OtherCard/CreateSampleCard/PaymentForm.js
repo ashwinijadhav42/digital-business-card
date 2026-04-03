@@ -44,7 +44,12 @@ function PaymentForm({ formData, setFormData }) {
             className="form-control mb-2"
             placeholder="Account Name"
             value={formData.payment?.accountName || ""}
-            onChange={(e) => handleChange("accountName", e.target.value)}
+            onChange={(e) => { 
+              const value = e.target.value;
+              const onlyLetters = value.replace(/[^a-zA-Z\s]/g, "");
+              handleChange("accountName", onlyLetters);
+              }
+            }
           />
 
           <input
@@ -58,14 +63,27 @@ function PaymentForm({ formData, setFormData }) {
             className="form-control mb-2"
             placeholder="Account Number"
             value={formData.payment?.accountNumber || ""}
-            onChange={(e) => handleChange("accountNumber", e.target.value)}
+            onChange={(e) =>  { 
+               const value = e.target.value;
+               if (/^\d*$/.test(value)) {
+                handleChange("accountNumber", value);
+                }
+               }
+            }
           />
 
           <input
             className="form-control mb-2"
             placeholder="IFSC Code"
             value={formData.payment?.ifsc || ""}
-            onChange={(e) => handleChange("ifsc", e.target.value)}
+            maxLength={11}
+            onChange={(e) => {
+              const value = e.target.value.toUpperCase();
+              if(/^[A-Z0-9]*$/.test(value)) {
+                handleChange("ifsc",value);
+              }
+              }
+            }
           />
 
           <textarea
