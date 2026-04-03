@@ -47,8 +47,6 @@ public class CorporateCard {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(name = "template_type")
-private String templateType;
 
     // ================= GETTERS & SETTERS =================
 
