@@ -20,7 +20,7 @@ const UserProfile = () => {
 
   try {
     const res = await fetch("http://localhost:8080/api/user/change-password", {
-      method: "PUT", //  FIX HERE
+      method: "PUT", // 🔥 FIX HERE
       headers: {
         "Content-Type": "application/json",
       },
