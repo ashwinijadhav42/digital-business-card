@@ -37,7 +37,7 @@ function InquiryList() {
 
   return (
     <div className="container text-center mt-4">
-      <h3>Inquiries</h3>
+      <h3>inquiries</h3>
 
       <table className="table table-bordered mt-3 text-center">
         <thead>
