@@ -51,17 +51,16 @@ const BusinessAnalystCard = ({ data = {} }) => {
         {/* Header */}
         <div className="card-header">
           <div className="profile-circle">
-  {data.imagePreview ? (
-  <img src={data.imagePreview} alt="profile" className="profile-img" />
-) : data.profileImage ? (
   <img
-    src={`http://localhost:8080/uploads/corporate_card/${data.profileImage}`}
-    alt="profile"
-    className="profile-img"
-  />
-) : (
-  "👤"
-)}
+  src={
+    data.imagePreview ||
+    (data.profileImage
+      ? `http://localhost:8080/uploads/corporate_card/${data.profileImage}`
+      : "https://i.pravatar.cc/150?img=12")
+  }
+  alt="profile"
+  className="profile-img"
+/>
           </div>
           <h3>Business & Data Analyst</h3>
           <p>Data • Analytics • Strategy</p>
@@ -69,66 +68,69 @@ const BusinessAnalystCard = ({ data = {} }) => {
 
         {/* Body */}
         <div className="card-body">
-          <h2>{data.fullName || "Your Name"}</h2>
-          <p className="role">{data.designation || "Your Role"}</p>
-          <p className="desc">{data.description || "Description here"}</p>
+          <h3>{data.fullName || "Jhon Duran"}</h3>
+          <p className="role">{data.designation || "Business Analyst"}</p>
+          <p className="desc">{data.description || "Working experience description"}</p>
 
           {/* INFO */}
           <div className="info">
-            {data.phone && (
-              <div className="info-item">
-                <FaPhone /> <span>{data.phone}</span>
-              </div>
-            )}
+            <div className="info-item">
+            <FaPhone /> <span>{data.phone || "7986541235"}</span>
+          </div>
+          <div className="info-item">
+            <FaEnvelope /> <span>{data.email || "demo@email.com"}</span>
+          </div>
 
-            {data.email && (
-              <div className="info-item">
-                <FaEnvelope /> <span>{data.email}</span>
-              </div>
-            )}
+          <div className="info-item">
+            <FaMapMarkerAlt /> <span>{data.address || "Nagpur, India"}</span>
+          </div>
 
-            {data.address && (
-              <div className="info-item">
-                <FaMapMarkerAlt /> <span>{data.address}</span>
-              </div>
-            )}
-
-            {data.website && (
-              <div className="info-item">
-                <FaGlobe /> <span>{data.website}</span>
-              </div>
-            )}
+          <div className="info-item">
+            <FaGlobe /> <span>{data.website || "www.example.com"}</span>
+          </div>
           </div>
 
           {/* SOCIAL BUTTONS */}
           <div className="social-buttons">
-            {data.linkedin?.trim() && (
-              <button
-                className="social-btn linkedin"
-                onClick={() => window.open(data.linkedin, "_blank")}
-              >
-                <FaLinkedin className="icon" />
-                <span>{data.linkedin.replace("https://", "")}</span>
-              </button>
-            )}
 
-            {data.github?.trim() && (
-              <button
-                className="social-btn github"
-                onClick={() => window.open(data.github, "_blank")}
-              >
-                <FaGithub className="icon" />
-                <span>{data.github.replace("https://", "")}</span>
-              </button>
-            )}
+          {/* LinkedIn */}
+          <button
+            className="social-btn linkedin"
+            onClick={() =>
+            window.open(
+            data.linkedin || "https://linkedin.com/in/demo",
+            "_blank"
+          )
+        }
+      >
+          <FaLinkedin className="icon" />
+          <span>
+          {(data.linkedin || "https://linkedin.com/in/demo").replace("https://", "")}
+          </span>
+          </button>
+
+          {/* GitHub */}
+          <button
+          className="social-btn github"
+          onClick={() =>
+          window.open(
+          data.github || "https://github.com/demo",
+          "_blank"
+          )
+        }
+      >
+          <FaGithub className="icon" />
+          <span>
+          {(data.github || "https://github.com/demo").replace("https://", "")}
+          </span>
+          </button>
+
           </div>
 
-          {/* QR */}
-          {data.website && (
-            <div className="qr">
-              <QRCode value={data.website} size={70} />
-            </div>
-          )}
+        {/* QR */}
+        <div className="qr">
+        <QRCode value={data.website || "https://example.com"} size={70} />
+        </div>
         </div>
       </div>
 

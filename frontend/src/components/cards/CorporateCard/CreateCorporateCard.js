@@ -23,6 +23,8 @@ function CreateCorporateCard() {
     github: "",
     profileImage: null,
     imagePreview: "",
+    imagePreview: "https://i.pravatar.cc/150?img=12", // 
+
   });
 
   // ✅ Template Selector Function (UPDATED)

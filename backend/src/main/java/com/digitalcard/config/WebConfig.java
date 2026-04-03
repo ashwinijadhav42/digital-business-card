@@ -9,23 +9,21 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        // uploads (dynamic path)
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:///C:/digital-business-card/backend/uploads/");
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/uploads/");
+
+        // gallery
+        registry.addResourceHandler("/gallery/**")
+                .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/gallery/");
+
+        // services
+        registry.addResourceHandler("/services/**")
+                .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/services/");
+
+        // products
+        registry.addResourceHandler("/products/**")
+                .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/products/");
     }
 }
-        registry
-            .addResourceHandler("/uploads/**")
-            .addResourceLocations("file:" + System.getProperty("user.dir") + "/uploads/");
-        
-    registry.addResourceHandler("/gallery/**")
-       .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/gallery/");
-
-    registry.addResourceHandler("/services/**")
-    .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/services/");
-    
-    registry.addResourceHandler("/products/**")
-    .addResourceLocations("file:E:/digital-business-card-main/backend/uploads/products/");
-    
-    }
-}
-
