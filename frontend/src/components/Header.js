@@ -28,7 +28,8 @@ function Header() {
   };
 
   const goToProfile = () => {
-    navigate("/profile");
+    
+    navigate("/user/profile");
   };
 
   return (
