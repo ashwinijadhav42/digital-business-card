@@ -38,6 +38,8 @@ import ViewSampleCard from "./components/cards/OtherCard/ViewSampleCard"
 import SampleCardInquiryList from "./components/cards/OtherCard/InquiryList"
 
 import SampleCard from "./components/cards/OtherCard/SampleCard";
+import DoctorCard3 from "./components/cards/DoctorCard/DoctorCard3";
+import DoctorCard1 from "./components/cards/DoctorCard/DoctorCard1";
 
 export default function MainApp() {
   const location = useLocation();
@@ -56,6 +58,7 @@ export default function MainApp() {
         <Route path="/loginPage" element={<LoginPage />} />
 
 
+<Route path="/DoctorCard3" element={<DoctorCard3/>} />
 
         <Route path="/createCard" element={<CreateCard />} />
         <Route path="/templates" element={<Templates />} />

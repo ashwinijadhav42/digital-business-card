@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import DoctorCard1 from "../components/cards/DoctorCard/DoctorCard1";
 import DoctorCard2 from "../components/cards/DoctorCard/DoctorCard2";
+
+import DoctorCard3 from "../components/cards/DoctorCard/DoctorCard3";
 import BusinessAnalystCard from "../components/cards/CorporateCard/BusinessAnalyst";
 import SoftwareEngineer from "../components/cards/CorporateCard/SoftwareEngineer";
 import FreelanceSoftwareEngineer from "../components/cards/FreelancerCards/FreelanceSoftwareEngineer";
@@ -14,6 +16,8 @@ const templateMap = {
   doctor: [
     { id: 1, component: DoctorCard1 },
     { id: 2, component: DoctorCard2 },
+    { id: 3, component:DoctorCard3},
+    
     
   ],
 
