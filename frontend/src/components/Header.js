@@ -7,13 +7,12 @@ function Header() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  // ✅ Get user from localStorage
+  //  Get user from localStorage
  useEffect(() => {
   const getUser = () => {
     const loggedUser = JSON.parse(localStorage.getItem("user"));
     setUser(loggedUser);
   };
-
   getUser();
 
   window.addEventListener("storage", getUser);
@@ -21,7 +20,7 @@ function Header() {
   return () => window.removeEventListener("storage", getUser);
 }, []);
 
-  // ✅ Logout
+  //  Logout
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
@@ -29,7 +28,8 @@ function Header() {
   };
 
   const goToProfile = () => {
-    navigate("/profile");
+    
+    navigate("/user/profile");
   };
 
   return (
@@ -76,7 +76,7 @@ function Header() {
                 <NavLink to="/templates" className="nav-link">Templates</NavLink>
               </li>
 
-              {/* ✅ USER DROPDOWN OR LOGIN */}
+              {/*  USER DROPDOWN OR LOGIN */}
               {user ? (
                 <li className="nav-item">
                   <div className="dropdown">
@@ -115,6 +115,7 @@ function Header() {
               )}
 
               {/* ADMIN BUTTON */}
+              {/*If you want admin dashboard to open in new tab*/}
               <li className="nav-item">
                 <a
                   href="http://localhost:3001/dashboard"
@@ -175,17 +176,7 @@ function Header() {
 </li>
 
 
-             {/* ADMIN LOGIN BUTTON */}
-{/*If you want admin dashboard to open in new tab*/}
-<a
-  href="http://localhost:3001/dashboard"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn btn-danger px-3 py-2 ms-lg-2"
->
- 
-  Admin Login
-</a>
+   
             </ul>
           </div>
         </div>

@@ -4,15 +4,22 @@ function InquiryForm({ formData, setFormData }) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleChange = (field, value) => {
+ const handleChange = (field, value) => {
+    if (field === "name") {
+      const onlyLetters = /^[A-Za-z\s]*$/;
+       if (!onlyLetters.test(value)) {
+           return;
+       }
+    }
     setFormData((prev) => ({
       ...prev,
       inquiry: {
-        ...prev.inquiry,
-        [field]: value
-      }
+        ...(prev?.inquiry || {}),
+        [field]: value,
+      },
     }));
   };
+
 
   return (
     <>
@@ -35,14 +42,23 @@ function InquiryForm({ formData, setFormData }) {
             className="form-control mb-2"
             placeholder="Your Name"
             value={formData.inquiry?.name || ""}
-            onChange={(e) => handleChange("name", e.target.value)}
+            onChange={(e) => 
+              handleChange("name",e.target.value)}
+                  
           />
 
           <input
+           type="text"
             className="form-control mb-2"
             placeholder="Phone Number"
-            value={formData.inquiry?.phone || ""}
-            onChange={(e) => handleChange("phone", e.target.value)}
+            value={formData?.inquiry?.phone || ""}
+            onChange={(e) => {
+              const onlyNums = e.target.value.replace(/\D/g, "");
+              if (onlyNums.length <= 10) {
+              handleChange("phone", onlyNums);
+              } 
+              }
+            }
           />
 
           <input

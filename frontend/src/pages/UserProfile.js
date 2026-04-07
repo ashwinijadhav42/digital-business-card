@@ -5,13 +5,13 @@ const UserProfile = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  // ✅ Get user from localStorage
+  //  Get user from localStorage
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     setUser(storedUser);
   }, []);
 
-  // ✅ Change Password
+  //  Change Password
   const handlePasswordChange = async () => {
   if (!oldPassword || !newPassword) {
     alert("Please fill all fields");
@@ -53,8 +53,8 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="container py-5">
-
+    <div className="container py-2">
+ <h3 className="text-center mb-4">Profile </h3>
       {/* PROFILE INFO */}
       <div className="card shadow mb-4 p-4">
         <h5 className="mb-3">Profile Information</h5>

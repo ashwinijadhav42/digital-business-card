@@ -2,3 +2,96 @@
   color: #ffffff;
   opacity: 0.9;
 }
+
+.freelancer-btn:disabled{
+  
+  cursor:not-allowed;
+}  
+
+/* PDF Button New Style */
+.freelancer-btn.mt-2 {
+    background: #ff9900 !important; 
+    color: white !important;         
+    border: none !important;         
+    padding: 8px 15px !important;  
+    border-radius: 50px !important;  
+    font-weight: bold !important;    
+    font-size: 16px !important;      
+    width: 60% !important;           
+    margin: 15px auto !important;    
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s all ease;       
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+}
+
+/* (Hover) */
+.freelancer-btn.mt-2:hover {
+    background: #e68a00 !important; 
+    transform: scale(1.05);          
+}
+
+/* WhatsApp Button Style */
+.freelancer-btn.m-1:disabled{
+  cursor:not-allowed;
+}
+
+.freelancer-btn.m-1 {
+    background: #25D366 !important; 
+    color: white !important;         
+    border: none !important;         
+    padding: 8px 15px !important;   
+    border-radius: 50px !important;  
+    font-weight: bold !important;    
+    font-size: 14px !important;      
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;                       
+    transition: 0.3s all ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.freelancer-btn.m-1:hover {
+    background: #128C7E !important; 
+    transform: scale(1.05);          
+}
+
+
+
+/* Buy Now Button */
+.freelancer-btn.m-1:nth-of-type(2) {
+    background: #007bff !important; 
+    color: white !important;
+    border: none !important;
+    padding: 8px 15px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    transition: 0.3s all ease;
+}
+
+.freelancer-btn.m-1:nth-of-type(2):hover {
+    background: #0056b3 !important; 
+    transform: scale(1.05);
+}
+
+
+/* Copy Link Button */
+.freelancer-btn.m-1:nth-of-type(3) {
+    background: #6c757d !important; 
+    color: white !important;
+    border: none !important;
+    padding: 8px 15px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    transition: 0.3s all ease;
+}
+
+.freelancer-btn.m-1:nth-of-type(3):hover {
+    background: #495057 !important; 
+    transform: scale(1.05);
+}

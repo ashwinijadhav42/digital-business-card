@@ -114,7 +114,7 @@ if (isLogin) {
 const data = await res.json();
 console.log("Success:", data);
 
-// ✅ IMPORTANT: store user from DB
+// IMPORTANT: store user from DB
 if (isLogin) {
   const userData = {
   id: data.id,
@@ -125,7 +125,7 @@ if (isLogin) {
 
 localStorage.setItem("user", JSON.stringify(userData));
 
-// 🔥 Force UI update
+//  Force UI update
 window.location.href = `/create-${category}-card/template${templateType}`;
 
   alert("Login successful!");

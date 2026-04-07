@@ -212,7 +212,7 @@ body {
 }
 
 .template-img {
-  height: 180px;
+  height: 220px;
   object-fit: cover;
 }
 
@@ -247,4 +247,23 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+
+    background-color: #1a7a44 !important; 
+    color: white !important;
+    border-radius: 12px !important;
+    padding: 12px 35px !important;
+    border: none !important;
+    font-weight: bold;
+}
+
+//User sidebar
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+}
+
+.content {
+  width: 100%;
 }

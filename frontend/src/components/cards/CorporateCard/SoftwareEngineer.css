@@ -1,98 +1,138 @@
-.software-card {
-  margin-top: 0;
-  max-width: 360px;
-  border: 1px solid hsl(0, 4%, 5%); 
-  margin-left: 100px;
-  margin: auto 60;
-  background: #ffffff;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+
+/* CARD */
+.se-card {
+  width: 100%;
+  max-width: 450px;
+  min-height: 820px;
+  margin-left: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f5f5f5;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
-.software-header {
-  position: relative;
-  background: linear-gradient(135deg, #56cef3, #56cef34b, #56cef3);
-  padding: 5px 10px 75px;
+
+/* HEADER */
+.se-header {
+  background: linear-gradient(135deg, #3ec6ff, red);
   text-align: center;
-  color: #070707;
+  padding: 30px 15px;
+  color: white;
 }
 
-
-.code-icon {
-  font-size: 32px;
-  font-family: monospace;
-}
-
-/* Profile */
-.profile-section {
-  margin-top: -65px;
-  position: relative;
-  z-index: 1;
-}
-
-.profile-img {
-  width: 125px;
-  height: 125px;
+/* PROFILE */
+.se-profile {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 2px solid #0e0d0d;
-  
-  object-fit: cover;;      
-  background: #ffffff;            
-  padding: 2px;
-}
-.profile-name { 
-  margin-bottom: 9px;
-}
-
-.designation {
-  color: #6c757d;
-  font-size: 14px;
-}
-
-/* Icons */
-.icon-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 25px 20px;
-}
-.icon-circle {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;                 
-  background: rgba(224, 244, 246, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(19, 18, 18, 0.94);
-  color: #0d6efd;
+  background: #d9f99d;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  transition: all 0.45s ease;
+  margin: 0 auto 10px;
+  overflow: hidden;
+  font-size: 30px;
 }
 
-.icon-circle:hover {
-  transform: translateY(-4px);
-  background: #084298;
+.se-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* CTA */
-.cta span {
-  color: #0d6efd;
+/* BODY */
+.se-body {
+  padding: 25px;
+  text-align: center;
 }
 
-/* Footer */
-.software-footer {
-  background: #0f2027;
-  color: #fff;
+.se-role {
+  color: #666;
+}
+
+.se-desc {
+  color: #888;
+  margin: 10px 0;
+}
+
+/* INFO */
+.se-info {
+  margin-top: 15px;
+  text-align: left;
+}
+
+.se-info-item {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+/* SOCIAL */
+.se-social {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.se-btn {
+  display: flex;
+  gap: 10px;
   padding: 12px;
-  font-size: 20px;
+  border-radius: 25px;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
-.card-link {
-  text-decoration: none;
-  color: inherit;        
-  display: block;
+.se-btn.linkedin {
+  background: linear-gradient(90deg, #00c6ff, pink);
 }
 
-.card-link:hover {
-  color: inherit;
+.se-btn.github {
+  background: linear-gradient(90deg, #00c6ff, pink);
+}
+
+/* QR */
+.se-qr {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* FOOTER */
+.se-footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  width: fit-content;        /* ✅ shrink to content */
+  margin-left: 200px;         /* ✅ center block */
+  margin-right: auto;        /* ✅ center block */
+
+}
+
+/* FOOTER BUTTON */
+.se-footer-btn {
+  padding: 10px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  height: 60px;
+}
+
+/* COLORS */
+.se-footer-btn.pdf {
+  background: #0f172a;
+  color: white;
+}
+
+.se-footer-btn.whatsapp,
+.se-footer-btn.copy {
+  background: #f1f5f9;
+}
+
+.se-footer-btn.buy {
+  background: lightblue;
 }
