@@ -34,6 +34,7 @@ import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard/Crea
 import ViewSampleCard from "./components/cards/OtherCard/ViewSampleCard"
 import SampleCardInquiryList from "./components/cards/OtherCard/InquiryList"
 
+
 import SampleCard from "./components/cards/OtherCard/SampleCard";
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
         <Route path="/template-category/add" element={<TemplateCategoryForm />} />
         <Route path="/add-blog" element={<AddBlog />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />  
+        <Route path="/profile" element={<UserProfile />} /> 
 
         <Route path="/pricing" element={<PricingList />} />
         <Route path="/add-pricing" element={<AddPricing />} />
