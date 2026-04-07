@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import Header from "./components/Header";
@@ -98,6 +99,14 @@ function App() {
       </Routes>
       <Footer />
 
+=======
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import MainApp from "./MainApp";
+function App() {
+  return (
+    <BrowserRouter>
+      <MainApp />
+>>>>>>> 123c1d77bfc0043d8f399e3653eabefbee7f9687
     </BrowserRouter>
   );
 }

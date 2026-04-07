@@ -1,92 +1,299 @@
-.ba-card {
-  width: 360px;              /* FIXED width */
-  height: 650px;             /* FIXED height */
-  margin-bottom: 20px;
-  border-radius: 0px;
-  background: #f4f7fb;
+.card-container {
+  width: 100%;
+  max-width: 450px;
+  min-height: 750px;
+  margin-left: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f5f5f5;
+  font-family: "Segoe UI", sans-serif;
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  border: 1px solid #0e0d0d;
+ 
+}
+
+/* HEADER */
+.card-header {
+  background: linear-gradient(135deg, #3ec6ff, #a6d86d);
+  text-align: center;
+  padding: 30px 15px 20px;
+  color: white;
+  position: relative;
+}
+
+.profile-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #d9f99d;
   display: flex;
-  flex-direction: column;    /* Important */
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  font-size: 34px;
+}
+
+.card-header h3 {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.card-header p {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* BODY */
+.card-body {
+  padding: 50px;
+  text-align: center;
+}
+
+.card-body h2 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.role {
+  font-size: 15px;
+  color: #666;
+}
+
+.desc {
+  font-size: 15px;
+  margin: 10px 0 15px;
+  color: #888;
+}
+
+/* INFO */
+.info p {
+  display: flex;
+  flex-direction: column;   /* makes vertical */
+  align-items: flex-start;
+  gap: 10px;
+  justify-content: left;
+  font-size: 13px;
+  margin: 10px 0;
+  color: #333;
+}
+/* Icon styling */
+.icon {
+  font-size: 16px;
+  color: #4b5563;
+}
+
+/* BUTTONS */
+.btn-group {
+  margin: 15px 0;
+}
+
+.hfd {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.social-btn.linkedin {
+  background: linear-gradient(90deg, #00c6ff, #f9d423);
+}
+
+.github {
+  background: linear-gradient(90deg, #00c6ff, #f9d423);
+}
+
+/* QR */
+.qr {
+  margin-top: 15px;
+}
+.card-footer {
+  display: flex;
   justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+.social-btn span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Header */
-.ba-header {
-  background: linear-gradient(135deg, #0d6efd, #003c8f);
-  color: #fff;
-  padding: 15px 20px 1px;
-  text-align: center;
+.footer-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Profile */
-.ba-profile {
-  text-align: center;
-  margin-top: -40px;
+/* PDF Button (Dark) */
+.footer-btn.pdf {
+  background: #0f172a;
+  color: white;
 }
 
-.ba-profile-img {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;   /* Circle */
-  object-fit: cover;
-  border: 4px solid #fff;
+/* WhatsApp Button (Light Gray) */
+.footer-btn.whatsapp {
+  background: #f1f5f9;
+  color: #111;
 }
 
-
-
-/* Description */
-.ba-desc {
-  font-size: 14px;
-  padding: 0 20px;
-  text-align: center;
+/* Copy Button (Light Gray) */
+.footer-btn.copy {
+  background: #f1f5f9;
+  color: #111;
 }
 
-/* Contact Section */
-.ba-contact div {
-  padding: 6px 20px;
-  font-size: 14px;
+/* Hover */
+.footer-btn:hover {
+  transform: translateY(-2px);
 }
-
-/* FIXED ICON SIZE */
-.ba-contact svg,
-.ba-social svg {
-  width: 40px;     /* Smaller icons */
-  height: 40px;
-  padding: 8px;
-  border-radius: 10px;
-  background: rgba(224, 244, 246, 0.94);
-  border: 1px solid black;
-  color: #0d6efd;
-  stroke-width: 1.5;
-  transition: all 0.25s ease;
-}
-
-.ba-contact svg {
-  margin-right: 8px;
-}
-
-.ba-social {
-  text-align: center;
-  margin-top: auto;
-  margin-bottom: 15px;
-}
-
-.ba-social{
- position: absolute;
-  top: 10%;
-  right: 15px;
+/* Make card body flexible */
+.card-body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  z-index: 10;
+  align-items: center;
 }
 
-.ba-social svg {
-  margin: 0 6px;
-  cursor: pointer;
+/* INFO SECTION FIX */
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* LEFT ALIGN */
+  justify-content: center;   /* CENTER VERTICALLY */
+  margin-top: 15px;
+  width: 100%;
 }
 
-.ba-actions button {
+/* Each row */
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  margin: 6px 0;
   font-size: 14px;
+}
+
+/* Optional: center whole block inside card */
+.card-body {
+  min-height: 300px;
+  justify-content: center;
+}
+/* Container */
+.social-buttons {
+  display: flex;
+  flex-direction: column;   /* vertical */
+  gap: 10px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* Button Style */
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 30px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+  height: 50px;
+}
+
+/* Icon */
+.social-btn .icon {
+  font-size: 5px;
+}
+
+
+
+/* Hover Effect */
+.social-btn:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+/* Wrapper */
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Floating Footer */
+.floating-footer {
+  display: flex;
+  justify-content: center;   /* ✅ center horizontally */
+  align-items: center;       /* ✅ center vertically */
+  gap: 10px;
+  margin-top: 15px;
+  background: #ffffff;
+  padding: 10px 15px;
+  border-radius: 15px;
+
+  width: fit-content;        /* ✅ shrink to content */
+  margin-left: 200px;         /* ✅ center block */
+  margin-right: auto;        /* ✅ center block */
+}
+
+/* Footer Buttons */
+.footer-btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+  width: 100px;
+  height: 70px;
+  align-items: center;
+}
+
+/* Styles */
+.footer-btn.pdf {
+  background: #0f172a;
+  color: white;
+}
+
+.footer-btn.buy {
+  background: lightblue;
+  color: #111;
+}
+
+/* Hover */
+.footer-btn:hover {
+  transform: translateY(-2px);
+  
+}
+.profile-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #d9f99d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0 auto 10px;
+}
+
+.profile-img {
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
 }
