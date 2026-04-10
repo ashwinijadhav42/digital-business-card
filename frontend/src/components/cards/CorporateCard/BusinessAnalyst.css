@@ -187,7 +187,7 @@
 
 /* Optional: center whole block inside card */
 .card-body {
-  min-height: 300px;
+  min-height: 200px;
   justify-content: center;
 }
 /* Container */
@@ -245,9 +245,9 @@
   padding: 10px 15px;
   border-radius: 15px;
 
-  width: fit-content;        /* ✅ shrink to content */
-  margin-left: 200px;         /* ✅ center block */
-  margin-right: auto;        /* ✅ center block */
+  width: fit-content;        
+  margin-left: 200px;         
+  margin-right: auto;        
 }
 
 /* Footer Buttons */
