@@ -9,6 +9,7 @@ import {
 
 
 function CardActions({ slug, publicUrl, onDownload, variant = "light" }) {
+const isPaid = localStorage.getItem(`paid_${slug}`) === "true";
 
   const handleWhatsapp = () => {
     if (!slug) return;
@@ -17,6 +18,82 @@ function CardActions({ slug, publicUrl, onDownload, variant = "light" }) {
       "_blank"
     );
   };
+const handleBuyNow = async () => {
+  if (!slug) return;
+
+  try {
+    // 1️⃣ Create Order
+    const res = await fetch("http://localhost:8080/api/payment/create-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        amount: 499
+      })
+    });
+
+    const order = await res.json();
+
+    // 2️⃣ Razorpay Options
+    const options = {
+      key: "rzp_test_Sbh1YyXMJxqIMt",
+      amount: order.amount,
+      currency: "INR",
+      name: "Digital Card",
+      description: "Buy Card",
+      order_id: order.id,
+
+      // ✅ FORCE UPI ONLY
+      method: {
+        upi: true,
+        card: true,
+        netbanking: true,
+        wallet: true,
+        paylater: true
+      },
+
+      // ✅ Prefill (optional but good UX)
+      prefill: {
+        name: "Test User",
+        email: "test@example.com",
+        contact: "9999999999"
+      },
+
+      // ✅ Payment Success
+      handler: async function (response) {
+
+        await fetch("http://localhost:8080/api/payment/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            slug: slug
+          })
+        });
+
+        localStorage.setItem(`paid_${slug}`, "true");
+
+        alert("✅ Payment Successful");
+        window.location.reload();
+      },
+
+      theme: {
+        color: "#3399cc"
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+
+  } catch (err) {
+    console.error(err);
+    alert("❌ Payment Failed");
+  }
+};
 
   const handleCopy = () => {
     if (!slug) return;
@@ -40,18 +117,19 @@ function CardActions({ slug, publicUrl, onDownload, variant = "light" }) {
 </p>
       )}
       <button
-        className="freelancer-btn mt-2
-         pdf-custom-style"
-        disabled={!slug}
-        onClick={() => {
-          if (!slug) return;
-          onDownload();
-        }}
-      >
-        <FaDownload className="me-2" />
-        Download as PDF
-      </button>
-
+  className="freelancer-btn mt-2 pdf-custom-style"
+  disabled={!slug || !isPaid}
+  onClick={() => {
+    if (!isPaid) {
+      alert("Please complete payment first");
+      return;
+    }
+    onDownload();
+  }}
+>
+  <FaDownload className="me-2" />
+  {isPaid ? "Download PDF" : "Locked (Pay to Download)"}
+</button>
      
 
       {/* ================= SHARE ================= */}
@@ -71,15 +149,14 @@ function CardActions({ slug, publicUrl, onDownload, variant = "light" }) {
         </button>
 
         {/* Buy Now */}
-        <button
-          className="freelancer-btn m-1
-            buy-now-btn"
-          disabled={!slug}
-        >
-          <FaShoppingCart className="me-1" />
-          Buy Now
-        </button>
-
+<button
+  className="freelancer-btn m-1 buy-now-btn"
+  disabled={!slug}
+  onClick={handleBuyNow}
+>
+  <FaShoppingCart className="me-1" />
+  Buy Now
+</button>
         {/* Copy Link */}
         <button
           className="freelancer-btn m-1

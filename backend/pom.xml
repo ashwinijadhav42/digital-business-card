@@ -56,13 +56,28 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<!--Rozarpay -->
+		<dependency>
+  <groupId>com.razorpay</groupId>
+  <artifactId>razorpay-java</artifactId>
+  <version>1.4.3</version>
+</dependency>
+
 <!-- Swagger -->
 <dependency>
     <groupId>org.springdoc</groupId>
     <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
     <version>2.5.0</version>
 </dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-config</artifactId>
+</dependency>
 
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-web</artifactId>
+</dependency>
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
