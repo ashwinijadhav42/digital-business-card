@@ -20,7 +20,7 @@ const [message, setMessage] = useState("");
     <>
      
 <HeroSection/>
- <p>{message}</p>
+ 
    
     </>
   );

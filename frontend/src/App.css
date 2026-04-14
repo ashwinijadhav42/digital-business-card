@@ -248,7 +248,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 
-    background-color: #1a7a44 !important; 
+   /* background-color: #1a7a44 !important; */
     color: white !important;
     border-radius: 12px !important;
     padding: 12px 35px !important;
@@ -256,14 +256,3 @@ body {
     font-weight: bold;
 }
 
-//User sidebar
-.sidebar {
-  width: 250px;
-  height: 100vh;
-  background-color: #fff;
-  border-right: 1px solid #ddd;
-}
-
-.content {
-  width: 100%;
-}

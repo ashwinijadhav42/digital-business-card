@@ -31,6 +31,7 @@ import BlogDetails from "./pages/BlogDetails";
 import ViewCorporateCard from "./components/cards/CorporateCard/ViewCorporateCard";
 import UserProfile from "./pages/UserProfile";
 import UserLayout from "./components/UserLayout";
+import Affiliations from "./pages/Affiliations";
 
 import ViewRealEstateCard from "./components/cards/RealEstateCard/ViewRealEstateCard";
 import CreateSampleCard from "./components/cards/OtherCard/CreateSampleCard/CreateSampleCard";
@@ -111,7 +112,7 @@ export default function MainApp() {
         {/* <Route path="/profile" element={<UserLayout/>} /> */}
 
         <Route path="/user" element={<UserLayout />}>
-
+          <Route path="Affiliations" element={<Affiliations />} />
           <Route path="profile" element={<UserProfile />} />
           <Route path="templates" element={<Templates />} />
           <Route path="create-card" element={<CreateCard />} />

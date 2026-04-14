@@ -263,6 +263,9 @@
   /* ✅ center block */
   margin-right: auto;
   /* ✅ center block */
+  width: fit-content;        
+  margin-left: 200px;         
+  margin-right: auto;        
 }
 
 /* Footer Buttons */

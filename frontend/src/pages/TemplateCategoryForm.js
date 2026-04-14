@@ -101,7 +101,7 @@ const TemplateCategoryForm = () => {
           required
         />
 
-        {/* 🔥 IMAGE PREVIEW */}
+        {/*  IMAGE PREVIEW */}
         {preview && (
           <img
             src={preview}
@@ -110,8 +110,6 @@ const TemplateCategoryForm = () => {
             style={{ height: "150px" }}
           />
         )}
-
-        
 
         <div className="form-check mb-3">
           <input
