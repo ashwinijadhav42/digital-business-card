@@ -2,6 +2,11 @@ package com.digitalcard.service;
 
 import com.digitalcard.entity.SampleCard;
 import com.digitalcard.repository.SampleCardRepository;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +20,7 @@ public class SampleCardService {
 
     public SampleCard saveCard(SampleCard card) {
 
-        // ================= SLUG LOGIC =================
+        // ✅ SLUG LOGIC
         String baseSlug = card.getBusinessName()
                 .toLowerCase()
                 .replaceAll("[^a-z0-9\\s]", "")
@@ -25,64 +30,63 @@ public class SampleCardService {
         int count = 1;
 
         while (repo.existsBySlug(slug)) {
-            slug = baseSlug + "-" + count;
-            count++;
+            slug = baseSlug + "-" + count++;
         }
 
         card.setSlug(slug);
 
-        // ================= GALLERY LINK FIX =================
+        // ✅ LINK CHILD DATA (already good)
         if (card.getGallery() != null) {
-            for (var g : card.getGallery()) {
-                g.setSampleCard(card);  // VERY IMPORTANT
-            }
+            card.getGallery().forEach(g -> g.setSampleCard(card));
         }
-        
 
-        // ================= SERVICES (ADD THIS) =================
         if (card.getServices() != null) {
-            for (var s : card.getServices()) {
-                s.setSampleCard(card);   //  IMPORTANT
-            }
+            card.getServices().forEach(s -> s.setSampleCard(card));
         }
-        // =================BUSINESS HOURS =================
+
         if (card.getBusinessHours() != null) {
-            for (var b : card.getBusinessHours()) {
-                b.setSampleCard(card);   // IMPORTANT
-            }
+            card.getBusinessHours().forEach(b -> b.setSampleCard(card));
         }
-        // =================PRODUCTS =================
-        
+
         if (card.getProducts() != null) {
-            for (var p : card.getProducts()) {
-                p.setSampleCard(card);   // IMPORTANT
-            }
+            card.getProducts().forEach(p -> p.setSampleCard(card));
         }
-        
-     // ================= BLOG LINK FIX =================
+
         if (card.getBlogs() != null) {
-            for (var b : card.getBlogs()) {
-                b.setSampleCard(card);
-            }
+            card.getBlogs().forEach(b -> b.setSampleCard(card));
         }
-        
-     // ================= TESTIMONIAL =================
+
         if (card.getTestimonials() != null) {
-            for (var t : card.getTestimonials()) {
-                t.setSampleCard(card);   
-            }
+            card.getTestimonials().forEach(t -> t.setSampleCard(card));
         }
-        
-     // ================= PAYMENT =================
+
         if (card.getPayment() != null) {
             card.getPayment().setSampleCard(card);
         }
 
-        // ================= SAVE =================
         return repo.save(card);
     }
 
-    public SampleCard getCardBySlug(String slug) {
-        return repo.findBySlug(slug).orElseThrow();
-    }
+	public long getCardsByUser(Long userId) {
+		// TODO Auto-generated method stub
+		return repo.countByUserId(userId);
+	}
+	
+	public Map<String, Object> getDashboard(Long userId) {
+
+	    long cardCount = repo.countByUserId(userId);
+	    SampleCardRepository inquiryRepo = null;
+		long inquiryCount = inquiryRepo.countByUserId(userId);
+
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("cards", cardCount);
+	    map.put("inquiries", inquiryCount);
+
+	    return map;
+	}
+
+	public SampleCard getCardBySlug(String slug) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

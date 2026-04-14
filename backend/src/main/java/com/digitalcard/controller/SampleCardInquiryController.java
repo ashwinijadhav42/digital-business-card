@@ -22,6 +22,11 @@ public class SampleCardInquiryController {
         this.inquiryRepo = inquiryRepo;
         this.cardRepo = cardRepo;
     }
+    
+    @GetMapping("/user/{userId}")
+    public List<SampleCardInquiry> getUserInquiries(@PathVariable Long userId) {
+        return inquiryRepo.findByUserId(userId);
+    }
 
     // SAVE INQUIRY USING SLUG
     @PostMapping("/slug/{slug}")

@@ -100,8 +100,8 @@ function App() {
                 <Route path="/cards" element={<Cards />} />
                 <Route path="/templates" element={<Templates />} />
                 <Route path="/pricinglist" element={<PricingList />} />
-                <Route path="/pricinglist/add" element={<AddPricing />} />
-                <Route path="/pricinglist/edit/:id" element={<EditPricing />} />
+                <Route path="/pricing/add" element={<AddPricing />} />
+                <Route path="/pricing/edit/:id" element={<EditPricing />} />
                 <Route path="/blogs" element={<Blogs />} />
                 <Route path="/blogs/add" element={<AddBlog />} />
                 <Route path="/blogs/edit/:id" element={<EditBlog />} />

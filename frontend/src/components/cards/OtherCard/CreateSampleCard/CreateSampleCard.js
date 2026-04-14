@@ -76,6 +76,7 @@ payment: {},
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
 const datePickerRef = useRef(null);
+const [loading, setLoading] = useState(false);
 const [blogs, setBlogs] = useState([
   {
     image: "",
@@ -189,43 +190,48 @@ const allSelected =
 
   // ================= SAVE =================
   const handleSave = async (e) => {
-
     e.preventDefault();
 
     if (!validateForm()) return;
 
     try {
+      setLoading(true);
 
-      const response = await fetch(
-        "http://localhost:8080/api/sample-cards",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(formData)
-        }
-      );
+      const user = JSON.parse(localStorage.getItem("user"));
 
-      if (!response.ok) {
-        throw new Error("Failed to create card");
+      if (!user) {
+        alert("Please login first");
+        return;
       }
 
-      const savedCard = await response.json();
+      const finalData = {
+        ...formData,
+        userId: user.id
+      };
+
+      const res = await fetch("http://localhost:8080/api/sample-cards", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(finalData)
+      });
+
+      if (!res.ok) throw new Error("Failed");
+
+      const saved = await res.json();
 
       alert("Card Created Successfully!");
 
-      // open card in new tab using slug
-      window.open(
-        `/view-sample-card/${savedCard.slug}`,
-        "_blank"
-      );
+      window.open(`/view-sample-card/${saved.slug}`, "_blank");
 
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       alert("Error creating card");
+    } finally {
+      setLoading(false);
     }
-  }; 
+  };
 
   {/*Handle Reset*/}
   const handleReset = () => {
@@ -601,12 +607,10 @@ const allSelected =
 
           <SampleCard
             data={formData}
-           formData={formData}
+            formData={formData}
             showAllIcons={true}
-            
-            slug={null}
+            slug="preview"   
             publicUrl="preview"
-            
           />
 
         </div>

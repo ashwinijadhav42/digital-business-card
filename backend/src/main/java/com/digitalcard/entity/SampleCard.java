@@ -41,6 +41,12 @@ public class SampleCard {
     @Column(unique = true)
     private String slug;
     
+    @Column(name = "user_id")
+    private Long userId;
+    
+    @Column(name = "status")
+    private String status; // ACTIVE / INACTIVE
+    
     private Boolean appointmentEnabled;
 
     private LocalDate appointmentDate;
@@ -472,6 +478,14 @@ public class SampleCard {
 	}
 
     // getters setters
+	
+	public String getStatus() {
+	    return status;
+	}
+
+	public void setStatus(String status) {
+	    this.status = status;
+	}
     
     
 

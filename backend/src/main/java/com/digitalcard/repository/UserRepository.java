@@ -10,4 +10,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
+	long countByStatus(String string);
+	long countByEnabled(boolean enabled);
 }
+
