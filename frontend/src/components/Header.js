@@ -158,10 +158,10 @@ function Header() {
     </li>
      <li>
       <NavLink
-        to="/pricing"
+        to="/add-pricing"
         className="dropdown-item"
       >
-        Pricing
+        Add Pricing
       </NavLink>
       </li>
       <li>

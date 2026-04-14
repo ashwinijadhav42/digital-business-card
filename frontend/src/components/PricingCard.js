@@ -38,12 +38,70 @@ function PricingCard({ title, price, duration, features = [], highlight }) {
           </ul>
 
           <button
-            className={`btn ${
-              highlight ? "btn-primary" : "btn-outline-primary"
-            }`}
-          >
-            Get Started
-          </button>
+  className={`btn ${highlight ? "btn-primary" : "btn-outline-primary"} w-100`}
+  onClick={async () => {
+    const slug = localStorage.getItem("currentSlug");
+
+    try {
+      // 1️⃣ Create Order
+      const res = await fetch("http://localhost:8080/api/payment/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          amount: price  // ✅ dynamic price
+        })
+      });
+
+      const order = await res.json();
+
+      // 2️⃣ Razorpay
+      const options = {
+        key: "rzp_test_Sbh1YyXMJxqIMt",
+        amount: order.amount,
+        currency: "INR",
+        name: "Digital Card",
+        description: title,
+        order_id: order.id,
+
+        handler: async function (response) {
+          await fetch("http://localhost:8080/api/payment/verify", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              slug: slug
+            })
+          });
+
+          localStorage.setItem(`paid_${slug}`, "true");
+
+          alert("✅ Payment Successful");
+
+          // redirect back to card page
+          window.location.href = `/view-sample-card/${slug}`;
+        },
+
+        theme: {
+          color: "#3399cc"
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+
+    } catch (err) {
+      console.error(err);
+      alert("❌ Payment Failed");
+    }
+  }}
+>
+  Get Started
+</button>
         </div>
       </div>
     </div>

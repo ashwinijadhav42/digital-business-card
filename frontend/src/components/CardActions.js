@@ -18,83 +18,15 @@ const isPaid = localStorage.getItem(`paid_${slug}`) === "true";
       "_blank"
     );
   };
-const handleBuyNow = async () => {
+  const handleBuyNow = () => {
   if (!slug) return;
 
-  try {
-    // 1️⃣ Create Order
-    const res = await fetch("http://localhost:8080/api/payment/create-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        amount: 499
-      })
-    });
+  // store slug so we can use it later
+  localStorage.setItem("currentSlug", slug);
 
-    const order = await res.json();
-
-    // 2️⃣ Razorpay Options
-    const options = {
-      key: "rzp_test_Sbh1YyXMJxqIMt",
-      amount: order.amount,
-      currency: "INR",
-      name: "Digital Card",
-      description: "Buy Card",
-      order_id: order.id,
-
-      // ✅ FORCE UPI ONLY
-      method: {
-        upi: true,
-        card: true,
-        netbanking: true,
-        wallet: true,
-        paylater: true
-      },
-
-      // ✅ Prefill (optional but good UX)
-      prefill: {
-        name: "Test User",
-        email: "test@example.com",
-        contact: "9999999999"
-      },
-
-      // ✅ Payment Success
-      handler: async function (response) {
-
-        await fetch("http://localhost:8080/api/payment/verify", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_order_id: response.razorpay_order_id,
-            slug: slug
-          })
-        });
-
-        localStorage.setItem(`paid_${slug}`, "true");
-
-        alert("✅ Payment Successful");
-        window.location.reload();
-      },
-
-      theme: {
-        color: "#3399cc"
-      }
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.open();
-
-  } catch (err) {
-    console.error(err);
-    alert("❌ Payment Failed");
-  }
+  // redirect to pricing page
+  window.location.href = "/pricingDesign";
 };
-
   const handleCopy = () => {
     if (!slug) return;
     navigator.clipboard.writeText(publicUrl);

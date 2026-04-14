@@ -55,7 +55,7 @@ export default function MainApp() {
         <Route path="/" element={<Home />} />
         <Route path="/features" element={<Features />} />
         <Route path="/blogs" element={<Blogs />} />
-        {/* <Route path="/pricingDesign" element={<Pricing />} /> */}
+         <Route path="/pricingDesign" element={<Pricing />} /> 
         <Route path="/loginPage" element={<LoginPage />} />
 
 
