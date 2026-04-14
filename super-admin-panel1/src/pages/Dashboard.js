@@ -16,17 +16,18 @@ function Dashboard() {
   }, []);
 
   const fetchDashboard = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:8080/api/dashboard/counts"
-      );
-      setCounts(res.data);
-    } catch (error) {
-      console.error("Error fetching dashboard:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    const res = await axios.get("http://localhost:8080/api/dashboard/counts");
+
+    console.log("API RESPONSE 👉", res.data); // ✅ ADD THIS
+
+    setCounts(res.data);
+  } catch (error) {
+    console.error("Error fetching dashboard:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="container-fluid">
