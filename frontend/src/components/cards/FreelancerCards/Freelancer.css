@@ -1,30 +1,47 @@
- 
 .freelancer-card-page {
   max-width: 460px;
-  background: #1fc3c9 ;
-  color:black;
+  background: linear-gradient(270deg, #ff7a18, #ff4e50, #6a11cb, #2575fc);
+  color: black;
   min-height: auto;
   margin-top: 0;
   margin-left: auto;
   margin-right: 100px;
-  border: 1px solid #0e0d0d; 
-  
-  
+  border: 1px solid #0e0d0d;
+  background-size: 800% 800%;
+  animation: gradientMove 5s ease infinite;
 
+
+
+}
+
+/* Keyframes for animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* White oval card */
 .freelancer-business-card {
   background: #fff;
   width: 100%;
-  max-width: 680px;;
-  
-   padding: 30px 10px 20px 20px;
+  max-width: 680px;
+  ;
+
+  padding: 30px 10px 20px 20px;
   border-radius: 200px 200px 100px 100px;
 }
 
 /* Logo circle */
-.freelancer-profile-img{
+.freelancer-profile-img {
   width: 140px;
   height: 140px;
   border-radius: 50%;
@@ -39,7 +56,7 @@
 /* Name */
 .freelancer-name {
   font-weight: 700;
-  
+
 }
 
 /* Title */
@@ -64,11 +81,13 @@
   gap: 8px;
   margin-bottom: 20px;
 }
+
 /* Contact Section - Yellow Background */
 .contact-info {
   border-radius: 12px;
   padding: 20px;
 }
+
 .freelancer-social-icons svg,
 .freelancer-contact-item svg {
   width: 38px;
@@ -76,6 +95,7 @@
   min-width: 38px;
   min-height: 38px;
 }
+
 /* Contact Items */
 .freelancer-contact-item {
   display: flex;
@@ -96,15 +116,16 @@
   border-radius: 4px;
   font-size: 30px;
 }
+
 /* Social Icons - Opposite Style */
-.freelancer-social-icons{
+.freelancer-social-icons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   padding: 10px 0;
 }
 
-.freelancer-social-icons a{
+.freelancer-social-icons a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -123,25 +144,26 @@
   print-color-adjust: exact;
 }
 
-.freelancer-social-icons a svg{
+.freelancer-social-icons a svg {
   font-size: 22px;
 }
-.freelancer-btn{
-   background: #fff;
-   padding:5px;
-   border :2px solid #f39c12;
+
+.freelancer-btn {
+  background: #fff;
+  padding: 5px;
+  border: 2px solid #f39c12;
 }
 
-.freelancer-btn a{
-   background: #fff;
-   text-decoration: none;
-   color:black;
-   padding:10px;
+.freelancer-btn a {
+  background: #fff;
+  text-decoration: none;
+  color: black;
+  padding: 10px;
 }
+
 /* Bottom bar */
 .freelancer-bottom-bar button {
   font-size: 19px;
   background: #fff;
   color: black;
 }
- 

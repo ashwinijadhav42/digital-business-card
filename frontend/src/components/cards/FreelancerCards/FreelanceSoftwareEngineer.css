@@ -4,26 +4,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-   color:black;
+  color: black;
 }
 
 
 
 /* Card */
 .fs-se-card {
- 
+
   width: 460px;
-  background: #cd4d3f6b;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a18cd1, #89f7fe);
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid #171212; 
+  border: 1px solid #171212;
 }
 
 /* Top Section */
 .fs-se-top-images {
   position: relative;
   height: 180px;
-  
+
 }
 
 /* Circles */
@@ -54,19 +54,21 @@
   transform: translateX(-50%);
   display: flex;
   align-items: center;
- 
- 
+
+
 
 }
 
 /* Content */
 .fs-se-content {
-  margin-top:30px;
+  margin-top: 30px;
   padding: 0px 20px 20px;
 }
-.fs-se svg{
-background: #ffbf00;
+
+.fs-se svg {
+  background: #ffbf00;
 }
+
 .fs-se-name {
   font-weight: 700;
 }
@@ -78,7 +80,7 @@ background: #ffbf00;
 
 .fs-se-desc {
   font-size: 14px;
-  
+
 }
 
 .fs-se-info {
@@ -113,7 +115,9 @@ background: #ffbf00;
 .fs-se-icon-box svg {
   color: #000;
   font-size: 25px;
-}.fs-se-social-icon {
+}
+
+.fs-se-social-icon {
   background: #333;
   padding: 5px;
   margin-top: 20px;
@@ -127,7 +131,8 @@ background: #ffbf00;
   align-items: center;
   justify-content: center;
 
-  color: #f39c12;   /* IMPORTANT */
+  color: #f39c12;
+  /* IMPORTANT */
 }
 
 .fs-se-social {
@@ -177,13 +182,15 @@ background: #ffbf00;
   width: 305px;
   height: 205px;
   border-radius: 0%;
-  
+
   border: 2px solid #0e0d0d;
-  
-  object-fit: cover;;      
-  background: #ffffff;            
+
+  object-fit: cover;
+  ;
+  background: #ffffff;
   padding: 2px;
 }
+
 /* Bottom */
 .fs-se-bottom {
   background: #3cdbde29;
@@ -191,6 +198,7 @@ background: #ffbf00;
   justify-content: space-between;
   padding: 12px;
 }
+
 .fs-se-bottom-actions {
   display: flex;
   justify-content: space-around;
@@ -212,67 +220,67 @@ background: #ffbf00;
 
 /* PDF Button New Style */
 .freelancer-btn.mt-2 {
-    background: #ff9900 !important; 
-    color: white !important;         
-    border: none !important;         
-    padding: 8px 15px !important;  
-    border-radius: 50px !important;  
-    font-weight: bold !important;    
-    font-size: 16px !important;      
-    width: 60% !important;           
-    margin: 15px auto !important;    
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s all ease;       
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+  background: #ff9900 !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 15px !important;
+  border-radius: 50px !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  width: 60% !important;
+  margin: 15px auto !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s all ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* बटनवर माउस नेल्यावर (Hover) */
 .freelancer-btn.mt-2:hover {
-    background: #e68a00 !important;
-    transform: scale(1.05);          
+  background: #e68a00 !important;
+  transform: scale(1.05);
 }
 
 /* WhatsApp Button Style */
 .freelancer-btn.m-1 {
-    background: #25D366 !important; 
-    color: white !important;         
-    border: none !important;         
-    padding: 8px 15px !important;   
-    border-radius: 50px !important;  
-    font-weight: bold !important;    
-    font-size: 14px !important;      
-    cursor: pointer;
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;                       
-    transition: 0.3s all ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  background: #25D366 !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 15px !important;
+  border-radius: 50px !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  cursor: pointer;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.3s all ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* WhatsApp बटनवर माउस नेल्यावर */
 .freelancer-btn.m-1:hover {
-    background: #128C7E !important; 
-    transform: scale(1.05);          
+  background: #128C7E !important;
+  transform: scale(1.05);
 }
 
 
 
 /* Buy Now Button */
 .freelancer-btn.m-1:nth-of-type(2) {
-    background: #007bff !important; 
-    color: white !important;
-    border: none !important;
-    padding: 8px 15px !important;
-    border-radius: 50px !important;
-    font-weight: bold !important;
-    font-size: 14px !important;
-    transition: 0.3s all ease;
+  background: #007bff !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 15px !important;
+  border-radius: 50px !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  transition: 0.3s all ease;
 }
 
 .freelancer-btn.m-1:nth-of-type(2):hover {
-    background: #0056b3 !important; 
-    transform: scale(1.05);
+  background: #0056b3 !important;
+  transform: scale(1.05);
 }
