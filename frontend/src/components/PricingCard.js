@@ -43,20 +43,20 @@ function PricingCard({ title, price, duration, features = [], highlight }) {
     const slug = localStorage.getItem("currentSlug");
 
     try {
-      // 1️⃣ Create Order
+      //  Create Order
       const res = await fetch("http://localhost:8080/api/payment/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          amount: price  // ✅ dynamic price
+          amount: price  // dynamic price
         })
       });
 
       const order = await res.json();
 
-      // 2️⃣ Razorpay
+      //  Razorpay
       const options = {
         key: "rzp_test_Sbh1YyXMJxqIMt",
         amount: order.amount,
@@ -80,7 +80,7 @@ function PricingCard({ title, price, duration, features = [], highlight }) {
 
           localStorage.setItem(`paid_${slug}`, "true");
 
-          alert("✅ Payment Successful");
+          alert(" Payment Successful");
 
           // redirect back to card page
           window.location.href = `/view-sample-card/${slug}`;

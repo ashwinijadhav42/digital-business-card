@@ -85,7 +85,7 @@ return (
       </div>
 
       {/* Specialization */}
-<div className="jk-specialization-wrapper px-4 mt-4">
+<div className="jk-specialization-wrapper mx-4 mt-4">
   <h5 className="jk-specialization-title text-center mb-4">
     Our Expertise
   </h5>
@@ -159,7 +159,7 @@ return (
 </div>
 
 {/* View More Images Button */} 
-<div className="text-center my-4"> <button className="btn btn-warning view-more-btn"> View more images of Real Estate </button> </div>
+<div className="text-center my-4"> <button className="btn view-more-btn"> View more images of Real Estate </button> </div>
 {/* Social Icons */}
 <div className="social-icons text-center mt-4 mb-3">
 {(!showAllIcons || data?.whatsapp) && (
