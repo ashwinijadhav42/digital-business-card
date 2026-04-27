@@ -126,7 +126,7 @@ function Header() {
                   Admin Login
                 </a>
               </li>
-
+{/*
               <li className="nav-item dropdown mt-2 mt-lg-0">
   <a
     className="nav-link dropdown-toggle fw-semibold border rounded px-3 py-1"
@@ -174,10 +174,11 @@ function Header() {
     </li>
   </ul>
 </li>
-
+*/}
 
    
             </ul>
+            
           </div>
         </div>
       </nav>

@@ -77,7 +77,7 @@
   
 }
 .unity-header{
-  color: #fff;
+  color: #080808ee;
 }
 
 
@@ -181,7 +181,7 @@
 .specialization-title {
   font-weight: 700;
   font-size: 18px;
-  color: #fff;
+ 
   //position: relative;
 }
 
@@ -202,7 +202,7 @@
 }
 
 .specialization-box {
-  background: #ffffff;
+  background:  #92cce5;
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.06);

@@ -92,28 +92,28 @@ return (
 
   <div className="specialization-grid">
 
-    <div className="specialization-box">
+    <div className="jk-specialization-box">
       <div className="spec-heading">Property Type</div>
       <div className="spec-content">
         {data.propertyType || "Apartment • Villa • Commercial"}
       </div>
     </div>
 
-    <div className="specialization-box">
+    <div className="jk-specialization-box">
       <div className="spec-heading">Transaction</div>
       <div className="spec-content">
         {data.transactionType || "Buy • Sell • Rent"}
       </div>
     </div>
 
-    <div className="specialization-box">
+    <div className="jk-specialization-box">
       <div className="spec-heading">Budget Range</div>
       <div className="spec-content highlight-text">
         {data.budgetRange || "₹50L – ₹2Cr"}
       </div>
     </div>
 
-    <div className="specialization-box">
+    <div className="jk-specialization-box">
       <div className="spec-heading">Preferred Locations</div>
       <div className="spec-content">
         {data.preferredLocations || "Baner • Wakad • Hinjewadi"}
