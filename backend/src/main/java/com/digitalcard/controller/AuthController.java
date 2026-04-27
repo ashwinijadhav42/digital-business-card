@@ -21,7 +21,9 @@ public class AuthController {
     @Autowired
     private AdminRepository adminRepository;
 
-    // ✅ LOGIN FIXED
+    @Autowired
+    private com.digitalcard.service.EmailService emailService;
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
@@ -32,18 +34,68 @@ public class AuthController {
 
             if (admin.getPassword().equals(request.getPassword())) {
 
-                Map<String, Object> response = new HashMap<>();
-                response.put("id", admin.getId());
-                response.put("name", admin.getName());
-                response.put("email", admin.getEmail());
-                response.put("phone", admin.getPhone());
-                response.put("role", admin.getRole());
+                // ✅ Validate email before sending OTP
+                if (admin.getEmail() == null || 
+                    !admin.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                    return ResponseEntity.badRequest().body("Invalid email format in database");
+                }
 
-                return ResponseEntity.ok(response);
+                // 🔐 Generate OTP
+                String otp = String.valueOf(100000 + new java.util.Random().nextInt(900000));
+
+                admin.setOtp(otp);
+                admin.setOtpExpiry(java.time.LocalDateTime.now().plusMinutes(5));
+                adminRepository.save(admin);
+
+                try {
+                    // 📧 Send OTP
+                    emailService.sendOtp(admin.getEmail().trim(), otp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return ResponseEntity.status(500).body("Failed to send OTP. Check email configuration.");
+                }
+
+                return ResponseEntity.ok("OTP sent to email");
             }
         }
 
         return ResponseEntity.status(401).body("Invalid Email or Password");
+    }
+    
+    
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@RequestBody com.digitalcard.dto.OtpRequest request) {
+
+        Optional<Admin> adminOpt = adminRepository.findByEmail(request.getEmail());
+
+        if (adminOpt.isPresent()) {
+            Admin admin = adminOpt.get();
+
+            if (admin.getOtp() == null || !admin.getOtp().equals(request.getOtp())) {
+                return ResponseEntity.badRequest().body("Invalid OTP");
+            }
+
+            if (admin.getOtpExpiry().isBefore(java.time.LocalDateTime.now())) {
+                return ResponseEntity.badRequest().body("OTP expired");
+            }
+
+            // Clear OTP
+            admin.setOtp(null);
+            admin.setOtpExpiry(null);
+            adminRepository.save(admin);
+
+            // Return user data
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", admin.getId());
+            response.put("name", admin.getName());
+            response.put("email", admin.getEmail());
+            response.put("phone", admin.getPhone());
+            response.put("role", admin.getRole());
+
+            return ResponseEntity.ok(response);
+        }
+
+        return ResponseEntity.status(404).body("User not found");
     }
 
     // ✅ CHANGE PASSWORD FIXED

@@ -87,4 +87,15 @@ public class Admin {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+    
+ // 🔐 OTP fields
+    private String otp;
+    private LocalDateTime otpExpiry;
+
+    // Getter & Setter
+    public String getOtp() { return otp; }
+    public void setOtp(String otp) { this.otp = otp; }
+
+    public LocalDateTime getOtpExpiry() { return otpExpiry; }
+    public void setOtpExpiry(LocalDateTime otpExpiry) { this.otpExpiry = otpExpiry; }
 }
